@@ -1,4 +1,4 @@
-# Cosmetic-Shopping-Website
+# Cosmetics-Shopping-Website
 
 Collaborators
 
