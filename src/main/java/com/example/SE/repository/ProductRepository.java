@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ProductRepository extends MongoRepository<Product, String>, ProductService {
+public interface ProductRepository extends MongoRepository<Product, String>{
     ///@Query("{Category:'?0'}")
     Optional<Product> findByName(String name);
     List<Product> findByCategory(String category);

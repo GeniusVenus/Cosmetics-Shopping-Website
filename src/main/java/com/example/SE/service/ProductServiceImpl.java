@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Service
 @Component
-public class ProductServiceImpl implements ProductService{
+public class ProductServiceImpl{
     @Autowired
     private ProductRepository productRepository;
     public List<Product> allProduct() {
@@ -30,7 +30,7 @@ public class ProductServiceImpl implements ProductService{
         return productRepository.findByCategory(category);
     }
 
-    @Override
+    /*@Override
     public List<Product> findAll() {
         return null;
     }
@@ -43,5 +43,5 @@ public class ProductServiceImpl implements ProductService{
     @Override
     public List<Product> findByCategory(String category) {
         return null;
-    }
+    }*/
 }
