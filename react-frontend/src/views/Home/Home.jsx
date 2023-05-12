@@ -8,7 +8,7 @@ const Home = () => {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const response = await api.get("/posts");
+        const response = await api.get("/api/product");
         setPosts(response.data);
       } catch (err) {
         console.log(err);
@@ -28,7 +28,7 @@ const Home = () => {
             {" "}
             <div>
               {" "}
-              {post.id} - {post.title}{" "}
+              {post.productId} - {post.name}{" "}
             </div>{" "}
           </>
         ))}{" "}
