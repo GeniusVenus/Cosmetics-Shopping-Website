@@ -6,15 +6,17 @@ import "./global.scss";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "./store";
+import { ApiProvider } from "@reduxjs/toolkit/dist/query/react";
+import { cartApi } from "./features/cart/cartApiSlice";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <Provider store={store}>
+  <BrowserRouter>
+    <Provider store={store}>
+      <ApiProvider api={cartApi}>
         <App />
-      </Provider>
-    </BrowserRouter>
-  </React.StrictMode>
+      </ApiProvider>
+    </Provider>
+  </BrowserRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -1,0 +1,120 @@
+@use "../../global" as util;
+$HEADER_BACKGROUND: linear-gradient(292.12deg, #ffc881 -35.02%, #c9e7f2 78.96%);
+.nav-bar {
+  display: flex;
+  position: absolute;
+  top: 35px;
+  z-index: 2;
+  padding-left: 40px;
+  width: 97.4%;
+  font-family: util.$FONT_FAMILY_M;
+  gap: 10%;
+  .logo {
+    border: 1px solid red;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    flex: 1;
+    p {
+      font-family: util.$FONT_FAMILY_MA;
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 29px;
+    }
+    svg {
+      width: 45px;
+      height: 45px;
+      margin-right: 3%;
+    }
+  }
+
+  .menu-first {
+    display: flex;
+    gap: 50px;
+    border: 1px solid red;
+    align-items: center;
+    a {
+      margin-top: 12px;
+      font-size: 16px;
+      font-family: util.$FONT_FAMILY_M;
+      color: rgba(0, 0, 0, 0.5);
+      font-weight: 600;
+    }
+    a.active {
+      color: util.$FONT_COLOR;
+    }
+    a.active::after {
+      display: block;
+      content: "";
+      border-bottom: solid 2px util.$FONT_COLOR;
+      padding-top: 8px;
+      transform: scaleX(1);
+    }
+    a::after {
+      display: block;
+      content: "";
+      border-bottom: solid 2px util.$FONT_COLOR;
+      padding-top: 8px;
+      transform: scaleX(0);
+      transition: transform 0.2s ease-in-out;
+    }
+    a:hover::after {
+      transform: scaleX(1);
+    }
+  }
+  .menu-second {
+    display: flex;
+    gap: 25px;
+    border: 1px solid red;
+    align-items: center;
+    .item {
+      .icon {
+        border-radius: 20px;
+        background: rgba(255, 255, 255, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 46px;
+        height: 46px;
+        svg {
+          width: 24px;
+          height: 24px;
+        }
+      }
+      p {
+        color: util.$FONT_COLOR;
+        font-size: 16px;
+        font-weight: 500;
+        font-family: util.$FONT_FAMILY_M;
+      }
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    button {
+      width: 200px;
+      height: 50px;
+      border-radius: 14px;
+      font-weight: 600;
+      background: util.$FONT_COLOR;
+      color: #fff;
+      font-size: 16px;
+      font-family: util.$FONT_FAMILY_M;
+      transition: all 0.25s ease-in-out;
+      &:hover {
+        background: #fff;
+        color: util.$FONT_COLOR;
+      }
+    }
+  }
+}
+.nav-bar.fixed {
+  width: 100%;
+  position: fixed;
+  padding-right: 40px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background: #fff;
+  top: 0;
+  z-index: 999;
+}

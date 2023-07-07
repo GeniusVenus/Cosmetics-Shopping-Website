@@ -1,33 +1,23 @@
 import { Routes, Route } from "react-router-dom";
-import Home from "./views/Home/Home";
-import Layout from "./Layout";
-import Login from "./views/LoginForm/Login";
-import LoginLayout from "./views/LoginForm/Layout";
-import Register from "./views/LoginForm/Register";
-import ForgotPassword from "./views/LoginForm/ForgotPassword";
-import ResetPassword from "./views/LoginForm/ResetPassword";
+import Home from "./pages/Home/Home";
+import HomeLayout from "./pages/Home/Layout";
+import Login from "./pages/LoginForm/Login";
+import LoginLayout from "./pages/LoginForm/Layout";
+import Register from "./pages/LoginForm/Register";
+import ForgotPassword from "./pages/LoginForm/ForgotPassword";
+import ResetPassword from "./pages/LoginForm/ResetPassword";
 
 const App = () => {
   return (
     <Routes>
-      <Route path="/" element={<Layout />}>
+      <Route path="/" element={<HomeLayout />}>
         <Route index element={<Home />} />
       </Route>
-
-      <Route path="login" element={<LoginLayout />}>
-        <Route index element={<Login />} />
-      </Route>
-
-      <Route path="register" element={<LoginLayout />}>
-        <Route index element={<Register />} />
-      </Route>
-
-      <Route path="forgot-password" element={<LoginLayout />}>
-        <Route index element={<ForgotPassword />} />
-      </Route>
-
-      <Route path="reset-password" element={<LoginLayout />}>
-        <Route index element={<ResetPassword />} />
+      <Route path="/" element={<LoginLayout />}>
+        <Route path="login" element={<Login />} />
+        <Route path="register" element={<Register />} />
+        <Route path="forgot-password" element={<ForgotPassword />} />
+        <Route path="reset-password" element={<ResetPassword />} />
       </Route>
     </Routes>
   );

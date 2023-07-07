@@ -1,0 +1,93 @@
+@use "../../global" as util;
+
+.sign-up-box {
+  padding: 0 18%;
+  margin-top: 40px;
+  .sign-up-layout {
+    border-radius: 20px;
+    background: util.$FONT_COLOR;
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 279px;
+    gap: 32px;
+    .some-word {
+      color: #fdfdfd;
+      font-size: 24px;
+      font-family: util.$FONT_FAMILY_M;
+      font-weight: 700;
+      line-height: 36px;
+      text-transform: capitalize;
+      text-align: center;
+    }
+    .box-content {
+      display: flex;
+      padding: 12px 22px;
+      align-items: center;
+      justify-content: center;
+      width: 85%;
+      height: 102px;
+      border-radius: 20px;
+      background: #fff;
+      gap: 2%;
+      input {
+        border-radius: 10px;
+        border: 1px solid util.$FONT_FAMILY_M;
+        background: #fff;
+        padding: 10px 28px;
+        width: calc(98% - 178px);
+        color: util.$FONT_COLOR;
+        font-size: 14px;
+        font-family: util.$FONT_FAMILY_M;
+        font-weight: 400;
+        line-height: 20px;
+        &::placeholder {
+          color: util.$FONT_COLOR;
+          font-size: 14px;
+          font-family: util.$FONT_FAMILY_M;
+          font-weight: 400;
+          line-height: 20px;
+        }
+      }
+      .sign-up-btn {
+        background: util.$FONT_COLOR;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 178px;
+        height: 41px;
+        gap: 8px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.25s ease-in-out;
+        p {
+          color: #fff;
+          font-size: 14px;
+          font-family: util.$FONT_FAMILY_M;
+          font-weight: 700;
+          line-height: 30px;
+          letter-spacing: -0.28px;
+          margin-left: 4px;
+        }
+        svg {
+          width: 16px;
+          height: 16px;
+        }
+        &:hover {
+          background: #fff;
+          border: 1.5px solid util.$FONT_COLOR;
+          p {
+            color: util.$FONT_COLOR;
+          }
+          svg {
+            #Vector {
+              fill: util.$FONT_COLOR;
+            }
+          }
+        }
+      }
+    }
+  }
+}

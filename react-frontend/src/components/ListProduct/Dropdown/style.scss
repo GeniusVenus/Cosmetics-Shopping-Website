@@ -1,0 +1,52 @@
+@use "../../../global" as util;
+
+.dropdown {
+  .dropdown-btn {
+    display: flex;
+    height: 44px;
+    padding: 20px 16px 20px 20px;
+    align-items: center;
+    border-radius: 10px;
+    gap: 8px;
+    border: 1px solid util.$FONT_COLOR;
+    cursor: pointer;
+    .option {
+      width: 130px;
+      color: util.$FONT_COLOR;
+      font-size: 14px;
+      font-family: util.$FONT_FAMILY_M;
+      font-weight: 400;
+    }
+    svg {
+      width: 12px;
+      height: 12px;
+    }
+  }
+  .dropdown-content {
+    position: absolute;
+    width: 190px;
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.25s ease-in-out;
+    z-index: 100;
+    .inner {
+      overflow: hidden;
+      transform: translate(0, 2px);
+    }
+    .dropdown-item {
+      padding: 10px 20px 10px 20px;
+      color: util.$FONT_COLOR;
+      font-size: 14px;
+      font-family: util.$FONT_FAMILY_M;
+      font-weight: 400;
+      background: #f1f1f1;
+      cursor: pointer;
+      &:hover {
+        background: #dbd9d9;
+      }
+    }
+  }
+  .dropdown-content.active {
+    grid-template-rows: 1fr;
+  }
+}

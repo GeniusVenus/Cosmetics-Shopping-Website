@@ -14,7 +14,7 @@ public class RestConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .requestMatchers(HttpMethod.GET, "/api/product").permitAll();
+                .requestMatchers( HttpMethod.GET, "/api/product").permitAll();
         return http.build();
     }
 }

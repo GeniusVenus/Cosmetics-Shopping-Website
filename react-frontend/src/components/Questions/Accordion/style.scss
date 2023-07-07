@@ -1,0 +1,63 @@
+@use "../../../global" as util;
+
+.accordion {
+  padding: 20px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0px 4px 114px 0px rgba(0, 0, 0, 0.09);
+  cursor: pointer;
+  .accordion-title {
+    display: flex;
+    p {
+      width: 96%;
+      color: #000;
+      font-size: 18px;
+      font-family: util.$FONT_FAMILY_M;
+      font-weight: 600;
+      line-height: 22px;
+    }
+    .font-icon {
+      width: 4%;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+      svg {
+        transition: transform 0.3s ease-in-out;
+        width: 14px;
+        height: 14px;
+      }
+    }
+  }
+  .accordion-content {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s ease-in-out;
+    .inner {
+      overflow: hidden;
+      width: 100%;
+      p {
+        color: #000;
+        font-size: 14px;
+        font-family: util.$FONT_FAMILY_M;
+        font-weight: 400;
+        line-height: 177.9%;
+        letter-spacing: 0.16px;
+        padding: 20px 0 10px 0;
+      }
+    }
+  }
+}
+
+.accordion.active {
+  .accordion-title {
+    .font-icon {
+      svg {
+        transform: rotate(45deg);
+      }
+    }
+  }
+  .accordion-content {
+    grid-template-rows: 1fr;
+  }
+}

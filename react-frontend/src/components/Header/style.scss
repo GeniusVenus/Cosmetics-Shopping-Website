@@ -1,0 +1,200 @@
+@use "../../global" as util;
+$HEADER_BACKGROUND: linear-gradient(292.12deg, #ffc881 -35.02%, #c9e7f2 78.96%);
+$FIRST_BACKGROUND: rgba(255, 255, 255, 0.4);
+
+.header {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: auto;
+  background: $HEADER_BACKGROUND;
+  padding: 80px 40px 40px 40px;
+  .header-content {
+    border-top: 2px solid #fff;
+    height: 750px;
+    z-index: 123;
+    margin-top: 20px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    .first-commitment {
+      display: inline-flex;
+      margin-top: 20px;
+      padding: 20px;
+      align-items: flex-start;
+      gap: 26px;
+      background: $FIRST_BACKGROUND;
+      border-radius: 20px;
+
+      .commit {
+        svg {
+          color: #5d8d00;
+          width: 18px;
+          height: 18px;
+          margin-right: 6px;
+        }
+        p {
+          color: #757095;
+          font-size: 17px;
+          font-family: util.$FONT_FAMILY_M;
+          line-height: 30px;
+          letter-spacing: -0.34px;
+        }
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+    .content {
+      display: flex;
+      .header-side-content {
+        flex: 1;
+        border: 1px solid black;
+        .second-commitment {
+          margin-top: 10px;
+          color: #000;
+          font-size: 4.5rem;
+          letter-spacing: -2.1px;
+          font-family: util.$FONT_FAMILY_M;
+          margin-bottom: 60px;
+        }
+        .third-commitment {
+          color: #5b5b5b;
+          font-size: 24px;
+          font-family: util.$FONT_FAMILY_M;
+          margin-bottom: 60px;
+          span {
+            font-family: util.$FONT_FAMILY_M;
+            font-weight: 700;
+          }
+        }
+        .shop-collection-btn {
+          padding: 19px 67px;
+          border-radius: 10px;
+          background: util.$FONT_COLOR;
+          font-size: 18px;
+          font-family: util.$FONT_FAMILY_M;
+          transition: all 0.25s ease-in-out;
+          color: #fff;
+          font-weight: 700;
+          line-height: 30px;
+          letter-spacing: -0.36px;
+        }
+        .shop-collection-btn:hover {
+          background: #fff;
+          color: util.$FONT_COLOR;
+        }
+      }
+
+      .header-side-image {
+        border: 1px solid purple;
+        display: flex;
+        flex: 1;
+        gap: 40px;
+        justify-content: center;
+        .first-side {
+          .first-pic {
+            width: 361px;
+            height: 530px;
+            border-radius: 217px;
+          }
+          svg {
+            position: absolute;
+            width: 360px;
+            height: 150px;
+            transform: translate(-248px, 420px);
+          }
+        }
+        .second-side {
+          border: 2px solid blue;
+          .second-pic {
+            width: 231px;
+            height: 391px;
+            border-radius: 217px;
+            transform: translate(0, 136px);
+          }
+          .list-img {
+            position: absolute;
+            display: flex;
+            gap: 15px;
+            padding: 18px;
+            border-radius: 8px;
+            transform: translate(-390px, 80px);
+            background: rgba(255, 255, 255, 0.44);
+            backdrop-filter: blur(5.5px);
+            img {
+              width: 98px;
+              height: 87px;
+              border-radius: 8px;
+              object-fit: cover;
+            }
+          }
+          svg {
+            position: absolute;
+            width: 54px;
+            height: 137px;
+            transform: translate(-30px, 400px);
+          }
+        }
+      }
+    }
+  }
+  .for-fun {
+    position: absolute;
+    width: 290px;
+    height: 160px;
+    right: 0;
+    transform: translate(110px, -60px);
+  }
+}
+
+.header::before {
+  content: "";
+  z-index: -1;
+  background: url("../../assets/image/Texture.png"),
+    lightgray 0% 0% / 60.90909242630005px 60.90909242630005px repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  opacity: 0.12;
+}
+
+.advert-section {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 40px 30px 40px;
+  border: 1px solid black;
+  .advert {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background: #ebfaff;
+    height: 207px;
+    border-radius: 25px;
+    transform: translate(0, -40px);
+    position: relative;
+    z-index: 99;
+    .first {
+      margin-bottom: 27px;
+    }
+    p {
+      color: util.$FONT_COLOR;
+      font-size: 22px;
+      font-family: util.$FONT_FAMILY_M;
+      font-weight: 400;
+      span {
+        color: #000000;
+        font-size: 34px;
+        font-family: util.$FONT_FAMILY_M;
+        font-weight: 900;
+        padding: 0 6px 0 6px;
+      }
+    }
+  }
+}

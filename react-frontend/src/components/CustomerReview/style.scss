@@ -1,0 +1,123 @@
+@use "../../global" as util;
+
+.customer-review {
+  margin-top: 100px;
+  margin-bottom: 200px;
+  text-align: center;
+  border: 1px solid cyan;
+  .title {
+    @include util.title-text;
+  }
+
+  .layout {
+    margin-top: 62px;
+    padding: 0 8%;
+    .slick-dots {
+      li.slick-active {
+        margin-right: 18px;
+        margin-left: 4px;
+      }
+      li.slick-active button::before {
+        width: 30px;
+        background: util.$FONT_COLOR !important;
+        opacity: 1;
+      }
+      li button::before {
+        content: "";
+        height: 12px;
+        width: 12px;
+        display: inline-block;
+        background: #c4c4c4 !important;
+        font-size: 10px !important;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 300ms ease;
+        top: 4rem;
+        opacity: 1;
+      }
+    }
+    .review {
+      border-radius: 12px;
+      height: 207px;
+      background: #f5f6f8;
+      border: 1px solid red;
+      .review-layout {
+        display: flex;
+        flex-direction: column;
+        padding: 12px 0;
+        gap: 12px;
+        text-align: left;
+        .content {
+          color: #000;
+          font-family: util.$FONT_FAMILY_M;
+          font-size: 16px;
+          font-weight: 400;
+          line-height: 177.9%;
+          letter-spacing: 0.16px;
+        }
+        .zip-line {
+          height: 2px;
+          width: 30%;
+          background: linear-gradient(
+            90deg,
+            #5d8d00 0%,
+            rgba(119, 147, 65, 0.3) 100%
+          );
+        }
+        .user {
+          display: flex;
+          border: 1px solid orange;
+          padding: 0;
+          .avatar {
+            flex: 1;
+            width: 60px;
+            height: 60px;
+            img {
+              transform: translate(-10%, 0);
+              width: 60px;
+              height: 60px;
+              object-fit: cover;
+              border-radius: 60px;
+            }
+          }
+          .info {
+            flex: 9;
+            border: 1px solid blue;
+            transform: translate(-5%, 0);
+            .name {
+              color: #000;
+              font-family: util.$FONT_FAMILY_M;
+              font-size: 16px;
+              font-weight: 600;
+              line-height: 24px;
+            }
+            .job {
+              color: #97989f;
+              font-family: util.$FONT_FAMILY_M;
+              font-size: 14px;
+              font-weight: 400;
+              line-height: 24px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .see-review-btn {
+    border-radius: 10px;
+    background: util.$FONT_COLOR;
+    padding: 14px 68px;
+    color: #fff;
+    text-align: center;
+    font-family: util.$FONT_FAMILY_M;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 30px;
+    letter-spacing: -0.36px;
+    transform: translate(0, 120px);
+  }
+}
+
+.slick-slide div {
+  margin: 0 2%;
+}
