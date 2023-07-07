@@ -1,17 +1,18 @@
-package com.example.SE.service;
+package main.java.com.example.SE.service;
 
-import com.example.SE.Collection.Product;
-import com.example.SE.repository.ProductRepository;
+import main.java.com.example.SE.Collection.Product;
+import main.java.com.example.SE.repository.ProductRepository;
+import main.java.com.example.SE.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.List;
 import java.util.Optional;
+
 @Service
 @Component
-public class ProductServiceImpl {
+public class ProductServiceImpl{
     @Autowired
     private ProductRepository productRepository;
     public List<Product> allProduct() {
@@ -27,6 +28,9 @@ public class ProductServiceImpl {
     }
     public List<Product> categoryProduct(String category){
         return productRepository.findByCategory(category);
+    }
+    public Product saveProduct(Product product) {
+        return productRepository.save(product);
     }
 
     /*@Override

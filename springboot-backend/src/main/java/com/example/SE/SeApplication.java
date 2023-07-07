@@ -1,5 +1,6 @@
-package com.example.SE;
+package main.java.com.example.SE;
 
+import main.java.com.example.SE.Crawler.SkinCrawl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -11,6 +12,8 @@ public class SeApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SeApplication.class, args);
+		///SkinCrawl skincrawl = new SkinCrawl();
+		///skincrawl.CrawlData();
 	}
 //	@Bean
 //	public WebMvcConfigurer corsConfigurer(){

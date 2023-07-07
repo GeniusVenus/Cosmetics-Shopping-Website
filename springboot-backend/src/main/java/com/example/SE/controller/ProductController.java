@@ -1,36 +1,16 @@
-package com.example.SE.controller;
-import com.example.SE.Collection.Product;
-import com.example.SE.service.ProductServiceImpl;
+package main.java.com.example.SE.controller;
+
+import main.java.com.example.SE.Collection.Product;
+import main.java.com.example.SE.service.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 import java.util.Optional;
+
 @RestController
-@CrossOrigin(
-        // Access-Control-Allow-Origin
-        origins = { "*" },
-
-        // Alternative to origins that supports more flexible originpatterns.
-        // Please, see CorsConfiguration.setAllowedOriginPatterns(List)for details.
-        // originPatterns = { "" },
-
-        // Access-Control-Allow-Credentials
-        allowCredentials = "false",
-
-        // Access-Control-Allow-Headers
-        allowedHeaders = { "*" },
-
-        // Access-Control-Expose-Headers
-        exposedHeaders = { "*" },
-
-        // Access-Control-Max-Age
-        maxAge = 60 * 30,
-
-        // Access-Control-Allow-Methods
-        methods = {RequestMethod.GET}
-)
 @RequestMapping("/api/product")
 public class ProductController {
     @Autowired
@@ -49,7 +29,12 @@ public class ProductController {
         return new ResponseEntity<Optional<Product>>(productService.NameProduct(name), HttpStatus.OK);
     }
     @GetMapping("/category/{category}")
-    public ResponseEntity<List<Product>> getcategoryProduct(@PathVariable("category") String category){
+    public ResponseEntity<List<Product>> getCategoryProduct(@PathVariable("category") String category){
         return new ResponseEntity<List<Product>>(productService.categoryProduct(category), HttpStatus.OK);
+    }
+
+    @PostMapping("/addProduct")
+    public Product saveProduct(@RequestBody Product product) {
+        return productService.saveProduct(product);
     }
 }
