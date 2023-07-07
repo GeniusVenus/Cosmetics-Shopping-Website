@@ -1,6 +1,6 @@
 import React from "react";
 import "./style.scss";
-import LoginImage from "../../assets/image/LoginImage";
+import LoginImage from "../../../assets/image/LoginImage";
 const OtherLoginForms = (props) => {
   const { googleIcon, facebookIcon, appleIcon } = LoginImage;
   return (

@@ -1,9 +1,8 @@
-import React from "react";
-import { useState } from "react";
-import FormInput from "../../components/FormInput";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import LoginFormHeader from "../../components/LoginFormHeader";
-import { Fragment } from "react";
+import LoginGreeting from "../../components/LoginGreeting";
+import FormCard from "../../components/FormCard";
+
 import "./style.scss";
 const ResetPassword = () => {
   const [values, setValues] = useState({
@@ -43,18 +42,23 @@ const ResetPassword = () => {
   return (
     <>
       {" "}
-      <form onSubmit={handleSubmit}>
-        <LoginFormHeader type="reset-password" />
-        {inputs.map((input) => (
-          <FormInput
-            key={input.id}
-            {...input}
-            value={values[input.name]}
-            onChange={onChange}
+      <div className="container">
+        <div className="first-container">
+          <LoginGreeting
+            type="reset-password"
+            text="Let us help you find your account"
           />
-        ))}
-        <button> Reset Password</button>
-      </form>
+        </div>
+        <div className="second-container">
+          <FormCard
+            type="reset-password"
+            inputs={inputs}
+            values={values}
+            onChange={onChange}
+            handleSubmit={handleSubmit}
+          />
+        </div>
+      </div>
     </>
   );
 };

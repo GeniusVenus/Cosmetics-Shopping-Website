@@ -1,11 +1,7 @@
-import { useState } from "react";
-import React from "react";
-import FormInput from "../../components/FormInput";
-// import { Link } from "react-router-dom";
-import OtherLoginForms from "../../components/OtherLoginForms";
-import LoginFormHeader from "../../components/LoginFormHeader";
+import React, { useState } from "react";
 import LoginGreeting from "../../components/LoginGreeting";
 import "./style.scss";
+import FormCard from "../../components/FormCard";
 const Register = () => {
   const [values, setValues] = useState({
     username: "",
@@ -59,24 +55,16 @@ const Register = () => {
   return (
     <div className="container">
       <div className="first-container">
-        <LoginGreeting type="login" text="Welcome back!" />
+        <LoginGreeting type="register" text="Hi there!" />
       </div>
       <div className="second-container">
-        <div className="card">
-          <form onSubmit={handleSubmit}>
-            <LoginFormHeader type="register" />
-            <OtherLoginForms type="register" />
-            {inputs.map((input) => (
-              <FormInput
-                key={input.id}
-                {...input}
-                value={values[input.name]}
-                onChange={onChange}
-              />
-            ))}
-            <button> Sign up</button>
-          </form>
-        </div>
+        <FormCard
+          type="register"
+          inputs={inputs}
+          values={values}
+          onChange={onChange}
+          handleSubmit={handleSubmit}
+        />
       </div>
     </div>
   );

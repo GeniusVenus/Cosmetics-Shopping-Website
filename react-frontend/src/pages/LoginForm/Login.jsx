@@ -1,9 +1,5 @@
 import { useState } from "react";
-import useNavigate from "react-router-dom";
-import FormInput from "../../components/FormInput";
-import OtherLoginForms from "../../components/OtherLoginForms";
-import LoginFormHeader from "../../components/LoginFormHeader";
-import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../../features/auth/authSlice";
@@ -70,7 +66,13 @@ const Login = () => {
           <LoginGreeting type="login" text="Welcome back!" />
         </div>
         <div className="second-container">
-          <FormCard />
+          <FormCard
+            type="login"
+            inputs={inputs}
+            values={values}
+            onChange={onChange}
+            handleSubmit={handleSubmit}
+          />
         </div>
       </div>
     </>

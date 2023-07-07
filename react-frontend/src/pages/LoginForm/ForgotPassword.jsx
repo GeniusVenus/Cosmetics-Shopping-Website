@@ -1,8 +1,7 @@
-import React, { Fragment } from "react";
-import { useState } from "react";
-import FormInput from "../../components/FormInput";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import LoginFormHeader from "../../components/LoginFormHeader";
+import FormCard from "../../components/FormCard";
+import LoginGreeting from "../../components/LoginGreeting";
 import "./style.scss";
 const Login = () => {
   const [values, setValues] = useState({
@@ -32,21 +31,23 @@ const Login = () => {
   return (
     <>
       {" "}
-      <form onSubmit={handleSubmit}>
-        <LoginFormHeader type="forgot-password" />
-        {inputs.map((input) => (
-          <FormInput
-            key={input.id}
-            {...input}
-            value={values[input.name]}
-            onChange={onChange}
+      <div className="container">
+        <div className="first-container">
+          <LoginGreeting
+            type="forgot-password"
+            text="Let us help you find your account"
           />
-        ))}
-        <div className="send-email">
-          We will send you an email with the instruction to reset your password
         </div>
-        <button> Send Email </button>
-      </form>
+        <div className="second-container">
+          <FormCard
+            type="forgot-password"
+            inputs={inputs}
+            values={values}
+            onChange={onChange}
+            handleSubmit={handleSubmit}
+          />
+        </div>
+      </div>
     </>
   );
 };
