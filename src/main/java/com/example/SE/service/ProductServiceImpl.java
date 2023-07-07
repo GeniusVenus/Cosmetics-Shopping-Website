@@ -29,6 +29,9 @@ public class ProductServiceImpl{
     public List<Product> categoryProduct(String category){
         return productRepository.findByCategory(category);
     }
+    public Product saveProduct(Product product) {
+        return productRepository.save(product);
+    }
 
     /*@Override
     public List<Product> findAll() {

@@ -29,7 +29,12 @@ public class ProductController {
         return new ResponseEntity<Optional<Product>>(productService.NameProduct(name), HttpStatus.OK);
     }
     @GetMapping("/category/{category}")
-    public ResponseEntity<List<Product>> getcategoryProduct(@PathVariable("category") String category){
+    public ResponseEntity<List<Product>> getCategoryProduct(@PathVariable("category") String category){
         return new ResponseEntity<List<Product>>(productService.categoryProduct(category), HttpStatus.OK);
+    }
+
+    @PostMapping("/addProduct")
+    public Product saveProduct(@RequestBody Product product) {
+        return productService.saveProduct(product);
     }
 }
