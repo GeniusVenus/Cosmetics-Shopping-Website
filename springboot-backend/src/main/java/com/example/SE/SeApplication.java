@@ -1,6 +1,6 @@
-package main.java.com.example.SE;
+package com.example.SE;
 
-import main.java.com.example.SE.Crawler.SkinCrawl;
+import com.example.SE.Crawler.SkinCrawl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;

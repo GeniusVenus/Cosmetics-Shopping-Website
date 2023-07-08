@@ -1,6 +1,6 @@
-package main.java.com.example.SE.repository;
+package com.example.SE.repository;
 
-import main.java.com.example.SE.Collection.Product;
+import com.example.SE.Collection.Product;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

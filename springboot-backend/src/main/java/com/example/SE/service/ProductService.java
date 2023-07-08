@@ -1,6 +1,6 @@
-package main.java.com.example.SE.service;
+package com.example.SE.service;
 
-import main.java.com.example.SE.Collection.Product;
+import com.example.SE.Collection.Product;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

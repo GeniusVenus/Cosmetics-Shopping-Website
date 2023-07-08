@@ -1,7 +1,7 @@
-package main.java.com.example.SE.controller;
+package com.example.SE.controller;
 
-import main.java.com.example.SE.Collection.Product;
-import main.java.com.example.SE.service.ProductServiceImpl;
+import com.example.SE.Collection.Product;
+import com.example.SE.service.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

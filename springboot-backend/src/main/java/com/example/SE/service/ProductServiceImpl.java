@@ -1,8 +1,8 @@
-package main.java.com.example.SE.service;
+package com.example.SE.service;
 
-import main.java.com.example.SE.Collection.Product;
-import main.java.com.example.SE.repository.ProductRepository;
-import main.java.com.example.SE.service.ProductService;
+import com.example.SE.Collection.Product;
+import com.example.SE.repository.ProductRepository;
+import com.example.SE.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
