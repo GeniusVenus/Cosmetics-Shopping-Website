@@ -37,4 +37,25 @@ public class ProductController {
     public Product saveProduct(@RequestBody Product product) {
         return productService.saveProduct(product);
     }
+    @DeleteMapping("/deleteProduct/{id}")
+    public ResponseEntity<HttpStatus> deleteProduct(@PathVariable("id") String id) {
+        try {
+            productService.deleteProduct(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @DeleteMapping("/tutorials")
+    public ResponseEntity<HttpStatus> deleteAllProducts() {
+        try {
+            productService.deleteAllProducts();
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
 }

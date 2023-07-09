@@ -33,6 +33,14 @@ public class ProductServiceImpl{
         return productRepository.save(product);
     }
 
+    public void deleteProduct(String ProductId) {
+        productRepository.deleteById(ProductId);
+    }
+
+    public void deleteAllProducts() {
+        productRepository.deleteAll();
+    }
+
     /*@Override
     public List<Product> findAll() {
         return null;

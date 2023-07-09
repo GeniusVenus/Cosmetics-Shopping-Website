@@ -3,11 +3,9 @@ package com.example.SE.Crawler;
 import com.example.SE.Collection.Product;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.jsoup.Jsoup;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
-
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
