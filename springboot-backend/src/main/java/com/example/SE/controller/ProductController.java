@@ -47,7 +47,7 @@ public class ProductController {
         }
     }
 
-    @DeleteMapping("/tutorials")
+    @DeleteMapping("/deleteAll")
     public ResponseEntity<HttpStatus> deleteAllProducts() {
         try {
             productService.deleteAllProducts();
