@@ -15,7 +15,7 @@ public class SkinCrawl implements BaseCrawler {
         int dem = 0;
         String baseUrl = "https://www.cultbeauty.co.uk/skin-care.list?pageNumber=";
         String baseId = "Skin_";
-        try (Writer writer = new FileWriter("springboot-backend/src/main/java/com/example/SE/JsonFile/Skin.json")) {
+        try (Writer writer = new FileWriter("D:\\SE_Project\\SE\\springboot-backend\\src\\main\\java\\com\\example\\SE\\JsonFile\\Skin.json")) {
             writer.write('[');
             for (int j = 1; j <= 46; ++j) {
                 try {
@@ -30,7 +30,9 @@ public class SkinCrawl implements BaseCrawler {
                         String link = element.getElementsByTag("a").attr("abs:href");
                         ///System.out.println("link: " + link);
                         String productId = baseId + Integer.toString(dem);
+                        System.out.println(productId);
                         Document docs = Jsoup.connect(link).get();
+                        String image = docs.select("#mainContent > div.athenaProductPage_topRow > div.athenaProductPage_firstColumn > div.athenaProductPage_imageContainer > div > div.athenaProductImageCarousel_imagesContainer > div > div:nth-child(1) > img").attr("src");
                         String name = docs.getElementsByClass("productName_title").text();
                         String cost = docs.getElementsByClass("productPrice_price").text();
                         String description = "";
@@ -60,8 +62,8 @@ public class SkinCrawl implements BaseCrawler {
                             String lastQuery = baseQuery + number + ")";
                             String lastQuerySpan = lastQuery + "> div > span";
                             String lastQueryLi = lastQuery + "> ul > li";
-                            System.out.println("Here: " + lastQueryLi);
-                            System.out.println("Respectively: " + docs.select(lastQueryLi).text());
+                            ///System.out.println("Here: " + lastQueryLi);
+                            ///System.out.println("Respectively: " + docs.select(lastQueryLi).text());
                             if (docs.select(lastQuerySpan).text().contains("Volume")) {
                                 volume = docs.select(lastQueryLi).text();
                             } else if (docs.select(lastQuerySpan).text().contains("Brand")) {
@@ -74,13 +76,14 @@ public class SkinCrawl implements BaseCrawler {
                         System.out.println("brand: " + brand);
                         System.out.println("Volume: " + volume);
                         System.out.println("---------------------------------");*/
-                        Product product = new Product(productId, category, name, cost, description, how_to_use, ingredient, brand, volume);
+                        Product product = new Product(productId, category, name, cost, description, how_to_use, ingredient, brand, volume, image);
                         ObjectMapper mapper = new ObjectMapper();
-                        System.out.println(mapper.writeValueAsString(product));
+                        ///System.out.println(mapper.writeValueAsString(product));
                         writer.write(mapper.writeValueAsString(product));
-                        if (dem != 2695) {
+                        /*if (dem != 2695) {
                             writer.write(",");
-                        }
+                        }*/
+                        writer.write(",");
                         writer.write("\n");
                     }
                 } catch (IOException err) {
@@ -91,10 +94,5 @@ public class SkinCrawl implements BaseCrawler {
         } catch (IOException err) {
             err.printStackTrace();
         }
-
-    /*public static void main(String[] args) throws IOException {
-        SkinCrawl crawl = new SkinCrawl();
-        crawl.CrawlData();
-    }*/
     }
 }

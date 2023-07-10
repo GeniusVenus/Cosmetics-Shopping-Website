@@ -26,8 +26,9 @@ public class Product {
     private String brand;
     private String volume;
     private int mark;
+    private String image;
 
-    public Product(String productId, String category, String name, String cost, String description, String how_to_use, String ingredient, String brand, String volume) {
+    public Product(String productId, String category, String name, String cost, String description, String how_to_use, String ingredient, String brand, String volume, String image) {
         this.productId = productId;
         this.category = category;
         this.name = name;
@@ -37,6 +38,7 @@ public class Product {
         this.ingredient = ingredient;
         this.brand = brand;
         this.volume = volume;
+        this.image = image;
     }
 
     public String getProductId() {
@@ -117,5 +119,13 @@ public class Product {
 
     public void setMark(int mark) {
         this.mark = mark;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

@@ -1,6 +1,6 @@
 package com.example.SE;
 
-import com.example.SE.Crawler.SkinCrawl;
+import com.example.SE.Crawler.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -12,8 +12,18 @@ public class SeApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SeApplication.class, args);
-		///SkinCrawl skincrawl = new SkinCrawl();
-		///skincrawl.CrawlData();
+//		SkinCrawl skincrawl = new SkinCrawl();
+//        skincrawl.CrawlData();
+//        HairCrawl hairCrawl = new HairCrawl();
+//        hairCrawl.CrawlData();
+//        BodyCrawl bodyCrawl = new BodyCrawl();
+//        bodyCrawl.CrawlData();
+//        WellnessCrawl wellnessCrawl = new WellnessCrawl();
+//        wellnessCrawl.CrawlData();
+//        MakeUpCrawl makeUpCrawl = new MakeUpCrawl();
+//        makeUpCrawl.CrawlData();
+//        FragranceCrawl fragranceCrawl = new FragranceCrawl();
+//        fragranceCrawl.CrawlData();
 	}
 //	@Bean
 //	public WebMvcConfigurer corsConfigurer(){

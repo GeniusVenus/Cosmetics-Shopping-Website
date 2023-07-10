@@ -20,7 +20,11 @@ public class ProductServiceImpl{
     }
 
     public Optional<Product> IdProduct(String ProductId){
-        return productRepository.findById(ProductId);
+        return productRepository.findByProductId(ProductId);
+    }
+
+    public List<Product> BrandProduct(String brand) {
+        return productRepository.findByBrand(brand);
     }
 
     public Optional<Product> NameProduct(String name) {
