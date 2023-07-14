@@ -1,0 +1,51 @@
+@use "../../global" as util;
+
+.card {
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: 0px 4px 35px rgba(0, 0, 0, 0.08);
+  border-radius: calc(1rem + 1vw);
+  padding: 40px calc(1.2rem + 1vw) 40px calc(1.2rem + 1vw);
+  width: 80%;
+  button {
+    width: 100%;
+    padding: 17px;
+    margin-top: 0.5rem;
+    cursor: pointer;
+    border-radius: 10px;
+    background: #283618;
+    box-shadow: 0px 4px 19px 0px rgba(119, 147, 65, 0.3);
+    color: rgba(255, 255, 255);
+    text-align: center;
+    font-family: util.$FONT_FAMILY_M;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.25s ease-in-out;
+    &:hover {
+      background: rgba(255, 255, 255, 0.6);
+      color: util.$FONT_COLOR;
+    }
+  }
+  .forgot-password {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 1.1rem;
+    margin-bottom: 0.8rem;
+    a {
+      color: #5d8d00;
+      font-family: util.$FONT_FAMILY_M;
+    }
+  }
+  .send-email {
+    margin-top: 0.8rem;
+    margin-bottom: 0.8rem;
+    text-align: center;
+    color: #000;
+    font-family: util.$FONT_FAMILY_M;
+    font-size: 13px;
+    font-weight: 300;
+  }
+}

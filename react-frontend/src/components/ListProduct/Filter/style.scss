@@ -1,0 +1,106 @@
+@use "../../../global" as util;
+.list-product-filter {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid blue;
+  .label {
+    font-size: 24px;
+    font-family: util.$FONT_FAMILY_M;
+    font-weight: 700;
+    line-height: 24px;
+    padding: 10px 0 10px 40px;
+  }
+  .list-filter-content {
+    background: #f9f9f9;
+    padding: 20px 0 0 40px;
+    .filter-content {
+      .filter-title {
+        font-size: 16px;
+        font-family: util.$FONT_FAMILY_M;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 24px;
+        margin-bottom: 8px;
+      }
+      .filter-option {
+        display: flex;
+        flex-direction: column;
+        padding: 0 0 8px 0;
+        border-bottom: 2px solid #ebeeef;
+        .option {
+          display: block;
+          margin-bottom: 12px;
+          input {
+            padding: 0;
+            height: initial;
+            width: initial;
+            margin-bottom: 0;
+            display: none;
+            cursor: pointer;
+          }
+          label {
+            position: relative;
+            font-size: 14px;
+            font-family: util.$FONT_FAMILY_M;
+            font-weight: 400;
+            line-height: 20px;
+            cursor: pointer;
+          }
+          label:before {
+            content: "";
+            -webkit-appearance: none;
+            background-color: transparent;
+            border: 2px solid #ccd1d2;
+            border-radius: 4px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05),
+              inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+            padding: 8px;
+            display: inline-block;
+            position: relative;
+            vertical-align: middle;
+            margin-bottom: 2px;
+            margin-right: 4px;
+            cursor: pointer;
+          }
+          input:checked + label:after {
+            content: "";
+            display: block;
+            position: absolute;
+            top: 3px;
+            left: 7px;
+            width: 4px;
+            height: 8px;
+            border: solid #002a48;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+          }
+        }
+      }
+      .max-min-option {
+        display: flex;
+        gap: 8px;
+        padding: 0 0 16px 0;
+        border-bottom: 2px solid #ebeeef;
+        input {
+          padding: 10px;
+          outline: none;
+          border: none;
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+          opacity: 1;
+        }
+        input::placeholder {
+          font-size: 14px;
+          font-family: util.$FONT_FAMILY_M;
+          color: #242b33;
+          font-weight: 400;
+        }
+        .block {
+          border: 1px solid #cbcbcb;
+          width: 1px;
+        }
+      }
+    }
+  }
+}

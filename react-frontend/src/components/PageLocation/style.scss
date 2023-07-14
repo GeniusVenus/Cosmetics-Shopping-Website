@@ -1,0 +1,27 @@
+@use "../../global" as util;
+
+.page-location {
+  display: inline-flex;
+  padding: 24px 40px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: #ebeeef;
+  gap: 12px;
+  margin-left: 40px;
+  margin-top: 50px;
+  .page {
+    color: #36372d;
+    font-family: util.$FONT_FAMILY_M;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
+    &.active {
+      color: #5d8d00;
+    }
+  }
+  svg {
+    width: 10px;
+    height: 10px;
+  }
+}

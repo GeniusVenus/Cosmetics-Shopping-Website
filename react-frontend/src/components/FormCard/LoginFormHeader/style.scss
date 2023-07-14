@@ -1,0 +1,75 @@
+@use "../../../global" as util;
+
+.login-form-header {
+  .first {
+    display: flex;
+    .title {
+      flex: 2.5;
+      display: flex;
+      color: util.$FONT_COLOR;
+      font-family: util.$FONT_FAMILY_M;
+      font-size: 21px;
+      font-weight: 400;
+      p {
+        flex: 1;
+        color: util.$FONT_COLOR_BOLD;
+      }
+      margin-bottom: 1.2rem;
+    }
+
+    .link {
+      flex: 1;
+      color: #8d8d8d;
+      font-family: util.$FONT_FAMILY_M;
+      font-size: 13px;
+      font-weight: 400;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      .link-container {
+        margin-top: 2px;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        .question {
+          color: #8d8d8d;
+        }
+        a {
+          color: #5d8d00;
+        }
+      }
+    }
+  }
+
+  h1 {
+    color: util.$FONT_COLOR_BOLD;
+    font-family: util.$FONT_FAMILY_M;
+    font-size: 44px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+}
+@media (max-width: 1260px) {
+  .first {
+    .title {
+      flex-direction: column;
+      margin-bottom: 0.2rem;
+    }
+  }
+}
+@media (max-width: 960px) {
+  .first {
+    .title {
+      flex-direction: row;
+      margin-bottom: 0.2rem;
+    }
+  }
+}
+@media (max-width: 640px) {
+  .first {
+    .title {
+      flex-direction: column;
+      margin-bottom: 0.2rem;
+    }
+  }
+}

@@ -1,0 +1,79 @@
+@use "../../global" as util;
+.questions {
+  margin-top: 140px;
+  border: 1px solid red;
+  .questions-zone {
+    @include util.title-text;
+    margin-bottom: 30px;
+  }
+
+  .questions-layout {
+    display: flex;
+    padding: 40px 80px 40px 80px;
+    gap: 4%;
+    .questions-container {
+      width: 60%;
+    }
+
+    .questions-ask {
+      width: 36%;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      justify-content: center;
+      align-items: center;
+      border-radius: 10px;
+      border: 1px solid #3734a9;
+      background: #fff;
+      padding: 0 40px;
+      height: 440px;
+      .question-mark {
+        width: 54px;
+        height: 54px;
+        border-radius: 27px;
+        border: 4px solid #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        svg {
+          width: 36px;
+          height: 36px;
+        }
+      }
+      span {
+        color: #000;
+        font-size: 22px;
+        font-family: util.$FONT_FAMILY_M;
+        text-align: center;
+        font-weight: 800;
+        line-height: 22px;
+      }
+      p {
+        color: #000;
+        font-size: 16px;
+        text-align: center;
+        font-family: util.$FONT_FAMILY_M;
+        font-weight: 400;
+        line-height: 177.9%;
+        letter-spacing: 0.16px;
+      }
+      button {
+        border-radius: 10px;
+        background: util.$FONT_COLOR;
+        padding: 19px 51px;
+        color: #fff;
+        text-align: center;
+        font-size: 18px;
+        font-family: util.$FONT_FAMILY_M;
+        font-weight: 700;
+        line-height: 30px;
+        letter-spacing: -0.36px;
+        transition: all 0.25s ease-in-out;
+        &:hover {
+          color: util.$FONT_COLOR;
+          background: #fff;
+        }
+      }
+    }
+  }
+}

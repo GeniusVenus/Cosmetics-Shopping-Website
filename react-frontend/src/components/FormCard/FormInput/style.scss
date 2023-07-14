@@ -1,0 +1,94 @@
+@use "../../../global" as util;
+.formInput {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  margin-bottom: 18px;
+  label {
+    color: #000;
+    font-family: util.$FONT_FAMILY_M;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  fieldset {
+    display: flex;
+    margin-top: 0.1rem;
+    align-items: center;
+    border-radius: 0.5rem;
+    border: 1px solid #adadad;
+    background: #fff;
+  }
+  fieldset:focus-within {
+    border: 1px solid #5d8d00;
+  }
+  fieldset:invalid[focused="true"] {
+    border: 1px solid red;
+  }
+  fieldset:invalid[focused="true"] ~ span {
+    display: block;
+  }
+  input {
+    width: 100%;
+    padding: 19px 1rem 19px 1rem;
+    border-radius: 0.5rem;
+    border: none !important;
+    outline: none !important;
+    color: #808080;
+    font-family: util.$FONT_FAMILY_M;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  input::placeholder {
+    color: #808080;
+    font-family: util.$FONT_FAMILY_M;
+    font-size: 14px;
+    font-weight: 300;
+    opacity: 0.6;
+  }
+  svg {
+    width: 8%;
+    cursor: pointer;
+    font-size: calc(0.9rem + 0.1vw);
+  }
+  span {
+    font-size: 12px;
+    padding: 0.15rem;
+    color: red;
+    font-family: util.$FONT_FAMILY_M;
+    display: none;
+  }
+}
+
+@media (max-width: 960px) {
+  .formInput {
+    input {
+      width: 94%;
+    }
+    svg {
+      width: 6%;
+    }
+  }
+}
+
+@media (max-width: 660px) {
+  .formInput {
+    input {
+      width: 92%;
+    }
+    svg {
+      width: 8%;
+    }
+  }
+}
+@media (max-width: 400px) {
+  .formInput {
+    input {
+      width: 88%;
+    }
+    svg {
+      width: 12%;
+    }
+  }
+}

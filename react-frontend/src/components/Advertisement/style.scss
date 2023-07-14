@@ -1,0 +1,132 @@
+@use "../../global" as util;
+
+.advertisement-section {
+  padding: 60px 40px 60px 40px;
+  .advertisement-layout {
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    background: util.$FONT_COLOR;
+    .first-section {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 0 20px 0;
+      .section-image {
+        z-index: 2;
+        img {
+          width: 264px;
+          height: 389px;
+          border-radius: 200px;
+          object-fit: cover;
+        }
+      }
+      .for-fun {
+        width: 683px;
+        height: 476px;
+        transform: rotate(52.318deg) translate(180px, 180px);
+        left: 0;
+        border-radius: 99px;
+        background: #f5cac3;
+        position: absolute;
+      }
+    }
+    .second-section {
+      flex: 1;
+      .swing {
+        position: absolute;
+        width: 500px;
+        height: 220px;
+        transform: translate(-240px, 100px);
+      }
+      .section-content {
+        position: relative;
+        transform: translate(60px, -20px);
+        .content-layout {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          z-index: 1;
+          .first-content {
+            color: util.$FONT_COLOR;
+            font-size: 52px;
+            font-family: util.$FONT_FAMILY_M;
+            font-weight: 400;
+            line-height: 68px;
+            text-transform: capitalize;
+          }
+          .second-content {
+            color: util.$FONT_COLOR;
+            font-size: 36px;
+            font-family: util.$FONT_FAMILY_M;
+            font-weight: 700;
+            line-height: 54px;
+            text-transform: capitalize;
+            margin-bottom: 8px;
+          }
+          .third-content {
+            text-align: center;
+            color: #000;
+            padding: 0 120px 0 120px;
+            font-size: 12px;
+            font-family: util.$FONT_FAMILY_M;
+            font-weight: 400;
+            line-height: 18px;
+            margin-bottom: 16px;
+          }
+          .shop-collection-btn {
+            background: util.$FONT_COLOR;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 178px;
+            height: 41px;
+            gap: 8px;
+            border-radius: 10px;
+            cursor: pointer;
+            transform: translate(20px, 0);
+            transition: all 0.25s ease-in-out;
+            p {
+              color: #fff;
+              font-size: 14px;
+              font-family: util.$FONT_FAMILY_M;
+              font-weight: 700;
+              line-height: 30px;
+              letter-spacing: -0.28px;
+              margin-left: 4px;
+            }
+            svg {
+              width: 16px;
+              height: 16px;
+            }
+            &:hover {
+              background: #fff;
+              border: 1.5px solid util.$FONT_COLOR;
+              p {
+                color: util.$FONT_COLOR;
+              }
+              svg {
+                #Vector {
+                  fill: util.$FONT_COLOR;
+                }
+              }
+            }
+          }
+        }
+      }
+      .for-fun {
+        width: 553.906px;
+        height: 505.278px;
+        transform: rotate(37.057deg) translate(-120px, -140px);
+        border-radius: 106px;
+        background: #f7ede2;
+        right: 0;
+        position: absolute;
+      }
+    }
+  }
+}

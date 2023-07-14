@@ -1,0 +1,106 @@
+@use "../../global" as util;
+
+.reason {
+  margin-top: 20px;
+  .question {
+    @include util.title-text;
+    margin-bottom: 30px;
+  }
+  .reason-content {
+    padding: 20px 10% 20px 10%;
+    position: relative;
+    .reason-container {
+      display: grid;
+      border: 1px solid red;
+      position: relative;
+      z-index: 99;
+      grid-template-columns: auto auto;
+      justify-content: center;
+      border-radius: 25px;
+      padding: 0 40px 0 40px;
+      height: 440px;
+      box-shadow: 0px 4px 114px 0px rgba(0, 0, 0, 0.09);
+      background: #fff;
+      #content {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        #icon {
+          width: 90px;
+          height: 90px;
+          border-radius: 25px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .icon_0 {
+          background: #fff3e8;
+        }
+        .icon_1 {
+          background: #f1f0ff;
+        }
+        .icon_2 {
+          background: #e2f3ff;
+        }
+        .icon_3 {
+          background: #edffe7;
+        }
+        svg {
+          width: 45px;
+          height: 45px;
+        }
+        .info {
+          width: 430px;
+          .label {
+            color: #000;
+            font-size: 25px;
+            font-family: util.$FONT_FAMILY_M;
+            font-weight: 600;
+            line-height: 177.9%;
+            letter-spacing: 0.25px;
+          }
+          .value {
+            color: #797979;
+            font-size: 16px;
+            font-family: util.$FONT_FAMILY_M;
+            font-weight: 400;
+            line-height: 177.9%;
+            letter-spacing: 0.16px;
+          }
+        }
+      }
+      .content_0 {
+        border-bottom: 1px solid #d2d2d2;
+      }
+      .content_1 {
+        border-bottom: 1px solid #d2d2d2;
+        padding-left: 10px;
+      }
+      .content_3 {
+        padding-left: 10px;
+      }
+    }
+    .for-fun-one {
+      z-index: 2;
+      position: absolute;
+      width: 480px;
+      height: 420px;
+      transform: rotate(37.057deg);
+      border-radius: 106px;
+      background: #adc178;
+      left: -80px;
+      top: 90px;
+    }
+    .for-fun-two {
+      z-index: 1;
+      width: 480px;
+      height: 420px;
+      transform: rotate(37.057deg);
+      position: absolute;
+      border-radius: 106px;
+      background: #283618;
+      right: -140px;
+      top: 10px;
+    }
+  }
+}

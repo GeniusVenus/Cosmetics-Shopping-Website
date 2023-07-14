@@ -1,0 +1,81 @@
+@use "../../global" as util;
+$LOGIN_BACKGROUND: linear-gradient(292.12deg, #ffc881 -35.02%, #c9e7f2 78.96%);
+
+.login-form {
+  background: $LOGIN_BACKGROUND;
+  position: relative;
+  z-index: 1;
+  padding: 120px 0 0 0;
+  a {
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .container {
+    display: flex;
+  }
+  .login-container {
+    padding: 0 40px;
+    .login-layout {
+      border-top: 2px solid white;
+      padding: 40px 0 0 0;
+      .first-container {
+        flex: 1;
+        border: 1px solid red;
+        height: 100%;
+      }
+      .second-container {
+        flex: 1;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        height: 100%;
+      }
+    }
+  }
+}
+.login-form::before {
+  content: "";
+  z-index: -1;
+  background: url("../../assets/image/Texture.png"),
+    lightgray 0% 0% / 60.90909242630005px 60.90909242630005px repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  opacity: 0.12;
+}
+@media (max-width: 960px) {
+  .group-name {
+    display: none;
+  }
+  .first-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    .greeting {
+      display: none;
+    }
+  }
+  .second-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    .card {
+      width: 85%;
+    }
+  }
+}
+@media (max-width: 360px) {
+  .login-form {
+    button {
+      margin-top: 0.4rem;
+    }
+  }
+}

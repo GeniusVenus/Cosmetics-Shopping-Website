@@ -1,0 +1,84 @@
+@use "../../global" as util;
+
+.footer {
+  margin-top: 60px;
+  padding: 0 6%;
+  .footer-layout {
+    display: flex;
+    border-top: 1.5px solid #3734a9;
+    padding: 40px 0 40px 0;
+    .footer-copyright {
+      display: flex;
+      flex: 1.5;
+      flex-direction: column;
+      gap: 20px;
+      .footer-logo {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        .brand {
+          font-family: util.$FONT_FAMILY_MA;
+          font-size: 24px;
+          font-weight: 700;
+          line-height: 29px;
+        }
+        svg {
+          width: 45px;
+          height: 45px;
+        }
+      }
+      p {
+        color: #7f848d;
+        font-size: 16px;
+        font-family: util.$FONT_FAMILY_M;
+        font-weight: 400;
+        line-height: 32px;
+        padding-right: 20%;
+      }
+      span {
+        color: #293241;
+        font-size: 16px;
+        font-family: util.$FONT_FAMILY_M;
+        font-weight: 400;
+        line-height: 32px;
+      }
+    }
+    .footer-others {
+      flex: 1;
+      .links {
+        display: grid;
+        grid-template-columns: auto auto;
+        gap: 13px 0px;
+        .link {
+          color: #7f848d;
+          font-size: 14px;
+          font-family: util.$FONT_FAMILY_M;
+          font-weight: 400;
+        }
+      }
+      .sci-list {
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        .blank {
+          flex: 1;
+        }
+        .list {
+          flex: 1;
+          display: flex;
+          gap: 16px;
+          .sci {
+            width: 42px;
+            height: 42px;
+            background: #eaebec;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+        }
+      }
+    }
+  }
+}

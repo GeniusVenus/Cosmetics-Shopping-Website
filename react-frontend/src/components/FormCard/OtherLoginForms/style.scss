@@ -1,0 +1,72 @@
+@use "../../../global" as util;
+
+$LOGO_HEIGHT: calc(3rem + 1vh);
+
+svg {
+  width: calc(1rem + 0.4vw);
+  height: $LOGO_HEIGHT;
+}
+.list-sci {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+  margin-bottom: 24px;
+  .first-sci {
+    flex: 6;
+    height: $LOGO_HEIGHT;
+    border-radius: 9px;
+    cursor: pointer;
+    .logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #e9f1ff;
+      text-align: center;
+      height: $LOGO_HEIGHT;
+      border-radius: 0.6rem;
+      width: 100%;
+      gap: 8px;
+      p {
+        color: #4285f4;
+        font-family: util.$FONT_FAMILY_M;
+        font-size: 14px;
+        font-weight: 400;
+      }
+    }
+  }
+  .second-sci {
+    flex: 1;
+    height: $LOGO_HEIGHT;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: flex-end;
+    .logo {
+      width: 100%;
+      height: $LOGO_HEIGHT;
+      text-align: center;
+      border-radius: 9px;
+      background: #f6f6f6;
+      cursor: pointer;
+    }
+  }
+}
+@media (max-width: 420px) {
+  .list-sci {
+    margin-bottom: 0.7rem;
+    .first-sci {
+      display: flex;
+      flex: 1;
+      justify-content: flex-start;
+      .logo {
+        p {
+          display: none;
+        }
+      }
+    }
+    .second-sci {
+      flex: 1;
+      align-items: flex-start;
+    }
+  }
+}
