@@ -12,10 +12,12 @@ const LoginLayout = () => {
       <ToastContainer />
       <NavBar />
       <div className="login-form">
-        <div className="login-layout">
-          <Outlet />
-          <Footer />
+        <div className="login-container">
+          <div className="login-layout">
+            <Outlet />
+          </div>
         </div>
+        <Footer />
       </div>
     </>
   );

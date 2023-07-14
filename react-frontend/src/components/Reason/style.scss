@@ -1,6 +1,7 @@
 @use "../../global" as util;
 
 .reason {
+  margin-top: 20px;
   .question {
     @include util.title-text;
     margin-bottom: 30px;
@@ -31,7 +32,6 @@
           display: flex;
           align-items: center;
           justify-content: center;
-          border: 1px solid orange;
         }
         .icon_0 {
           background: #fff3e8;

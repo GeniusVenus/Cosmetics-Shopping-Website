@@ -2,6 +2,7 @@
 
 .list-product {
   border: 1px solid red;
+  margin-bottom: 20px;
   .list-title {
     @include util.title-text;
     margin-bottom: 50px;
@@ -43,14 +44,12 @@
     display: flex;
     border: 1px solid black;
     align-items: center;
-    position: absolute;
-    width: calc(100% - 360px);
-    transform: translate(320px, -60px);
+    width: 100%;
     .pagination-section {
       display: flex;
       align-items: center;
-      width: calc(100% - 130px);
       justify-content: center;
+      flex: 1;
       border: 1px solid red;
       gap: 12px;
       a {

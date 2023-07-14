@@ -3,8 +3,9 @@
   display: flex;
   flex-direction: column;
   border: 1px solid red;
-  gap: 32px;
-  padding-top: 80px;
+
+  gap: 42px;
+  padding-top: 70px;
   padding-right: 25%;
   .first {
     color: #000;
@@ -23,7 +24,7 @@
   .third {
     color: #000;
     font-family: util.$FONT_FAMILY_M;
-    font-size: 13px;
+    font-size: 16px;
     font-weight: 300;
   }
 }

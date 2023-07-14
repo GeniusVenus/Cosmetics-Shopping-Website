@@ -17,8 +17,7 @@
   cursor: pointer;
   transition: all 0.25s ease-in-out;
   &:hover {
-    transform: translate(0, -8px);
-    opacity: 0.85;
+    transform: translate(0, -6px);
   }
   .product-image {
     img {

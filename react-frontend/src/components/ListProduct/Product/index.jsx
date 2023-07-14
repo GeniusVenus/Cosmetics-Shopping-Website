@@ -1,12 +1,15 @@
 import React from "react";
 import "./style.scss";
 import NavBarImage from "../../../assets/image/NavBarImage";
+
+import { Link } from "react-router-dom";
+
 const Product = (props) => {
   const { src, title, brand, gender, price } = props.product;
   const { cartIcon2 } = NavBarImage;
   return (
     <>
-      <div className="product-container">
+      <Link className="product-container" to="/products/1">
         <div className="product-image">
           <img src={src} alt={title} />
         </div>
@@ -30,7 +33,7 @@ const Product = (props) => {
             <div className="cart-btn">{cartIcon2}</div>
           </div>
         </div>
-      </div>
+      </Link>
     </>
   );
 };

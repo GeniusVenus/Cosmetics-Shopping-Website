@@ -4,21 +4,19 @@ import ListProduct from "../../components/ListProduct";
 import Advertisement from "../../components/Advertisement";
 import Reason from "../../components/Reason";
 import Questions from "../../components/Questions";
-import SignUpBox from "../../components/SignUpBox";
-import Footer from "../../components/Footer";
 import CustomerReview from "../../components/CustomerReview";
 
 const Home = () => {
   return (
     <>
-      <Header />
-      <ListProduct />
-      <Advertisement />
-      <Reason />
-      <CustomerReview />
-      <Questions />
-      <SignUpBox />
-      <Footer />
+      <div className="home-layout">
+        <Header />
+        <ListProduct title="Featured This Week" productPerPage={8} />
+        <Advertisement />
+        <Reason />
+        <CustomerReview />
+        <Questions />
+      </div>
     </>
   );
 };

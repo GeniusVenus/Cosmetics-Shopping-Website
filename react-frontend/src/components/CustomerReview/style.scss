@@ -44,8 +44,8 @@
       .review-layout {
         display: flex;
         flex-direction: column;
-        padding: 12px 0;
-        gap: 12px;
+        padding: 20px 0;
+        gap: 16px;
         text-align: left;
         .content {
           color: #000;
@@ -115,6 +115,13 @@
     line-height: 30px;
     letter-spacing: -0.36px;
     transform: translate(0, 120px);
+    transition: all 0.25s ease-in-out;
+    border: 1px solid util.$FONT_COLOR;
+    &:hover {
+      border: 1px solid util.$FONT_COLOR;
+      color: util.$FONT_COLOR;
+      background: #fff;
+    }
   }
 }
 
