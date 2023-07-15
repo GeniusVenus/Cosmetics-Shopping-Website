@@ -1,0 +1,20 @@
+.checkout-form {
+    padding-top: 10px;
+}
+.radio-form {
+    display: flex;
+    padding: 10px;
+
+}
+.checkout-section {
+    margin-bottom: 10px;
+}
+.radio-input:checked {
+    accent-color: #5D8D00;
+}
+.text-input {
+    color: #5D8D00;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px gray solid;
+}

@@ -7,6 +7,11 @@ import Register from "./pages/LoginForm/Register";
 import ForgotPassword from "./pages/LoginForm/ForgotPassword";
 import ResetPassword from "./pages/LoginForm/ResetPassword";
 
+import CheckoutLayout from "./pages/Checkout/Layout";
+import Checkout from "./pages/Checkout/Checkout";
+import CartLayout from "./pages/Cart/Layout"
+import Cart from "./pages/Cart/Cart";
+
 const App = () => {
   return (
     <Routes>
@@ -19,6 +24,13 @@ const App = () => {
         <Route path="forgot-password" element={<ForgotPassword />} />
         <Route path="reset-password" element={<ResetPassword />} />
       </Route>
+      <Route path="/checkout" element={<CheckoutLayout />}>
+        <Route index element={<Checkout />} />
+      </Route>
+      <Route path="/cart" element={<CartLayout />}>
+        <Route index element={<Cart />} />
+      </Route>
+
     </Routes>
   );
 };

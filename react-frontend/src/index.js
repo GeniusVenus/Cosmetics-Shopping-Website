@@ -12,9 +12,9 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <Provider store={store}>
-      <ApiProvider api={cartApi}>
+      {/* <ApiProvider api={cartApi}> */}
         <App />
-      </ApiProvider>
+      {/* </ApiProvider> */}
     </Provider>
   </BrowserRouter>
 );

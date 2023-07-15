@@ -9,7 +9,7 @@ import { apiSlice } from "../../api/apiSlice";
 //     }),
 //   }),
 // });
-export const cartApi = createApi({
+export const cartApii = createApi({
   reducerPath: "cartApi",
   baseQuery: fetchBaseQuery({
     baseUrl: "https://jsonplaceholder.typicode.com/",
@@ -21,4 +21,4 @@ export const cartApi = createApi({
   }),
 });
 
-export const { useGetPostsQuery } = cartApi;
+export const { useGetPostsQuery } = cartApii;

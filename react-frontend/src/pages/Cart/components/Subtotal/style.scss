@@ -1,0 +1,20 @@
+.subtotal-shipping {
+    
+    padding-bottom: 10px;
+    .subtotal-shipping-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0 10px 0;
+    }
+}
+
+.total {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0 10px 0;
+    .total-price {
+        padding-top: 10px;
+    }
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+}

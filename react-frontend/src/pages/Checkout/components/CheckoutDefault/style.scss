@@ -1,0 +1,44 @@
+
+.checkout-layout {
+    padding-left: 40px;
+    padding-right: 40px;
+}
+.checkout-header {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    // padding
+    padding-top: 120px;
+}
+.checkout-header-text {
+    margin-top: 40px;
+}
+// Form 
+.checkout-form-container {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+.checkout-form-double {
+    display: flex;
+    // justify-content: space-between;
+    gap: 10px;
+}
+//Radio
+.radio-wrapper {
+    border: 1px solid;
+    border-radius: 10px;
+    width: 30%;
+    .radio-form {
+        border-top: 1px solid;
+    }
+    .radio-top {
+        border: none;
+    }
+}
+.checkout-section {
+    margin-top: 10px;
+}
+.section-message {
+    padding: 10px 0 10px 0;
+}
