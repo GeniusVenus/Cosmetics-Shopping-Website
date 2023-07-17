@@ -86,4 +86,9 @@ public class ProductController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+    @GetMapping("/hello")
+    public ResponseEntity<String> getCategoryProduct() {
+        String message = "Hello, world!";
+        return new ResponseEntity<>(message, HttpStatus.OK);
+    }
 }
