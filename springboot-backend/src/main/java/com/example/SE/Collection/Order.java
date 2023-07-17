@@ -32,8 +32,9 @@ public class Order {
     private String paymentMethod;
     // private DeliveryInfo deliveryInfo;
 
-    public Order(String userId, Date orderDate, String orderStatus, double totalPrice, String paymentMethod) {
+    public Order(String userId, List<OrderItem> orderItems, Date orderDate, String orderStatus, double totalPrice, String paymentMethod) {
         this.userId = userId;
+        this.orderItems = orderItems;
         this.orderDate = orderDate;
         this.orderStatus = orderStatus;
         this.totalPrice = totalPrice;
