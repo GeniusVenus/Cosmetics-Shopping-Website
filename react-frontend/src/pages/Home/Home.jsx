@@ -1,11 +1,10 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import Header from "../../components/Header";
 import ListProduct from "../../components/ListProduct";
 import Advertisement from "../../components/Advertisement";
 import Reason from "../../components/Reason";
 import Questions from "../../components/Questions";
 import CustomerReview from "../../components/CustomerReview";
-
 const Home = () => {
   return (
     <>
@@ -17,7 +16,9 @@ const Home = () => {
         <CustomerReview />
         <Questions />
       </div>
+
     </>
   );
 };
+
 export default Home;

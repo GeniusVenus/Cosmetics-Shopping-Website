@@ -1,6 +1,6 @@
 package com.example.SE.Crawler;
 
-import com.example.SE.Collection.Product;
+import com.example.SE.models.Product;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.jsoup.Jsoup;
 import java.io.FileWriter;

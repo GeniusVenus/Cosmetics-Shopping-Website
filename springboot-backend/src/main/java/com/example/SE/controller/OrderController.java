@@ -1,7 +1,6 @@
 package com.example.SE.controller;
 
-import com.example.SE.Collection.Order;
-import com.example.SE.Collection.Product;
+import com.example.SE.models.Order;
 import com.example.SE.service.OrderServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
