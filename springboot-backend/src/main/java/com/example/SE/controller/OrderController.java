@@ -24,7 +24,7 @@ public class OrderController {
 
     @PostMapping
     public ResponseEntity<Order> createOrder(@RequestBody Order order) {
-        Order savedOrder = orderService.saveOrder(order);
+        Order savedOrder = orderService.aveOrder(order);
         return new ResponseEntity<>(savedOrder, HttpStatus.CREATED);
     }
 
@@ -42,7 +42,7 @@ public class OrderController {
 
     @GetMapping("/{orderId}")
     public ResponseEntity<Optional<Order>> getOrderById(@PathVariable("orderId") String orderId) {
-        return new ResponseEntity<Optional<Order>>(orderService.findByOrderId(orderId), HttpStatus.OK);
+        return new ResponseEntity<Optional<Order>>(orderService.indByOrderId(orderId), HttpStatus.OK);
     }
 
     @PutMapping("/accept/{orderId}")

@@ -20,7 +20,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order saveOrder(Order order) {
+    public Order aveOrder(Order order) {
         return orderRepository.save(order);
     }
 
@@ -35,7 +35,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
 //    @Override
-    public Optional<Order> findByOrderId(String orderId) {
+    public Optional<Order> indByOrderId(String orderId) {
         return orderRepository.findByOrderId(orderId);
     }
 
