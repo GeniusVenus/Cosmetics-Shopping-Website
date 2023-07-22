@@ -1,8 +1,10 @@
 import NavBarImage from "../../assets/image/NavBarImage";
 import { useNavigate, Link } from "react-router-dom";
-
+import { useSelector, useDispatch } from "react-redux";
+import { selectPurchaseState, setPurchaseState } from "../../features/purchase/purchaseSlice";
 import './style.scss'
 export default function PurchaseNavigation(props) {
+    const success = useSelector(selectPurchaseState);
     let {goBackIcon} = NavBarImage;
     const navigate = useNavigate();
     const back = () => {
@@ -22,9 +24,13 @@ export default function PurchaseNavigation(props) {
                     </span>
                 </div>
             </div>
-            <div className="purchase-noti-tofill"> 
-                Fill the form below to complete your purchase
-            </div>
+            {
+                !success ?? 
+                <div className="purchase-noti-tofill"> 
+                    Fill the form below to complete your purchase
+                </div>
+            }
+            
         </>
     );
 }

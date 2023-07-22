@@ -9,6 +9,7 @@ import ResetPassword from "./pages/LoginForm/ResetPassword";
 
 import CheckoutLayout from "./pages/Checkout/Layout";
 import Checkout from "./pages/Checkout/Checkout";
+import CheckoutSuccess from "./pages/Checkout/CheckoutSuccess";
 import CartLayout from "./pages/Cart/Layout"
 import Cart from "./pages/Cart/Cart";
 
@@ -26,10 +27,12 @@ const App = () => {
       </Route>
       <Route path="/checkout" element={<CheckoutLayout />}>
         <Route index element={<Checkout />} />
+        <Route path="/checkout/success" element={<CheckoutSuccess/>} />
       </Route>
       <Route path="/cart" element={<CartLayout />}>
         <Route index element={<Cart />} />
       </Route>
+      
 
     </Routes>
   );

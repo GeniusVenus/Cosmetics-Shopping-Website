@@ -15,9 +15,9 @@ export default function Cart() {
                 <div className="purchase-field">
                     <CartItem/>
                 </div>
-                <div className="purchase-field">
+                {/* <div className="purchase-field">
                     <ShippingInfo/>
-                </div>
+                </div> */}
                 <div className="purchase-field">
                     <OrderReview inPage="cart"/>
                 </div>
