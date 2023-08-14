@@ -6,11 +6,12 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.example.SE.exception.TokenRefreshException;
-import com.example.SE.models.RefreshToken;
+import com.example.SE.models.*;
 import com.example.SE.payload.request.LogoutRequest;
 import com.example.SE.payload.request.TokenRefreshRequest;
 import com.example.SE.payload.response.JwtResponse;
 import com.example.SE.payload.response.TokenRefreshResponse;
+import com.example.SE.repository.CustomerInfoRepository;
 import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.SE.models.ERole;
-import com.example.SE.models.Role;
-import com.example.SE.models.User;
 import com.example.SE.payload.request.LoginRequest;
 import com.example.SE.payload.request.SignupRequest;
 import com.example.SE.payload.response.UserInfoResponse;
@@ -57,6 +55,9 @@ public class AuthController {
 
     @Autowired
     RefreshTokenService refreshTokenService;
+
+    @Autowired
+    CustomerInfoRepository customerInfoRepository;
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
@@ -138,7 +139,9 @@ public class AuthController {
 
         user.setRoles(roles);
         userRepository.save(user);
-
+        CustomerInfo info = new CustomerInfo();
+        info.setUser(userRepository.findByUsername(user.getUsername()).get());
+        customerInfoRepository.save(info);
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
     @PostMapping("/signout")
