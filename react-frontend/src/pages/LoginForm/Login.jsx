@@ -1,11 +1,12 @@
- import { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { setCredentials } from "../../features/auth/authSlice";
-import { useLoginMutation } from "../../features/auth/authApiSlice";
+import { useSigninMutation } from "../../features/auth/authApiSlice";
 import LoginGreeting from "../../components/LoginGreeting";
 import FormCard from "../../components/FormCard";
+import { setInfo } from "../../features/user/userSlice";
 
 const Login = () => {
   const [values, setValues] = useState({
@@ -14,7 +15,7 @@ const Login = () => {
   });
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [login] = useLoginMutation();
+  const [login] = useSigninMutation();
   let inputs = [
     {
       id: 1,
@@ -40,23 +41,24 @@ const Login = () => {
     try {
       const userData = await login(values).unwrap();
       dispatch(setCredentials({ ...userData, user }));
+      dispatch(setInfo(userData));
       setValues({
         username: "",
         password: "",
       });
       toast.success("Sign in successfully");
-      navigate("/home");
+      setTimeout(() => navigate("/"), 2000);
     } catch (err) {
-      if (!err.originalStatus) toast.error("No Server Response");
-      else if (err.originalStatus === 400)
+      if (!err?.data?.status) toast.error("No Server Response");
+      else if (err?.data?.status === 400)
         toast.error("Missing Username or Password");
-      else if (err.originalStatus === 401) toast.error("Unauthorized");
+      else if (err?.data?.status === 401) toast.error("Unauthorized");
       else toast.error("Login Failed");
     }
   };
 
   const onChange = (e) => {
-    setValues({ ...values, [e.target.name]: e.target.value });
+    setValues({ ...values, [e.target.name]: e.target.value.trim() });
   };
   return (
     <>

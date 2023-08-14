@@ -11,7 +11,7 @@ $FIRST_BACKGROUND: rgba(255, 255, 255, 0.4);
   padding: 80px 40px 40px 40px;
   .header-content {
     border-top: 2px solid #fff;
-    height: 750px;
+    height: 770px;
     z-index: 123;
     margin-top: 20px;
     padding-top: 20px;
@@ -19,6 +19,7 @@ $FIRST_BACKGROUND: rgba(255, 255, 255, 0.4);
     .first-commitment {
       display: inline-flex;
       margin-top: 20px;
+      margin-bottom: 20px;
       padding: 20px;
       align-items: flex-start;
       gap: 26px;
@@ -48,7 +49,6 @@ $FIRST_BACKGROUND: rgba(255, 255, 255, 0.4);
       display: flex;
       .header-side-content {
         flex: 1;
-        border: 1px solid black;
         .second-commitment {
           margin-top: 10px;
           color: #000;
@@ -86,7 +86,6 @@ $FIRST_BACKGROUND: rgba(255, 255, 255, 0.4);
       }
 
       .header-side-image {
-        border: 1px solid purple;
         display: flex;
         flex: 1;
         gap: 40px;
@@ -105,7 +104,6 @@ $FIRST_BACKGROUND: rgba(255, 255, 255, 0.4);
           }
         }
         .second-side {
-          border: 2px solid blue;
           .second-pic {
             width: 231px;
             height: 391px;
@@ -167,7 +165,6 @@ $FIRST_BACKGROUND: rgba(255, 255, 255, 0.4);
   align-items: center;
   justify-content: center;
   padding: 0 40px 30px 40px;
-  border: 1px solid black;
   .advert {
     display: flex;
     flex-direction: column;

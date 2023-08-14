@@ -28,7 +28,7 @@
       height: 130px;
       object-fit: cover;
       border-radius: 10px;
-      cursor: z;
+      cursor: pointer;
     }
     .image.active {
       img {
@@ -73,9 +73,14 @@
     width: 100%;
     border: 1px solid black;
     .product-image-layout {
+      border: 1px solid blue;
       display: flex;
       justify-content: center;
       align-items: center;
+
+      image {
+        border: 1px solid brown;
+      }
     }
   }
 }

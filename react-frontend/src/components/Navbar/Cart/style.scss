@@ -1,0 +1,41 @@
+@use "../../../global" as util;
+.cart {
+  cursor: pointer;
+  .icon {
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.5);
+    @include util.center();
+    width: 50px;
+    height: 50px;
+    svg {
+      width: 25px;
+      height: 25px;
+    }
+    &.fixed {
+      background: rgba(119, 147, 65, 0.3);
+      position: relative;
+      span {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        width: 25px;
+        height: 25px;
+        background: #4f4f4f;
+        border-radius: 25px;
+        position: absolute;
+        top: -6px;
+        right: -8px;
+      }
+    }
+  }
+  p {
+    color: util.$FONT_COLOR;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: util.$FONT_FAMILY_M;
+  }
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

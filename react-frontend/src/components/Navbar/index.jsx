@@ -1,23 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./style.scss";
 import { NavLink, useNavigate } from "react-router-dom";
 import NavBarImage from "../../assets/image/NavBarImage";
-import { motion } from "framer-motion";
+import Search from "./Search";
+import Cart from "./Cart";
+import Avatar from "./Avatar";
 const Navbar = () => {
-  let { logo, searchIcon, cartIcon } = NavBarImage;
-  const [fixed, setFixed] = useState(false);
+  let { logo } = NavBarImage;
   const navigate = useNavigate();
-  const showStickyNav = () => {
-    if (window.scrollY >= 130) setFixed(true);
-    else setFixed(false);
-  };
-  useEffect(() => {
-    showStickyNav();
-  }, []);
-  window.addEventListener("scroll", showStickyNav);
+  const [active, setActive] = useState(false);
+  // const [fixed] = useState(false);
+  // const showStickyNav = () => {
+  //   if (window.scrollY >= 130) setFixed(true);
+  //   else setFixed(false);
+  // };
+  // useEffect(() => {
+  //   showStickyNav();
+  // }, []);
+  // window.addEventListener("scroll", showStickyNav);
   return (
     <>
-      <motion.div className={fixed ? "nav-bar fixed" : "nav-bar"}>
+      <div className={active ? "nav-bar search-active" : "nav-bar"}>
         <div className="logo" onClick={(e) => navigate("/")}>
           {logo}
           <p> The Eleventh</p>
@@ -28,20 +31,11 @@ const Navbar = () => {
           <NavLink to="/contact"> Contact </NavLink>
         </div>
         <div className="menu-second">
-          <div className="item">
-            <div className="icon">{searchIcon}</div>
-            <p> Search</p>
-          </div>
-          <div className="item">
-            <div className="icon">{cartIcon}</div>
-            <p> Cart </p>
-          </div>
-          <button className="loginBtn" onClick={() => navigate("/login")}>
-            {" "}
-            Log in/Sign up
-          </button>
+          <Search active={active} setActive={setActive} />
+          <Cart />
+          <Avatar />
         </div>
-      </motion.div>
+      </div>
     </>
   );
 };

@@ -5,16 +5,19 @@ import ProductDetailImage from "../../assets/image/ProductDetailImage";
 import Info from "./Info";
 const ProductInfo = (props) => {
   const { messageIcon } = ProductDetailImage;
-  const { title, price, product_type, ...others } = props.product;
+  const { productId, image, name, cost, category, ...others } = props.product;
+  const handleAddToCart = (id) => {
+    console.log(id);
+  };
   return (
     <>
       <div className="product-info">
         <div className="product-info-layout">
           <div className="product-info-content">
             <div className="main-info">
-              <div className="product-type">{product_type} </div>
-              <div className="product-name">{title}</div>
-              <div className="product-price">{price} VND</div>
+              <div className="product-type">{category} </div>
+              <div className="product-name">{name}</div>
+              <div className="product-price">{cost}</div>
               <div className="interact-btn">
                 <div className="contact-btn">Contact us</div>
                 <div className="seller-contact-btn">
@@ -31,7 +34,13 @@ const ProductInfo = (props) => {
               ))}
             </div>
             <div className="other-interact-btn">
-              <div className="add-to-cart-btn"> Add to cart</div>
+              <div
+                className="add-to-cart-btn"
+                onClick={handleAddToCart(productId)}
+              >
+                {" "}
+                Add to cart
+              </div>
               <div className="add-to-favorite-btn"> Add to favorite</div>
             </div>
           </div>

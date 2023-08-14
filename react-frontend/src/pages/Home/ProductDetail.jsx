@@ -2,28 +2,31 @@ import React from "react";
 import PageLocation from "../../components/PageLocation";
 import ProductInfo from "../../components/ProductInfo";
 import ProductPresent from "../../components/ProductPresent";
-const ProductDetail = () => {
+import { useParams } from "react-router-dom";
+import Loading from "../../components/Loading";
+import { useGetProductDetailQuery } from "../../features/product/productApiSlice";
+const ProductDetail = (props) => {
+  const { id } = useParams();
   const page = [
     { title: "Home", url: "/" },
     { title: "Products (All)", url: "/products" },
-    { title: "Product Detail", url: "/products/1" },
+    { title: "Product Detail", url: `/products/${id}` },
   ];
-  const product = {
-    title: "The Ordinary Niacinamide 10% Serum",
-    product_type: "Skincare",
-    price: 100000,
-    volume: "30 ml | 1.0 US fl.oz",
-    ingredients: "Water, Niacinamide (10%)",
-    brand: "The Ordinary",
-    type: "Serum",
-    description:
-      "Niacinamide also possesses anti-inflammatory properties, making it a fantastic choice for those with acne-prone skin. ",
-  };
+  const { data, error, isLoading } = useGetProductDetailQuery(id);
   return (
     <div className="product-detail">
       <PageLocation page={page} />
-      <ProductPresent />
-      <ProductInfo product={product} />
+      {isLoading || error ? (
+        <div className="loading-section">
+          <Loading />
+        </div>
+      ) : (
+        <>
+          {" "}
+          <ProductPresent image={data.image} />
+          <ProductInfo product={data} />
+        </>
+      )}
     </div>
   );
 };
