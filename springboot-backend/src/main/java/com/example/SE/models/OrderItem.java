@@ -1,5 +1,4 @@
-package com.example.SE.Collection;
-import com.fasterxml.jackson.annotation.JsonInclude;
+package com.example.SE.models;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

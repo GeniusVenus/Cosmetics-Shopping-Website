@@ -1,12 +1,12 @@
 package com.example.SE.controller;
 
-import com.example.SE.Collection.Product;
+import com.example.SE.models.Product;
 import com.example.SE.service.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -38,15 +38,24 @@ public class ProductController {
     public ResponseEntity<List<Product>> getCategoryProduct(@PathVariable("category") String category){
         return new ResponseEntity<List<Product>>(productService.categoryProduct(category), HttpStatus.OK);
     }
-
+    ///@PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/addProduct")
     public Product saveProduct(@RequestBody Product product) {
-        return productService.saveProduct(product);
+        String ids = product.getProductId();
+        Optional<Product> products = productService.IdProduct(ids);
+        if (products.isPresent()) {
+            Product prd = products.get();
+            prd.setNum(product.getNum() + 1);
+            return productService.saveProduct(prd);
+        }
+        else return productService.saveProduct(product);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/deleteProduct/{id}")
     public ResponseEntity<HttpStatus> deleteProduct(@PathVariable("id") String id) {
         try {
+            Optional<Product> products = productService.IdProduct(id);
             productService.deleteProduct(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
@@ -54,6 +63,7 @@ public class ProductController {
         }
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/deleteAll")
     public ResponseEntity<HttpStatus> deleteAllProducts() {
         try {
@@ -64,6 +74,7 @@ public class ProductController {
         }
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/updateProduct/{id}")
     public ResponseEntity<Product> updateProduct(@PathVariable("id") String id, @RequestBody Product prdct) {
         Optional<Product> products = productService.IdProduct(id);
@@ -80,6 +91,7 @@ public class ProductController {
             product.setName(prdct.getName());
             product.setVolume(prdct.getVolume());
             product.setMark(prdct.getMark());
+            product.setNum(prdct.getNum());
            return new ResponseEntity<>(productService.saveProduct(product), HttpStatus.OK);
         }
         else {

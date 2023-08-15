@@ -1,6 +1,6 @@
 package com.example.SE.Crawler;
 
-import com.example.SE.Collection.Product;
+import com.example.SE.models.Product;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.jsoup.Jsoup;
 import java.io.FileWriter;
@@ -17,7 +17,7 @@ public class SkinCrawl implements BaseCrawler {
         String baseId = "Skin_";
         try (Writer writer = new FileWriter("D:\\SE_Project\\SE\\springboot-backend\\src\\main\\java\\com\\example\\SE\\JsonFile\\Skin.json")) {
             writer.write('[');
-            for (int j = 1; j <= 46; ++j) {
+            for (int j = 1; j <= 9; ++j) {
                 try {
                     String url = "";
                     String num = Integer.toString(j);

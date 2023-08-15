@@ -1,0 +1,45 @@
+@use "../../global" as util;
+@mixin info_box {
+  border-radius: 8px;
+  border: 1px solid #eaeaef;
+  background: #fff;
+  box-shadow: 0px 1px 4px 0px rgba(33, 33, 52, 0.1);
+}
+
+@mixin title_box {
+  color: #32324d;
+  font-family: util.$FONT_FAMILY_M;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 20px;
+}
+@mixin input_view {
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 1px solid #dcdce4;
+  background: #fff;
+}
+@mixin input_label {
+  color: #32324d;
+  font-family: util.$FONT_FAMILY_M;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px;
+}
+
+@mixin input_description {
+  color: #666687;
+  font-family: util.$FONT_FAMILY_M;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  margin-bottom: 12px;
+}
+
+@mixin input_font {
+  color: #32324d;
+  font-family: util.$FONT_FAMILY_M;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}

@@ -1,6 +1,6 @@
 package com.example.SE.Crawler;
 
-import com.example.SE.Collection.Product;
+import com.example.SE.models.Product;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -19,7 +19,7 @@ public class BodyCrawl implements BaseCrawler{
         String baseId = "Body_";
         try (Writer writer = new FileWriter("D:\\SE_Project\\SE\\springboot-backend\\src\\main\\java\\com\\example\\SE\\JsonFile\\Body.json")) {
             writer.write('[');
-            for (int j = 1; j <= 22; ++j) {
+            for (int j = 1; j <= 6; ++j) {
                 try {
                     String url = "";
                     String num = Integer.toString(j);

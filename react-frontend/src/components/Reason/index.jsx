@@ -1,7 +1,6 @@
 import React from "react";
 import "./style.scss";
 import AdvertisementImage from "../../assets/image/AdvertisementImage";
-import { motion } from "framer-motion";
 const Reason = () => {
   const { shoppingCart, tapeMeasure, shopDesign, deliveryCar } =
     AdvertisementImage;
@@ -34,39 +33,13 @@ const Reason = () => {
   return (
     <>
       <div className="reason">
-        <motion.div
-          className="question"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.5, ease: "easeInOut" }}
-          viewport={{ once: true }}
-        >
-          Why Order from the Eleventh?
-        </motion.div>
+        <div className="question">Why Order from the Eleventh?</div>
         <div className="reason-content">
           <div className="for-fun-one"></div>
-          <motion.div
-            className="reason-container"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.25, ease: "easeInOut" }}
-            viewport={{ once: true }}
-          >
+          <div className="reason-container">
             {contents.map((item, index) => {
               return (
-                <motion.div
-                  key={index}
-                  id="content"
-                  className={"content_" + index}
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{
-                    duration: 1,
-                    delay: index * 0.1 + 0.75,
-                    ease: "easeInOut",
-                  }}
-                  viewport={{ once: true }}
-                >
+                <div key={index} id="content" className={"content_" + index}>
                   <div id="icon" className={"icon_" + index}>
                     {" "}
                     {item.icon}{" "}
@@ -75,10 +48,10 @@ const Reason = () => {
                     <div className="label"> {item.label} </div>
                     <div className="value"> {item.value} </div>
                   </div>
-                </motion.div>
+                </div>
               );
             })}
-          </motion.div>
+          </div>
           <div className="for-fun-two"></div>
         </div>
       </div>

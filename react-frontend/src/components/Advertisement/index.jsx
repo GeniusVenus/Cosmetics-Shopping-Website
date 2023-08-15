@@ -1,29 +1,16 @@
 import React from "react";
 import "./style.scss";
 import AdvertisementImage from "../../assets/image/AdvertisementImage";
-import { motion } from "framer-motion";
 const Advertisement = () => {
   const { firstPicture, vectorOne, arrow } = AdvertisementImage;
   return (
     <div className="advertisement-section">
       <div className="advertisement-layout">
-        <motion.div
-          className="first-section"
-          initial={{ opacity: 0, x: -40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1, delay: 0.5, ease: "easeInOut" }}
-          viewport={{ once: true }}
-        >
+        <div className="first-section">
           <div className="section-image">{firstPicture}</div>
           <div className="for-fun"></div>
-        </motion.div>
-        <motion.div
-          className="second-section"
-          initial={{ opacity: 0, x: 40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1, delay: 0.5, ease: "easeInOut" }}
-          viewport={{ once: true }}
-        >
+        </div>
+        <div className="second-section">
           <div className="for-fun"></div>
           <div className="section-content">
             {vectorOne}
@@ -41,7 +28,7 @@ const Advertisement = () => {
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </div>
   );

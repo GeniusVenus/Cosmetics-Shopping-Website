@@ -1,7 +1,6 @@
 @use "../../global.scss" as util;
 
 .list-product {
-  border: 1px solid red;
   margin-bottom: 20px;
   .list-title {
     @include util.title-text;
@@ -10,13 +9,11 @@
   .list-content {
     padding-right: 40px;
     display: flex;
-    border: 1px solid brown;
     .list-product-info {
       width: 100%;
       .list-product-header {
         display: flex;
         width: 100%;
-        border: 1px solid red;
         align-items: center;
         padding-left: 20px;
         span {
@@ -42,7 +39,6 @@
   }
   .list-product-pagination {
     display: flex;
-    border: 1px solid black;
     align-items: center;
     width: 100%;
     .pagination-section {
@@ -50,7 +46,6 @@
       align-items: center;
       justify-content: center;
       flex: 1;
-      border: 1px solid red;
       gap: 12px;
       a {
         list-style-type: none;
@@ -88,6 +83,7 @@
         border-radius: 10px;
         border: 1.5px solid util.$FONT_COLOR;
         gap: 8px;
+        color: util.$FONT_COLOR;
         font-size: 14px;
         font-family: util.$FONT_FAMILY_M;
         font-weight: 400;

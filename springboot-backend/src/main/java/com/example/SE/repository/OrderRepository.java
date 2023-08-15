@@ -1,6 +1,6 @@
 package com.example.SE.repository;
 
-import com.example.SE.Collection.Order;
+import com.example.SE.models.Order;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 import java.util.List;

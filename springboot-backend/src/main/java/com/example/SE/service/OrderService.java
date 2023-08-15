@@ -1,9 +1,8 @@
 package com.example.SE.service;
-import com.example.SE.Collection.Order;
+import com.example.SE.models.Order;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public interface OrderService {

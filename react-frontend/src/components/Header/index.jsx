@@ -3,7 +3,6 @@ import "./style.scss";
 import HeaderImage from "../../assets/image/HeaderImage";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { motion } from "framer-motion";
 const Header = () => {
   const {
     firstPicture,
@@ -24,13 +23,7 @@ const Header = () => {
     <>
       <div className="header">
         <div className="header-content">
-          <motion.div
-            className="first-commitment"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: "easeInOut" }}
-            viewport={{ once: true }}
-          >
+          <div className="first-commitment">
             {commits.map((value, index) => {
               return (
                 <div key={index} className="commit">
@@ -39,15 +32,9 @@ const Header = () => {
                 </div>
               );
             })}
-          </motion.div>
+          </div>
           <div className="content">
-            <motion.div
-              className="header-side-content"
-              initial={{ opacity: 0, x: -40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1, delay: 0.75, ease: "easeInOut" }}
-              viewport={{ once: true }}
-            >
+            <div className="header-side-content">
               <div className="second-commitment">
                 Getting the best and latest products has never been easier.
               </div>
@@ -57,14 +44,8 @@ const Header = () => {
                 right products for all your need to beauty.{" "}
               </div>
               <button className="shop-collection-btn"> Shop collections</button>
-            </motion.div>
-            <motion.div
-              className="header-side-image"
-              initial={{ opacity: 0, x: 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1, delay: 0.75, ease: "easeInOut" }}
-              viewport={{ once: true }}
-            >
+            </div>
+            <div className="header-side-image">
               <div className="first-side">
                 {vectorOne}
                 {firstPicture}
@@ -78,20 +59,14 @@ const Header = () => {
                   {fifthPicture}
                 </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
         {fillOne}
       </div>
 
       <div className="advert-section">
-        <motion.div
-          className="advert"
-          initial={{ opacity: 0, y: 0 }}
-          whileInView={{ opacity: 1, y: -40 }}
-          transition={{ duration: 1, delay: 0.25, ease: "easeInOut" }}
-          viewport={{ once: true }}
-        >
+        <div className="advert">
           <p className="first">
             Over <span>10k+</span> customers are glowing up with The Eleventh.{" "}
           </p>
@@ -100,7 +75,7 @@ const Header = () => {
             love, whenever I want.”
           </p>
           <p>- Anna</p>
-        </motion.div>
+        </div>
       </div>
     </>
   );

@@ -1,0 +1,33 @@
+@use "../../../global" as util;
+@use "../style" as box;
+.delivery-address-card {
+  @include box.info_box();
+  padding: 24px 28px 24px 28px;
+  .title {
+    @include box.title_box();
+    margin-bottom: 4px;
+  }
+  .description {
+    @include box.input_description();
+  }
+  .default-address-input {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    label {
+      @include box.input_label();
+    }
+    input {
+      width: 100%;
+      @include box.input_view();
+      outline: none;
+      @include box.input_font();
+      &:focus {
+        border: 1px solid #5d8d00;
+      }
+    }
+    span {
+      @include box.input_description();
+    }
+  }
+}

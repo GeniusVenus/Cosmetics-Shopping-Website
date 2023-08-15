@@ -1,7 +1,6 @@
 @use "../../global" as util;
 .questions {
   margin-top: 140px;
-  border: 1px solid red;
   .questions-zone {
     @include util.title-text;
     margin-bottom: 30px;
@@ -31,7 +30,6 @@
         width: 54px;
         height: 54px;
         border-radius: 27px;
-        border: 4px solid #000;
         display: flex;
         justify-content: center;
         align-items: center;
