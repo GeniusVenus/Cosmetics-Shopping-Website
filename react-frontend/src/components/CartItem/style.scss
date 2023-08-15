@@ -1,3 +1,4 @@
+@use "../../global" as util;
 .cart-item {
     display: flex;
     justify-content: space-between;
@@ -32,9 +33,19 @@
             width: 20px;
             border: none;
         }
+        button:hover {
+            cursor: pointer;
+        }
         .qty {
             margin-left: 10px;
             margin-right: 10px;
+        }
+    }
+
+    .cart-item-img {
+        img {
+            width: 120px;
+            height: 120px;
         }
     }
 }

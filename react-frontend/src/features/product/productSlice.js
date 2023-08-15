@@ -2,30 +2,29 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 
 const initialState = {
     value : [],
+    availProd : [],
     status : 'idle'
 }
 
-export const fetchProductIdList = createAsyncThunk('product/fetchProductIdList', async () => {
+export const fetchProductIdList = createAsyncThunk('product/fetchProductIdList', async (userId) => {
+    //Refactor
     try {
         console.log('fetch');
-        const url = 'http://localhost:8080/api/cart/cartId/64b536c31cb463531d44bcce';
+        const url = `http://localhost:8080/api/cart/userId/${userId}/1`;
         const response = await fetch(url, {
             method: 'GET',
             headers: {
-            'Content-Type': 'application/json'
+                'Content-Type': 'application/json'
             }
         });
         const data = await response.json();
         const productIds = data[0].productIds;
-        // productSlice.actions.setNewList(productIds);
-        console.log(productIds);
-        const numberProductIds = productIds.map((str) => parseInt(str));
-        return numberProductIds;
-        // return [1,2,3];
+        return productIds;
     } catch(err) {
         console.log(err);
+        throw err; // Re-throw the error to let the calling code handle it
     }
-})
+});
 
 const productSlice = createSlice({
     name: 'product',
@@ -36,7 +35,7 @@ const productSlice = createSlice({
     // },
     initialState,
     reducers: {
-        setNewList: (state, action) => {
+        setCurrentProductsInCart: (state, action) => {
             console.log(action.payload);
             try {
                 state.value = action.payload;
@@ -60,7 +59,7 @@ const productSlice = createSlice({
 
 })
 
-export const {setNewList} = productSlice.actions;
-export const getProductList = (state) => state.product.value;
+export const {setCurrentProductsInCart} = productSlice.actions;
+export const getProductsInCart = (state) => state.product.value;
 
 export default productSlice.reducer;

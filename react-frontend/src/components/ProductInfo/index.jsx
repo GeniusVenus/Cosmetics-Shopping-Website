@@ -1,13 +1,48 @@
 import React from "react";
 import ProductReview from "./ProductReview";
+import { useSelector } from "react-redux";
+import { selectCurrentUserId } from "../../features/auth/authSlice";
 import "./style.scss";
 import ProductDetailImage from "../../assets/image/ProductDetailImage";
 import Info from "./Info";
 const ProductInfo = (props) => {
   const { messageIcon } = ProductDetailImage;
   const { productId, image, name, cost, category, ...others } = props.product;
-  const handleAddToCart = (id) => {
-    console.log(id);
+  const userId = useSelector(selectCurrentUserId);
+  const handleAddToCart = async (id) => {
+    //Refactor
+    try {
+      const getCartUrl = `http://localhost:8080/api/cart/userId/${userId}/1`;
+      const getCartResponse = await fetch(getCartUrl);
+      const cartData = await getCartResponse.json();
+
+      const updatedProductIds = [...cartData[0].productIds, id];
+
+      const updateCartUrl = 'http://localhost:8080/api/cart';
+      const payload = {
+        cartId: cartData[0].cartId,
+        userId: userId,
+        productIds: updatedProductIds,
+        isActive: true,
+        totalPrice: 0.0
+      };
+
+      const updateCartResponse = await fetch(updateCartUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      if (updateCartResponse.ok) {
+        console.log('Product added to cart successfully');
+      } else {
+        console.error('Failed to add product to cart');
+      }
+    } catch (error) {
+      console.error('Errsor:', error);
+    }
   };
   return (
     <>
@@ -36,7 +71,7 @@ const ProductInfo = (props) => {
             <div className="other-interact-btn">
               <div
                 className="add-to-cart-btn"
-                onClick={handleAddToCart(productId)}
+                onClick={() => handleAddToCart(productId)}
               >
                 {" "}
                 Add to cart
