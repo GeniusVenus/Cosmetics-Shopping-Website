@@ -21,7 +21,7 @@ public class HairCrawl implements BaseCrawler {
         String baseId = "Hair_";
         try (Writer writer = new FileWriter("D:\\SE_Project\\SE\\springboot-backend\\src\\main\\java\\com\\example\\SE\\JsonFile\\Hair.json")) {
             writer.write('[');
-            for (int j = 1; j <= 25; ++j) {
+            for (int j = 1; j <= 6; ++j) {
                 try {
                     String url = "";
                     String num = Integer.toString(j);

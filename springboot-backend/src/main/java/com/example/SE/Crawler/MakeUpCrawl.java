@@ -19,7 +19,7 @@ public class MakeUpCrawl implements BaseCrawler{
         String baseId = "MakeUp_";
         try (Writer writer = new FileWriter("D:\\SE_Project\\SE\\springboot-backend\\src\\main\\java\\com\\example\\SE\\JsonFile\\MakeUp.json")) {
             writer.write('[');
-            for (int j = 1; j <= 34; ++j) {
+            for (int j = 1; j <= 9; ++j) {
                 try {
                     String url = "";
                     String num = Integer.toString(j);

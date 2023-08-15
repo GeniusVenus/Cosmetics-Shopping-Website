@@ -38,16 +38,24 @@ public class ProductController {
     public ResponseEntity<List<Product>> getCategoryProduct(@PathVariable("category") String category){
         return new ResponseEntity<List<Product>>(productService.categoryProduct(category), HttpStatus.OK);
     }
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    ///@PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/addProduct")
     public Product saveProduct(@RequestBody Product product) {
-        return productService.saveProduct(product);
+        String ids = product.getProductId();
+        Optional<Product> products = productService.IdProduct(ids);
+        if (products.isPresent()) {
+            Product prd = products.get();
+            prd.setNum(product.getNum() + 1);
+            return productService.saveProduct(prd);
+        }
+        else return productService.saveProduct(product);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/deleteProduct/{id}")
     public ResponseEntity<HttpStatus> deleteProduct(@PathVariable("id") String id) {
         try {
+            Optional<Product> products = productService.IdProduct(id);
             productService.deleteProduct(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         } catch (Exception e) {
@@ -83,6 +91,7 @@ public class ProductController {
             product.setName(prdct.getName());
             product.setVolume(prdct.getVolume());
             product.setMark(prdct.getMark());
+            product.setNum(prdct.getNum());
            return new ResponseEntity<>(productService.saveProduct(product), HttpStatus.OK);
         }
         else {

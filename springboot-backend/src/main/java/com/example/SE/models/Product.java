@@ -27,6 +27,7 @@ public class Product {
     private String volume;
     private int mark;
     private String image;
+    private int num;
 
     public Product(String productId, String category, String name, String cost, String description, String how_to_use, String ingredient, String brand, String volume, String image) {
         this.productId = productId;
@@ -39,6 +40,7 @@ public class Product {
         this.brand = brand;
         this.volume = volume;
         this.image = image;
+        this.num = 999;
     }
 
     public String getProductId() {
@@ -127,5 +129,13 @@ public class Product {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
     }
 }
