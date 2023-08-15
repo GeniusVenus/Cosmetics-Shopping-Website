@@ -1,7 +1,6 @@
 package com.example.SE.controller;
 
-import com.example.SE.Collection.Cart;
-import com.example.SE.Collection.Cart;
+import com.example.SE.models.Cart;
 import com.example.SE.service.CartServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

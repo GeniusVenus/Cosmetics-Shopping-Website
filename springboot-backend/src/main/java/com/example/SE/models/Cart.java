@@ -1,4 +1,4 @@
-package com.example.SE.Collection;
+package com.example.SE.models;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,6 +28,7 @@ public class Cart {
 
     private List<String> productIds = new ArrayList<>();
     private boolean isActive;
+    private boolean isOrder;
     private double totalPrice;
     private String address;
     private int shippingMethod;
@@ -37,6 +38,7 @@ public class Cart {
             String userId,
             List<String> productIds,
             boolean isActive,
+            boolean isOrder,
             double totalPrice,
             String address,
             int shippingMethod
@@ -45,6 +47,7 @@ public class Cart {
         this.userId = userId;
         this.productIds = productIds;
         this.isActive = isActive;
+        this.isOrder = isOrder;
         this.totalPrice = totalPrice;
         this.address = address;
         this.shippingMethod = shippingMethod;
@@ -81,6 +84,15 @@ public class Cart {
     public void isActive(boolean isActive) {
         this.isActive = isActive;
     }
+
+    public boolean getIsOrder() {
+        return isOrder;
+    }
+
+    public void isOrder(boolean isOrder) {
+        this.isOrder = isOrder;
+    }
+
 
     public double getTotalPrice() {
         return totalPrice;

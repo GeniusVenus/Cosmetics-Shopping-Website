@@ -1,6 +1,6 @@
 package com.example.SE.service;
 
-import com.example.SE.Collection.Cart;
+import com.example.SE.models.Cart;
 import com.example.SE.repository.CartRepository;
 import com.example.SE.repository.CartRepository;
 import org.springframework.beans.factory.annotation.Autowired;
