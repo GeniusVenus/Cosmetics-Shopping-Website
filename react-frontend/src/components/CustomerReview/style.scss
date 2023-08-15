@@ -4,7 +4,6 @@
   margin-top: 100px;
   margin-bottom: 200px;
   text-align: center;
-  border: 1px solid cyan;
   .title {
     @include util.title-text;
   }
@@ -40,7 +39,6 @@
       border-radius: 12px;
       height: 207px;
       background: #f5f6f8;
-      border: 1px solid red;
       .review-layout {
         display: flex;
         flex-direction: column;
@@ -66,7 +64,7 @@
         }
         .user {
           display: flex;
-          border: 1px solid orange;
+
           padding: 0;
           .avatar {
             flex: 1;
@@ -82,7 +80,6 @@
           }
           .info {
             flex: 9;
-            border: 1px solid blue;
             transform: translate(-5%, 0);
             .name {
               color: #000;

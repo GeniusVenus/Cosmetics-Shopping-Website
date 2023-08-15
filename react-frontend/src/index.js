@@ -5,16 +5,15 @@ import reportWebVitals from "./reportWebVitals";
 import "./global.scss";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import store from "./store";
-import { ApiProvider } from "@reduxjs/toolkit/dist/query/react";
-import { cartApi } from "./features/cart/cartApiSlice";
+import { PersistGate } from "redux-persist/integration/react";
+import store, { persistor } from "./store";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <Provider store={store}>
-      <ApiProvider api={cartApi}>
+      <PersistGate loading={null} persistor={persistor}>
         <App />
-      </ApiProvider>
+      </PersistGate>
     </Provider>
   </BrowserRouter>
 );

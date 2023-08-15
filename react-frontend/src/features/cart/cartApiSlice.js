@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { apiSlice } from "../../api/apiSlice";
+// import { apiSlice } from "../../api/apiSlice";
 
 // export const cartApiSlice = apiSlice.injectEndpoints({
 //   endpoints: (builder) => ({
@@ -12,11 +12,11 @@ import { apiSlice } from "../../api/apiSlice";
 export const cartApi = createApi({
   reducerPath: "cartApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://jsonplaceholder.typicode.com/",
+    baseUrl: "http://localhost:8080/api/",
   }),
   endpoints: (builder) => ({
     getPosts: builder.query({
-      query: () => "posts",
+      query: () => "product",
     }),
   }),
 });

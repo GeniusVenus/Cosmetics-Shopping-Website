@@ -1,0 +1,34 @@
+@use "../../../global" as util;
+@use "../style" as box;
+.profile-card {
+  @include box.info_box();
+  padding: 24px 0px 24px 28px;
+  .title {
+    @include box.title_box();
+  }
+  .profile-inputs {
+    margin-top: 12px;
+    display: grid;
+    align-self: center;
+    grid-template-columns: auto auto;
+    gap: 16px 0px;
+    .info-input-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      input {
+        width: calc(100% - 28px);
+        @include box.input_view();
+        @include box.input_font();
+        outline: none;
+        &:focus {
+          border: 1px solid #5d8d00;
+        }
+      }
+      label {
+        @include box.input_label();
+      }
+    }
+  }
+}
