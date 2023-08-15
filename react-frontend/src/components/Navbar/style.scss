@@ -1,5 +1,6 @@
 @use "../../global" as util;
 $HEADER_BACKGROUND: linear-gradient(292.12deg, #ffc881 -35.02%, #c9e7f2 78.96%);
+
 .nav-bar {
   display: flex;
   position: absolute;
@@ -10,11 +11,11 @@ $HEADER_BACKGROUND: linear-gradient(292.12deg, #ffc881 -35.02%, #c9e7f2 78.96%);
   font-family: util.$FONT_FAMILY_M;
   gap: 10%;
   .logo {
-    border: 1px solid red;
     display: flex;
     align-items: center;
+    width: 360px;
     cursor: pointer;
-    flex: 1;
+
     p {
       font-family: util.$FONT_FAMILY_MA;
       font-size: 24px;
@@ -31,7 +32,7 @@ $HEADER_BACKGROUND: linear-gradient(292.12deg, #ffc881 -35.02%, #c9e7f2 78.96%);
   .menu-first {
     display: flex;
     gap: 50px;
-    border: 1px solid red;
+    flex: 1;
     align-items: center;
     a {
       margin-top: 12px;
@@ -65,32 +66,8 @@ $HEADER_BACKGROUND: linear-gradient(292.12deg, #ffc881 -35.02%, #c9e7f2 78.96%);
   .menu-second {
     display: flex;
     gap: 25px;
-    border: 1px solid red;
     align-items: center;
-    .item {
-      .icon {
-        border-radius: 20px;
-        background: rgba(255, 255, 255, 0.5);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 46px;
-        height: 46px;
-        svg {
-          width: 24px;
-          height: 24px;
-        }
-      }
-      p {
-        color: util.$FONT_COLOR;
-        font-size: 16px;
-        font-weight: 500;
-        font-family: util.$FONT_FAMILY_M;
-      }
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+
     button {
       width: 200px;
       height: 50px;
@@ -117,4 +94,14 @@ $HEADER_BACKGROUND: linear-gradient(292.12deg, #ffc881 -35.02%, #c9e7f2 78.96%);
   background: #fff;
   top: 0;
   z-index: 999;
+}
+
+.nav-bar.search-active {
+  gap: 40px;
+  .menu-first {
+    display: none;
+  }
+  .menu-second {
+    flex: 1;
+  }
 }

@@ -1,0 +1,86 @@
+@use "../../global" as util;
+.btn {
+  width: 60px;
+  height: 60px;
+  border-radius: 20px;
+  background: rgba(119, 147, 65, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  svg {
+    color: #5d8d00;
+  }
+}
+.product-present {
+  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  .image-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    img {
+      width: 130px;
+      height: 130px;
+      object-fit: cover;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .image.active {
+      img {
+        border: 2px solid #5d8d00;
+      }
+    }
+  }
+  .slide-show {
+    border: 1px solid black;
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 60px;
+    margin-bottom: 40px;
+    .prev-btn {
+      display: flex;
+      border: 1px solid red;
+      .container {
+        @extend .btn;
+      }
+    }
+    .next-btn {
+      .container {
+        @extend .btn;
+      }
+    }
+    .slide-container {
+      border: 1px solid blue;
+      width: 80%;
+      .slick-slide {
+        padding-right: 60px;
+        img {
+          width: 550px;
+          height: 550px;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+  .product-image {
+    width: 100%;
+    border: 1px solid black;
+    .product-image-layout {
+      border: 1px solid blue;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      image {
+        border: 1px solid brown;
+      }
+    }
+  }
+}

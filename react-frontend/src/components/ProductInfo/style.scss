@@ -1,0 +1,121 @@
+@use "../../global" as util;
+
+.product-info {
+  background: #f9f9f9;
+  border: 1px solid orange;
+  font-family: util.$FONT_FAMILY_M;
+  .product-info-layout {
+    padding: 40px;
+    display: flex;
+    .product-info-content {
+      flex: 1;
+      .main-info {
+        font-family: util.$FONT_FAMILY_M;
+        .product-type {
+          color: #99a2a5;
+          font-family: util.$FONT_FAMILY_M;
+          font-size: 14px;
+          font-weight: 400;
+          line-height: 20px;
+          margin-bottom: 4px;
+        }
+        .product-name {
+          color: #00171f;
+          font-size: 24px;
+          font-weight: 700;
+          line-height: 36px;
+          margin-bottom: 4px;
+        }
+        .product-price {
+          color: util.$FONT_COLOR;
+          font-family: util.$FONT_FAMILY_M;
+          font-size: 20px;
+          font-weight: 700;
+          line-height: 32px;
+        }
+        .interact-btn {
+          display: flex;
+          gap: 18px;
+          margin-top: 16px;
+          .contact-btn {
+            cursor: pointer;
+            padding: 14px 28px;
+            border-radius: 57px;
+            background: util.$FONT_COLOR;
+            color: #fdfdfd;
+            font-family: util.$FONT_FAMILY_M;
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 24px;
+            transition: all 0.25s ease-in-out;
+            border: 1px solid util.$FONT_COLOR;
+            &:hover {
+              color: util.$FONT_COLOR;
+              background: #fff;
+            }
+          }
+          .seller-contact-btn {
+            cursor: pointer;
+            display: flex;
+            padding: 14px 28px;
+            border-radius: 57px;
+            gap: 8px;
+            align-items: center;
+            border: 2px solid util.$FONT_COLOR;
+            color: util.$FONT_COLOR;
+            font-family: util.$FONT_FAMILY_M;
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 24px;
+            svg {
+              width: 24px;
+              height: 24px;
+              transform: translate(0, -1px);
+            }
+          }
+        }
+      }
+      .other-info {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-top: 24px;
+        margin-bottom: 60px;
+      }
+      .other-interact-btn {
+        display: flex;
+        gap: 54px;
+        .add-to-cart-btn {
+          padding: 19px 89px;
+          border-radius: 10px;
+          background: util.$FONT_COLOR;
+          color: #fff;
+          font-family: util.$FONT_FAMILY_M;
+          font-size: 18px;
+          font-weight: 700;
+          line-height: 30px;
+          letter-spacing: -0.36px;
+          border: 1px solid util.$FONT_COLOR;
+          cursor: pointer;
+          transition: all 0.25s ease-in-out;
+          &:hover {
+            color: util.$FONT_COLOR;
+            background: #fff;
+          }
+        }
+        .add-to-favorite-btn {
+          cursor: pointer;
+          border-radius: 10px;
+          border: 1px solid util.$FONT_COLOR;
+          padding: 19px 64px;
+          color: util.$FONT_COLOR;
+          font-family: util.$FONT_FAMILY_M;
+          font-size: 18px;
+          font-weight: 700;
+          line-height: 30px;
+          letter-spacing: -0.36px;
+        }
+      }
+    }
+  }
+}

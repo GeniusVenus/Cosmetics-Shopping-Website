@@ -1,0 +1,90 @@
+@use "../../../global" as util;
+
+.search {
+  cursor: pointer;
+  .icon {
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.5);
+    @include util.center();
+    width: 50px;
+    height: 50px;
+    svg {
+      width: 25px;
+      height: 25px;
+    }
+    &.fixed {
+      background: rgba(119, 147, 65, 0.3);
+      position: relative;
+      span {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        width: 25px;
+        height: 25px;
+        background: #4f4f4f;
+        border-radius: 25px;
+        position: absolute;
+        top: -6px;
+        right: -8px;
+      }
+    }
+  }
+  p {
+    color: util.$FONT_COLOR;
+    font-size: 16px;
+    font-weight: 500;
+    font-family: util.$FONT_FAMILY_M;
+  }
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  .search-container {
+    display: none;
+  }
+}
+
+.search.active {
+  cursor: auto;
+  flex: 1;
+  .icon {
+    cursor: pointer;
+  }
+  p {
+    display: none;
+  }
+  .search-container {
+    width: 80%;
+    display: block;
+    position: relative;
+    input {
+      width: 100%;
+      display: block;
+      height: 50px;
+      padding: 10px 16px;
+      border-radius: 12px;
+      border: 1px solid #dcdce4;
+      background: rgba(255, 255, 255, 0.5);
+      outline: none;
+      color: #32324d;
+      font-family: util.$FONT_FAMILY_M;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 20px;
+    }
+    .search-results {
+      position: absolute;
+      width: 100%;
+      background: rgb(244, 244, 244);
+      margin-top: 8px;
+      border: 1px solid #dcdce4;
+      border-radius: 12px;
+      padding: 10px 16px;
+      height: auto;
+      .list-results {
+        max-height: 400px;
+        overflow-y: auto;
+      }
+    }
+  }
+}

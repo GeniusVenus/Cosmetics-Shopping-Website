@@ -1,0 +1,28 @@
+@use "../../../global" as util;
+.avatar {
+  width: 200px;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 0 20px 0 20px;
+  border-radius: 20px;
+  height: 50px;
+  position: relative;
+  .avatar-content {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    gap: 10px;
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+    span {
+      color: util.$FONT_COLOR;
+      font-family: util.$FONT_FAMILY_M;
+      font-size: 16px;
+      font-weight: 500;
+      @include util.overflow_ver(1);
+    }
+  }
+}

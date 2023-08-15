@@ -1,0 +1,142 @@
+@use "../../global" as util;
+@mixin effect {
+  background: rgba(119, 147, 65, 0.3);
+  .title {
+    color: #5d8d00;
+  }
+  .icon {
+    svg {
+      path {
+        fill: #5d8d00;
+      }
+    }
+  }
+}
+@mixin effect_close {
+  .icon {
+    background: rgba(119, 147, 65, 0.3);
+    svg {
+      path {
+        fill: #5d8d00;
+      }
+    }
+  }
+  .title {
+    color: #5d8d00;
+  }
+  background: none;
+}
+.dashboard {
+  width: 246px;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  transition: all 0.25s ease-in-out;
+  .dashboard-header {
+    padding: 20px 0 20px 9px;
+    display: flex;
+    align-items: center;
+    .logo {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      svg {
+        width: 32px;
+        height: 32px;
+      }
+      .title {
+        font-family: util.$FONT_FAMILY_MA;
+        font-size: 20px;
+        font-weight: 700;
+        line-height: 29px;
+      }
+    }
+  }
+  .dashboard-body {
+    height: calc(100% - 152px);
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    #section {
+      display: flex;
+      flex-direction: column;
+      .option {
+        display: flex;
+        padding: 4px 0 4px 0;
+        align-items: center;
+        gap: 8px;
+        cursor: pointer;
+        padding-left: 4px;
+        .icon {
+          border-radius: 6px;
+          @include util.center;
+          width: 42px;
+          height: 42px;
+        }
+        .title {
+          font-family: util.$FONT_FAMILY_M;
+          font-size: 14px;
+          font-weight: 500;
+          line-height: 20px;
+        }
+        &.active {
+          @include effect();
+        }
+        &:hover {
+          @include effect();
+        }
+      }
+    }
+  }
+  .dashboard-footer {
+    display: flex;
+    align-items: center;
+    border-top: 2px solid #eaeaef;
+    width: 100%;
+    height: 60px;
+    bottom: 0;
+    position: absolute;
+    padding-left: 8px;
+    padding-right: 12px;
+    gap: 8px;
+    img {
+      width: 32px;
+      height: 32px;
+      border-radius: 32px;
+      object-fit: cover;
+    }
+    .title {
+      font-family: util.$FONT_FAMILY_M;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 20px;
+      @include util.overflow_ver(1);
+    }
+  }
+  .divider {
+    margin-top: 8px;
+    margin-bottom: 8px;
+    background: #eaeaef;
+    height: 2px;
+  }
+  &.closed {
+    .dashboard-body {
+      #section {
+        .option {
+          &.active {
+            @include effect_close();
+          }
+          &:hover {
+            @include effect_close();
+          }
+        }
+      }
+    }
+    .title {
+      opacity: 0;
+    }
+  }
+}

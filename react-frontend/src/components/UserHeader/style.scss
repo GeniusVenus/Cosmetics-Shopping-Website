@@ -1,0 +1,31 @@
+@use "../../global" as util;
+
+.user-page-header {
+  height: 72px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  .menu-bar {
+    width: 52px;
+    height: 52px;
+    border-radius: 52px;
+    margin-left: 20px;
+    @include util.center;
+    transition: all 0.25s ease-in-out;
+    cursor: pointer;
+    svg {
+      width: 26px;
+      height: 26px;
+    }
+    &:hover {
+      background: #eaeaef;
+    }
+  }
+  .page {
+    color: #32324d;
+    font-family: util.$FONT_FAMILY_M;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 40px;
+  }
+}

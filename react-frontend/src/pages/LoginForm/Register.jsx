@@ -2,27 +2,43 @@ import React, { useState } from "react";
 import LoginGreeting from "../../components/LoginGreeting";
 import "./style.scss";
 import FormCard from "../../components/FormCard";
+import { useSignupMutation } from "../../features/auth/authApiSlice";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 const Register = () => {
   const [values, setValues] = useState({
     username: "",
+    email: "",
     password: "",
     confirmPassword: "",
   });
-
+  const [signup] = useSignupMutation();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const inputs = [
     {
       id: 1,
       name: "username",
       type: "text",
-      placeholder: "Username or email address",
+      placeholder: "Enter username",
       errorMessage:
         "Username should be 3-16 characters and shouldn't include any special character!",
-      label: "Enter your username or email address",
+      label: "Enter your username",
       pattern: "^[A-Za-z0-9]{3,16}$",
       required: true,
     },
     {
       id: 2,
+      name: "email",
+      type: "email",
+      placeholder: "Enter email",
+      errorMessage: "Invalid email",
+      label: "Enter your email address",
+      required: true,
+    },
+    {
+      id: 3,
       name: "password",
       type: "password",
       placeholder: "Password",
@@ -33,7 +49,7 @@ const Register = () => {
       required: true,
     },
     {
-      id: 3,
+      id: 4,
       name: "confirmPassword",
       type: "password",
       placeholder: "Confirm Password",
@@ -44,14 +60,31 @@ const Register = () => {
     },
   ];
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const userData = await signup({
+        username: values.username,
+        email: values.email,
+        password: values.password,
+      }).unwrap();
+      setValues({
+        username: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      });
+      toast.success("Sign up successfully");
+      setTimeout(() => navigate("/login"), 2000);
+    } catch (err) {
+      toast.error(err.data.message);
+    }
   };
 
   const onChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
-
+  console.log(values);
   return (
     <div className="container">
       <div className="first-container">

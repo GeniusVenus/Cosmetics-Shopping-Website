@@ -1,6 +1,7 @@
 @use "../../global" as util;
 
 .reason {
+  margin-top: 20px;
   .question {
     @include util.title-text;
     margin-bottom: 30px;
@@ -10,7 +11,6 @@
     position: relative;
     .reason-container {
       display: grid;
-      border: 1px solid red;
       position: relative;
       z-index: 99;
       grid-template-columns: auto auto;
@@ -31,7 +31,6 @@
           display: flex;
           align-items: center;
           justify-content: center;
-          border: 1px solid orange;
         }
         .icon_0 {
           background: #fff3e8;
@@ -53,7 +52,7 @@
           width: 430px;
           .label {
             color: #000;
-            font-size: 25px;
+            font-size: 24px;
             font-family: util.$FONT_FAMILY_M;
             font-weight: 600;
             line-height: 177.9%;

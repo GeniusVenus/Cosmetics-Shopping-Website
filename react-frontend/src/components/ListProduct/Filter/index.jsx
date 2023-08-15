@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./style.scss";
-import { motion } from "framer-motion";
 const Filter = (props) => {
   const filterList = [
     { title: "Gender", filterOption: ["Male", "Female"] },
@@ -65,13 +64,7 @@ const Filter = (props) => {
   };
   return (
     <>
-      <motion.div
-        className="list-product-filter"
-        initial={{ opacity: 0, x: -60 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        transition={{ duration: 1, delay: 0.5, ease: "easeInOut" }}
-        viewport={{ once: true }}
-      >
+      <div className="list-product-filter">
         <div className="label"> Filter </div>
         <div className="list-filter-content">
           {filterList.map((filter, index) => {
@@ -124,7 +117,7 @@ const Filter = (props) => {
             );
           })}
         </div>
-      </motion.div>
+      </div>
     </>
   );
 };

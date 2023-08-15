@@ -5,20 +5,27 @@ import cartReducer from "./features/cart/cartSlice";
 import testReducer from "./features/test/testSlice";
 import productReducer from "./features/product/productSlice";
 import purchaseReducer from "./features/purchase/purchaseSlice";
+import userReducer from "./features/user/userSlice";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 
+const persistConfig = {
+  key: "root",
+  storage,
+};
 const store = configureStore({
   reducer: {
-    // [apiSlice.reducerPath]: apiSlice.reducer,
-    // auth: authReducer,
-    // cart: cartReducer,
+    [apiSlice.reducerPath]: apiSlice.reducer,
+    auth: persistReducer(persistConfig, authReducer),
+    cart: cartReducer,
+    user: userReducer,
     test: testReducer,
     product: productReducer,
     purchase: purchaseReducer
   },
-  // middleware: (getDefaultMiddleware) =>
-  //   getDefaultMiddleware().concat(apiSlice.middleware),
-
-  // devTools: true,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware().concat(apiSlice.middleware),
+  devTools: true,
 });
-
 export default store;
+export const persistor = persistStore(store);
