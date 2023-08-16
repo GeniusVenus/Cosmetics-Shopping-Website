@@ -38,7 +38,7 @@ public class ProductController {
     public ResponseEntity<List<Product>> getCategoryProduct(@PathVariable("category") String category){
         return new ResponseEntity<List<Product>>(productService.categoryProduct(category), HttpStatus.OK);
     }
-    ///@PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/addProduct")
     public Product saveProduct(@RequestBody Product product) {
         String ids = product.getProductId();
@@ -63,7 +63,7 @@ public class ProductController {
         }
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    ///@PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/deleteAll")
     public ResponseEntity<HttpStatus> deleteAllProducts() {
         try {

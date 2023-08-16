@@ -17,7 +17,7 @@ public class FragranceCrawl implements BaseCrawler{
         int dem = 0;
         String baseUrl = "https://www.cultbeauty.co.uk/hair-care.list?pageNumber=";
         String baseId = "Fragrance_";
-        try (Writer writer = new FileWriter("D:\\SE_Project\\SE\\springboot-backend\\src\\main\\java\\com\\example\\SE\\JsonFile\\Fragrance.json")) {
+        try (Writer writer = new FileWriter("D:\\SE Project\\springboot-backend\\src\\main\\java\\com\\example\\SE\\JsonFile\\Fragrance.json")) {
             writer.write('[');
             for (int j = 1; j <= 6; ++j) {
                 try {
@@ -78,12 +78,14 @@ public class FragranceCrawl implements BaseCrawler{
                         System.out.println("brand: " + brand);
                         System.out.println("Volume: " + volume);
                         System.out.println("---------------------------------");*/
-                        Product product = new Product(productId, category, name, cost, description, how_to_use, ingredient, brand, volume, image);
-                        ObjectMapper mapper = new ObjectMapper();
-                        ///System.out.println(mapper.writeValueAsString(product));
-                        writer.write(mapper.writeValueAsString(product));
-                        writer.write(",");
-                        writer.write("\n");
+                        if (!productId.isEmpty() && !category.isEmpty() && !name.isEmpty() && !description.isEmpty() && !how_to_use.isEmpty() &&  !ingredient.isEmpty() && !brand.isEmpty() && !volume.isEmpty() && !image.isEmpty()) {
+                            Product product = new Product(productId, category, name, cost, description, how_to_use, ingredient, brand, volume, image);
+                            ObjectMapper mapper = new ObjectMapper();
+                            ///System.out.println(mapper.writeValueAsString(product));
+                            writer.write(mapper.writeValueAsString(product));
+                            writer.write(",");
+                            writer.write("\n");
+                        }
                     }
                 } catch (IOException err) {
                     err.printStackTrace();

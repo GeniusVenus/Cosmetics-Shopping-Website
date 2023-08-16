@@ -17,7 +17,7 @@ public class BodyCrawl implements BaseCrawler{
         int dem = 0;
         String baseUrl = "https://www.cultbeauty.co.uk/body-wellbeing.list?pageNumber=";
         String baseId = "Body_";
-        try (Writer writer = new FileWriter("D:\\SE_Project\\SE\\springboot-backend\\src\\main\\java\\com\\example\\SE\\JsonFile\\Body.json")) {
+        try (Writer writer = new FileWriter("D:\\SE Project\\springboot-backend\\src\\main\\java\\com\\example\\SE\\JsonFile\\Body.json")) {
             writer.write('[');
             for (int j = 1; j <= 6; ++j) {
                 try {
@@ -78,6 +78,7 @@ public class BodyCrawl implements BaseCrawler{
                         System.out.println("brand: " + brand);
                         System.out.println("Volume: " + volume);
                         System.out.println("---------------------------------");*/
+                        if (cost.equals("")) continue;
                         Product product = new Product(productId, category, name, cost, description, how_to_use, ingredient, brand, volume, image);
                         ObjectMapper mapper = new ObjectMapper();
                         ///System.out.println(mapper.writeValueAsString(product));

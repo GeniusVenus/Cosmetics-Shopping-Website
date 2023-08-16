@@ -12,14 +12,26 @@ public class SeApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SeApplication.class, args);
+//		BodyCrawl bodyCrawl = new BodyCrawl();
+//		bodyCrawl.CrawlData();
+//		FragranceCrawl fragranceCrawl = new FragranceCrawl();
+//		fragranceCrawl.CrawlData();
+//		HairCrawl hairCrawl = new HairCrawl();
+//		hairCrawl.CrawlData();
+//		MakeUpCrawl makeUpCrawl = new MakeUpCrawl();
+//		makeUpCrawl.CrawlData();
+//		SkinCrawl skinCrawl = new SkinCrawl();
+//		skinCrawl.CrawlData();
+//		WellnessCrawl wellnessCrawl = new WellnessCrawl();
+//		wellnessCrawl.CrawlData();
 //		SkinCrawl skincrawl = new SkinCrawl();
 //        skincrawl.CrawlData();
 //        HairCrawl hairCrawl = new HairCrawl();
 //        hairCrawl.CrawlData();
 //        BodyCrawl bodyCrawl = new BodyCrawl();
 //        bodyCrawl.CrawlData();
-//        WellnessCrawl wellnessCrawl = new WellnessCrawl();
-//        wellnessCrawl.CrawlData();
+//        //WellnessCrawl wellnessCrawl = new Well nessCrawl();
+//        //wellnessCrawl.CrawlData();
 //        MakeUpCrawl makeUpCrawl = new MakeUpCrawl();
 //        makeUpCrawl.CrawlData();
 //        FragranceCrawl fragranceCrawl = new FragranceCrawl();
