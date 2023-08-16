@@ -63,7 +63,7 @@ public class ProductController {
         }
     }
 
-    ///@PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/deleteAll")
     public ResponseEntity<HttpStatus> deleteAllProducts() {
         try {
