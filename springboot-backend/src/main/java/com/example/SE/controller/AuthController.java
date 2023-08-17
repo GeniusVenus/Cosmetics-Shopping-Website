@@ -17,6 +17,7 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -33,6 +34,7 @@ import com.example.SE.repository.UserRepository;
 import com.example.SE.security.jwt.JwtUtils;
 import com.example.SE.service.UserDetailsImpl;
 import com.example.SE.service.RefreshTokenService;
+import com.example.SE.service.UserService;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -58,6 +60,9 @@ public class AuthController {
 
     @Autowired
     CustomerInfoRepository customerInfoRepository;
+
+    @Autowired
+    UserService userService;
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
@@ -138,6 +143,7 @@ public class AuthController {
         }
 
         user.setRoles(roles);
+        user.setDisable(Boolean.TRUE);
         userRepository.save(user);
         CustomerInfo info = new CustomerInfo();
         info.setUser(userRepository.findByUsername(user.getUsername()).get());
