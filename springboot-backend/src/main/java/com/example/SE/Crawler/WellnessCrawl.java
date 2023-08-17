@@ -36,7 +36,8 @@ public class WellnessCrawl implements BaseCrawler {
                         Document docs = Jsoup.connect(link).get();
                         String image = docs.select("#mainContent > div.athenaProductPage_topRow > div.athenaProductPage_firstColumn > div.athenaProductPage_imageContainer > div > div.athenaProductImageCarousel_imagesContainer > div > div:nth-child(1) > img").attr("src");
                         System.out.println("image: " + image);
-                        String name = docs.getElementsByClass("productName_title").text();
+                        if (docs.getElementsByClass("productName_title").first() == null) continue;
+                        String name = docs.getElementsByClass("productName_title").first().text();
                         String cost = docs.getElementsByClass("productPrice_price").text();
                         String description = "";
                         Elements desPTags = docs.select("#product-description-content-2 > div > div");

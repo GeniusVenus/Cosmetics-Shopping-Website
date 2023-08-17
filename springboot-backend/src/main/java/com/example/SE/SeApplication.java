@@ -24,6 +24,18 @@ public class SeApplication {
 //		skinCrawl.CrawlData();
 //		WellnessCrawl wellnessCrawl = new WellnessCrawl();
 //		wellnessCrawl.CrawlData();
+//		BodyCrawl bodyCrawl = new BodyCrawl();
+//		bodyCrawl.CrawlData();
+//		FragranceCrawl fragranceCrawl = new FragranceCrawl();
+//		fragranceCrawl.CrawlData();
+//		HairCrawl hairCrawl = new HairCrawl();
+//		hairCrawl.CrawlData();
+//		MakeUpCrawl makeUpCrawl = new MakeUpCrawl();
+//		makeUpCrawl.CrawlData();
+//		SkinCrawl skinCrawl = new SkinCrawl();
+//		skinCrawl.CrawlData();
+//		WellnessCrawl wellnessCrawl = new WellnessCrawl();
+//		wellnessCrawl.CrawlData();
 //		SkinCrawl skincrawl = new SkinCrawl();
 //        skincrawl.CrawlData();
 //        HairCrawl hairCrawl = new HairCrawl();
