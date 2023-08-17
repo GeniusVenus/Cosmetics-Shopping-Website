@@ -45,7 +45,7 @@ public class ProductController {
         Optional<Product> products = productService.IdProduct(ids);
         if (products.isPresent()) {
             Product prd = products.get();
-            prd.setNum(product.getNum() + 1);
+            prd.setNum(prd.getNum() + product.getNum());
             return productService.saveProduct(prd);
         }
         else return productService.saveProduct(product);
@@ -90,17 +90,13 @@ public class ProductController {
             product.setIngredient(prdct.getIngredient());
             product.setName(prdct.getName());
             product.setVolume(prdct.getVolume());
-            product.setMark(prdct.getMark());
             product.setNum(prdct.getNum());
+            product.setProfit(prdct.getProfit());
            return new ResponseEntity<>(productService.saveProduct(product), HttpStatus.OK);
         }
         else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-    @GetMapping("/hello")
-    public ResponseEntity<String> getCategoryProduct() {
-        String message = "Hello, world!";
-        return new ResponseEntity<>(message, HttpStatus.OK);
-    }
+
 }

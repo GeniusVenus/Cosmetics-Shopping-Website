@@ -79,6 +79,7 @@ public class MakeUpCrawl implements BaseCrawler{
                         System.out.println("Volume: " + volume);
                         System.out.println("---------------------------------");*/
                         if (cost.equals("")) continue;
+                        if (cost.length() > 7) continue;
                         Product product = new Product(productId, category, name, cost, description, how_to_use, ingredient, brand, volume, image);
                         ObjectMapper mapper = new ObjectMapper();
                         ///System.out.println(mapper.writeValueAsString(product));

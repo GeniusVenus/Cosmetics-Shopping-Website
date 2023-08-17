@@ -80,6 +80,8 @@ public class WellnessCrawl implements BaseCrawler {
                         System.out.println("brand: " + brand);
                         System.out.println("Volume: " + volume);
                         System.out.println("---------------------------------");*/
+                        if (cost.length() > 7) continue;
+                        if (cost.equals("")) continue;
                         if (!productId.isEmpty() && !category.isEmpty() && !name.isEmpty() && !description.isEmpty() && !how_to_use.isEmpty() &&  !ingredient.isEmpty() && !brand.isEmpty() && !volume.isEmpty() && !image.isEmpty()) {
                             Product product = new Product(productId, category, name, cost, description, how_to_use, ingredient, brand, volume, image);
                             ObjectMapper mapper = new ObjectMapper();
