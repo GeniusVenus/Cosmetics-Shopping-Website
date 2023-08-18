@@ -2,93 +2,102 @@ import './style.scss'
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCurrentUserId } from '../../features/auth/authSlice';
-import { setCurrentProductsInCart, getProductsInCart,fetchProductIdList } from '../../features/product/productSlice';
+import { setCurrentProductIds, 
+  getCurrentProductIds, 
+  setCurrentCartId, 
+  getCurrentCartId, 
+  fetchProductIds, 
+  fetchCart, 
+  getCurrentTotalPrice, 
+  setCurrentTotalPrice,
+  fetchTotalPrice } from '../../features/cart/cartSlice';
+import { getProductsInfoInCart, updateOrCreateCart, getActiveCartByUserId } from '../../api/apiFunctions';
 
 export default function CartItem() {
     const dispatch = useDispatch();
     const userId = useSelector(selectCurrentUserId);
-    const productIdsInCart = useSelector(getProductsInCart);
+    const productIdsInCart = useSelector(getCurrentProductIds);
+    const currentTotalPrice =useSelector(getCurrentTotalPrice);
     const productIdsInCartReduce = productIdsInCart.reduce((acc, word) => {
       acc[word] = (acc[word] || 0) + 1;
       return acc;
     }, {});
     
-    const [productList, setProductList] = useState([]);
+    const [productInfoList, setProductInfoList] = useState([]);
+    const [cartId, setCartId] = useState([]);
 
     useEffect(() => {
-      //Refactor
-      //Todo: Replace with cartId of userId
-      dispatch(fetchProductIdList(userId));
+      dispatch(fetchProductIds(userId));
+      dispatch(fetchCart(userId));
     }, [dispatch]);
   
     useEffect(() => {
       const fetchData = async () => {
-        const newProductList = [];
-        for (const productId of productIdsInCart) {
-          const response = await fetch(`http://localhost:8080/api/product/${productId}`);
-          const productData = await response.json();
-          newProductList.push(productData);
-        }
-        setProductList(newProductList);
-        console.log('asd');
+        const productInfoList = await getProductsInfoInCart(productIdsInCart);
+        const cart = await getActiveCartByUserId(userId);
+        setCartId(cart.cartId);
+        setProductInfoList(productInfoList);
       };
       fetchData();
     }, [productIdsInCart]);
 
     const changeQty = (id, changeQuantity) => {
-        if (productIdsInCartReduce.hasOwnProperty(id)) {
-          if (changeQuantity === "increase") {
-            productIdsInCartReduce[id]++;
-          } else if (changeQuantity === "decrease") {
-            productIdsInCartReduce[id]--;
-          }
-
-          if (productIdsInCartReduce[id] === 0) {
-            delete productIdsInCartReduce[id];
-          }
-      
-          // Convert the updated productListInCart object to an array
-          const updatedQtyProducts = Object.keys(productIdsInCartReduce).flatMap((productId) =>
-            Array.from({ length: productIdsInCartReduce[productId] }, () => productId)
-          );
-      
-          // Perform the API call to update Item qty
-          const url = 'http://localhost:8080/api/cart';
-          const payload = {
-            cartId: '64b536c31cb463531d44bcce',
-            userId: userId,
-            productIds: updatedQtyProducts,
-            isActive: true,
-            totalPrice: 0.0
-          };
-      
-          fetch(url, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(payload)
-          })
-            .then((response) => response.json())
-            .then((data) => {
-              // Process the received data if needed
-              dispatch(setCurrentProductsInCart(updatedQtyProducts));
-            })
-            .catch((error) => {
-              // Handle any errors that occurred during the request
-              console.error('Error:', error);
-            });
-      
-          
+      if (productIdsInCartReduce.hasOwnProperty(id)) {
+        const product = productInfoList.find(item => item.productId === id);
+    
+        if (!product) {
+          return; 
         }
-      };
+        
+        const cost = parseFloat(product.cost.replace(/[^0-9.-]+/g, ""));
+        let newTotalPrice = currentTotalPrice;
+        if (changeQuantity === "increase") {
+          productIdsInCartReduce[id]++;
+          newTotalPrice = currentTotalPrice + cost;
+          dispatch(setCurrentTotalPrice(newTotalPrice));
+        } else if (changeQuantity === "decrease") {
+          productIdsInCartReduce[id]--;
+          newTotalPrice = currentTotalPrice - cost;
+          dispatch(setCurrentTotalPrice(newTotalPrice));
+        }
+
+        if (productIdsInCartReduce[id] == 0) {
+          delete productIdsInCartReduce[id];
+        }
+    
+        const updatedQtyProducts = Object.keys(productIdsInCartReduce).flatMap((productId) =>
+          Array.from({ length: productIdsInCartReduce[productId] }, () => productId)
+        );
+    
+        const payload = {
+          cartId: cartId,
+          userId: userId,
+          productIds: updatedQtyProducts,
+          isActive: true,
+          totalPrice: newTotalPrice
+        };
+    
+        updateOrCreateCart(payload)
+          .then((data) => {
+            dispatch(setCurrentProductIds(updatedQtyProducts));
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+          });
+      }
+    };
       
     return (
         <>
             <p class="heading">Edit you Items</p>
+            {
+              productIdsInCart.length == 0 
+              ? <div className="cart-item-alert">You have no items in cart, please add more !</div> 
+              : null
+            }
             {Object.entries(productIdsInCartReduce).map(([productId, quantity]) => {
-              const productItem = productList.find(item => item.productId == productId);
-              if (productItem) {
+              const productItem = productInfoList.find(item => item.productId == productId);
+              if (productItem && productIdsInCart) {
                 return (
                   <div className="cart-item" id={"product-" + productItem.productId} key={productItem.productId}>
                       <div className="cart-item-img">
@@ -96,7 +105,6 @@ export default function CartItem() {
                       </div>
                       <div className="cart-item-info">{productItem.name.split(' ').slice(0, 2).join(' ')}</div>
                       <div className="cart-item-price">{productItem.productPrice}</div>
-                    {/* Render the quantity here based on the quantity in the productListInCart object */}
                       <div className="cart-item-qty">
                           <button onClick={() => changeQty(productItem.productId, "decrease")}>-</button>
                           <div className='qty'>

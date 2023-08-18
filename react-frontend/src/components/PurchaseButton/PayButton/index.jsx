@@ -1,27 +1,48 @@
 import '../style.scss';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCurrentUserId } from '../../../features/auth/authSlice';
 import { selectPurchaseState, setPurchaseState } from '../../../features/purchase/purchaseSlice';
-import { getProductsInCart, fetchProductIdList } from '../../../features/product/productSlice';
+import { setCurrentProductIds, 
+  getCurrentProductIds, 
+  setCurrentCartId, 
+  getCurrentCartId, 
+  fetchProductIds, 
+  fetchCart, 
+  getCurrentTotalPrice, 
+  setCurrentTotalPrice,
+  fetchTotalPrice, } from '../../../features/cart/cartSlice';
+import { updateOrCreateCart } from '../../../api/apiFunctions';
+import { getActiveCartByUserId } from '../../../api/apiFunctions';
 
 export default function PayButton() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const currentProductIdList = useSelector(getProductsInCart);
+    const currentProductIdList = useSelector(getCurrentProductIds);
+    const currentTotalPrice = useSelector(getCurrentTotalPrice);
     const userId = useSelector(selectCurrentUserId);
+    const [cartId, setCartId] = useState([]);
 
     useEffect(() => {
-        dispatch(fetchProductIdList());
-        // console.log(productIdList);
-        // dispatch(setNewList([1,2,3,4]));
+        const fetchData = async () => {
+          const cart = await getActiveCartByUserId(userId);
+          setCartId(cart.cartId);
+        }
+        fetchData();
+        dispatch(fetchProductIds());
     }, [dispatch]);
+
+    const validateInput = () => {
+      const textValid = document.getElementById('address').value.trim() != '';
+      const radioValid = document.getElementById('shipping-express').checked || document.getElementById('shipping-standard').checked;
+      return textValid && radioValid;
+    }
 
     const pay = () => {
         const inputValid = validateInput();
         if (inputValid) {
-            updateCart();
+            checkoutAndCreateNewCart();
         }
         dispatch(setPurchaseState('success'));
     }
@@ -46,73 +67,50 @@ export default function PayButton() {
         return addressValue;
     }
 
-    const validateInput = () => {
-        const textValid = document.getElementById('address').value.trim() != '';
-        const radioValid = document.getElementById('shipping-express').checked || document.getElementById('shipping-standard').checked;
-        return textValid && radioValid;
-    }
+    const checkoutAndCreateNewCart = async () => {
+      try {
+        const shippingMethod = getShippingMethod();
+        const address = getAddress();
   
-    const updateCart = async () => {
-        try {
-          // Create a new cart for the customer
-          const createCartUrl = 'http://localhost:8080/api/cart';
-          const createCartPayload = {
+        const checkoutPayload = {
+          userId: userId,
+          cartId: cartId,
+          productIds: currentProductIdList,
+          isActive: false,
+          isOrder: true,
+          totalPrice: currentTotalPrice,
+          shippingMethod: shippingMethod,
+          address: address,
+        };
+  
+        const checkoutCartData = await updateOrCreateCart(checkoutPayload);
+  
+        if (checkoutCartData) {
+          console.log('Cart updated successfully');
+          const createNewCartPayload = {
             userId: userId,
             productIds: [],
             isActive: true,
             isOrder: false,
             totalPrice: 0.0,
           };
-      
-          const createCartResponse = await fetch(createCartUrl, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(createCartPayload),
-          });
-      
-          if (!createCartResponse.ok) {
-            console.error('Failed to create a new cart');
-            return;
-          }
-      
-          // Get the created cart's information
-          const createdCartData = await createCartResponse.json();
-      
-          // Update the existing cart with the necessary information
-          const getCartUrl = `http://localhost:8080/api/cart/userId/${userId}/1`;
-          const getCartResponse = await fetch(getCartUrl);
-          const cartData = await getCartResponse.json();
-      
-          const updateCartUrl = 'http://localhost:8080/api/cart';
-          const payload = {
-            cartId: cartData[0].cartId,
-            userId: userId,
-            productIds: currentProductIdList,
-            isActive: false,
-            isOrder: true,
-            totalPrice: 0.0,
-          };
-      
-          const updateCartResponse = await fetch(updateCartUrl, {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(payload),
-          });
-      
-          if (updateCartResponse.ok) {
-            console.log('Payment successful');
+  
+          const createNewCartResponse = await updateOrCreateCart(createNewCartPayload);
+  
+          if (createNewCartResponse) {
+            console.log('New cart created successfully');
             navigate('/checkout/success');
           } else {
-            console.error('Payment failed');
+            console.error('Failed to create a new cart');
           }
-        } catch (error) {
-          console.error('Error:', error);
+        } else {
+          console.error('Payment failed');
         }
-      };
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    };
+
     return (
         <button onClick={pay} className='checkout-btn checkout-btn-green'>
                 Pay

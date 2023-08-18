@@ -18,7 +18,7 @@ export default function Checkout() {
     const navigate = useNavigate();
     useEffect(() => {
       if (success == 'done') {
-        navigate("/");
+        // navigate("/");
     }
     })
     return (

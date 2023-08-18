@@ -1,47 +1,76 @@
 import React from "react";
 import ProductReview from "./ProductReview";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { selectCurrentUserId } from "../../features/auth/authSlice";
 import "./style.scss";
 import ProductDetailImage from "../../assets/image/ProductDetailImage";
 import Info from "./Info";
+import { getActiveCartByUserId } from "../../api/apiFunctions";
+import { updateOrCreateCart } from "../../api/apiFunctions";
+import { toast } from "react-toastify";
+import { setCurrentProductIds, 
+  getCurrentProductIds, 
+  setCurrentCartId, 
+  getCurrentCartId, 
+  fetchProductIds, 
+  getCurrentTotalPrice, 
+  fetchTotalPrice, 
+  setCurrentCartEntity} from '../../features/cart/cartSlice';
+import { useEffect, useState } from "react";
+import { formToJSON } from "axios";
 const ProductInfo = (props) => {
+  const dispatch = useDispatch();
   const { messageIcon } = ProductDetailImage;
   const { productId, image, name, cost, category, ...others } = props.product;
+  const [cartId, setCartId] = useState(null); 
   const userId = useSelector(selectCurrentUserId);
-  const handleAddToCart = async (id) => {
-    //Refactor
+  const productIdsInCart = useSelector(getCurrentProductIds);
+  const currentTotalPrice = useSelector(getCurrentTotalPrice);
+
+  useEffect(() => {
+    dispatch(fetchProductIds(userId));
+    dispatch(fetchTotalPrice(userId));
+  }, [dispatch]);
+
+  useEffect(() => {
+    const fetchCartId = async () => {
+      const cart = await getActiveCartByUserId(userId);
+        setCartId(cart.cartId);
+    };
+
+    fetchCartId();
+  }, [userId]);
+
+  const handleAddToCart = async (id, cost) => {
+    const numericCost = parseFloat(cost.replace(/[^0-9.-]+/g, ""));
+  
     try {
-      const getCartUrl = `http://localhost:8080/api/cart/userId/${userId}/1`;
-      const getCartResponse = await fetch(getCartUrl);
-      const cartData = await getCartResponse.json();
+      if (cartId !== null) {
+        const cartData = await getActiveCartByUserId(userId);
 
-      const updatedProductIds = [...cartData[0].productIds, id];
+        const updatedProductIds = [...cartData.productIds, id];
 
-      const updateCartUrl = 'http://localhost:8080/api/cart';
-      const payload = {
-        cartId: cartData[0].cartId,
-        userId: userId,
-        productIds: updatedProductIds,
-        isActive: true,
-        totalPrice: 0.0
-      };
+        const createOrUpdateCartPayload = {
+          cartId: cartId,
+          userId: userId,
+          productIds: updatedProductIds,
+          isActive: true,
+          totalPrice: currentTotalPrice + numericCost,
+        };
 
-      const updateCartResponse = await fetch(updateCartUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-      });
+        const updatedCartData = await updateOrCreateCart(createOrUpdateCartPayload);
 
-      if (updateCartResponse.ok) {
-        console.log('Product added to cart successfully');
+        if (updatedCartData) {
+          dispatch(setCurrentCartEntity(updatedCartData));
+          toast.success("You have added product to cart");
+        } else {
+          toast.error("Error when add product to cart")
+        }
       } else {
-        console.error('Failed to add product to cart');
+        toast.error("Error when add product to cart");
       }
     } catch (error) {
-      console.error('Errsor:', error);
+      toast.error("Error when add product to cart");
     }
   };
   return (
@@ -71,7 +100,7 @@ const ProductInfo = (props) => {
             <div className="other-interact-btn">
               <div
                 className="add-to-cart-btn"
-                onClick={() => handleAddToCart(productId)}
+                onClick={() => handleAddToCart(productId, cost)}
               >
                 {" "}
                 Add to cart

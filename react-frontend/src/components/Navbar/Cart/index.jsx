@@ -1,18 +1,28 @@
 import React from "react";
 import { selectCurrentCart } from "../../../features/cart/cartSlice";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { getCurrentProductIds, setCurrentProductIds, getCurrentCartId, setCurrentCartId, fetchProductIds } from "../../../features/cart/cartSlice";
 import NavBarImage from "../../../assets/image/NavBarImage";
+import { selectCurrentUserId } from "../../../features/auth/authSlice";
 import "./style.scss";
 const Cart = () => {
   let { cartIcon } = NavBarImage;
-  const cart = useSelector(selectCurrentCart);
+  const dispatch = useDispatch();
+  const userId = useSelector(selectCurrentUserId);
+  const productIdsInCart = useSelector(getCurrentProductIds);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(fetchProductIds(userId));
+  }, [dispatch]);
+
   return (
     <div className="cart" onClick={() => navigate("/cart")}>
-      <div className={cart.length === 0 ? "icon" : "icon fixed"}>
+      <div className={productIdsInCart.length === 0 ? "icon" : "icon fixed"}>
         {cartIcon}
-        {cart.length !== 0 && <span> {cart.length} </span>}
+        {productIdsInCart.length !== 0 && <span> {productIdsInCart.length} </span>}
       </div>
       <p> Cart </p>
     </div>

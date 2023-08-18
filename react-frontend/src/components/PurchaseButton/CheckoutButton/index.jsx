@@ -3,14 +3,22 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectCurrentUserId } from '../../../features/auth/authSlice';
-import { getProductsInCart, fetchProductIdList } from '../../../features/product/productSlice';
+import { setCurrentProductIds, 
+  getCurrentProductIds, 
+  setCurrentCartId, 
+  getCurrentCartId, 
+  fetchProductIds, 
+  getCurrentTotalPrice, 
+  fetchTotalPrice, 
+  setCurrentCartEntity} from '../../../features/cart/cartSlice';
+import { getActiveCartByUserId, updateOrCreateCart } from '../../../api/apiFunctions';
+
 export default function CheckoutButton() {
     const userId = useSelector(selectCurrentUserId);
+    const currentProductIdList = useSelector(getCurrentProductIds);
+    const currentTotalPrice = useSelector(getCurrentTotalPrice);
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const checkout = () => {
-        updateCart();
-    }
 
     const getShippingMethod = () => {
         const standardInput = document.getElementById("shipping-standard");
@@ -25,50 +33,39 @@ export default function CheckoutButton() {
         }
 
     }
-    const currentProductIdList = useSelector(getProductsInCart);
 
     useEffect(() => {
-        dispatch(fetchProductIdList());
-        // console.log(productIdList);
-        // dispatch(setNewList([1,2,3,4]));
+        dispatch(fetchProductIds(userId));
+        dispatch(fetchTotalPrice(userId));
     }, [dispatch]);
 
     const updateCart = async () => {
         try {
-            const getCartUrl = `http://localhost:8080/api/cart/userId/${userId}/1`;
-            const getCartResponse = await fetch(getCartUrl);
-            const cartData = await getCartResponse.json();
+            
+            const cartData = await getActiveCartByUserId(userId);
       
-            const updateCartUrl = 'http://localhost:8080/api/cart';
             const payload = {
-              cartId: cartData[0].cartId,
+              cartId: cartData.cartId,
               userId: userId,
               productIds: currentProductIdList,
               isActive: true,
               isOrder: false,
-              totalPrice: 0.0
+              totalPrice: currentTotalPrice
             };
       
-            const updateCartResponse = await fetch(updateCartUrl, {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify(payload)
-            });
-      
-            if (updateCartResponse.ok) {
-              console.log('Checkout successfully');
+            updateOrCreateCart(payload)
+            .then((data) => {
               navigate('/checkout');
-            } else {
-              console.error('Failed to add product to cart');
+            })
+            .catch((error) => {
+              console.error('Error:', error);
+            });
+            } catch (error) {
+              console.error('Errsor:', error);
             }
-          } catch (error) {
-            console.error('Errsor:', error);
-          }
     }
     return (
-        <button onClick={checkout} className='checkout-btn checkout-btn-green'>
+        <button onClick={updateCart} className='checkout-btn checkout-btn-green'>
                 Checkout
         </button>
     );
