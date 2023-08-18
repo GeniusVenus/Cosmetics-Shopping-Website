@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Random;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -25,9 +27,9 @@ public class Product {
     private String ingredient;
     private String brand;
     private String volume;
-    private int mark;
     private String image;
     private int num;
+    private double profit;
 
     public Product(String productId, String category, String name, String cost, String description, String how_to_use, String ingredient, String brand, String volume, String image) {
         this.productId = productId;
@@ -41,6 +43,12 @@ public class Product {
         this.volume = volume;
         this.image = image;
         this.num = 999;
+        String money = this.cost.substring(1, cost.length() - 2);
+        double revenue = Double.parseDouble(money);
+        Random generator = new Random();
+        double num = generator.nextDouble() * (0.5 - 0);
+        revenue -= revenue * num;
+        this.profit = revenue;
     }
 
     public String getProductId() {
@@ -115,14 +123,6 @@ public class Product {
         this.volume = volume;
     }
 
-    public int getMark() {
-        return mark;
-    }
-
-    public void setMark(int mark) {
-        this.mark = mark;
-    }
-
     public String getImage() {
         return image;
     }
@@ -137,5 +137,14 @@ public class Product {
 
     public void setNum(int num) {
         this.num = num;
+    }
+
+    public void setProfit(double profit){
+
+        this.profit = profit;
+    }
+
+    public double getProfit() {
+        return this.profit;
     }
 }

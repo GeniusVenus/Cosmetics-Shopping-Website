@@ -44,19 +44,4 @@ public class ProductServiceImpl{
         productRepository.deleteAll();
     }
 
-
-    /*@Override
-    public List<Product> findAll() {
-        return null;
-    }
-
-    @Override
-    public Optional<Product> findByName(String name) {
-        return Optional.empty();
-    }
-
-    @Override
-    public List<Product> findByCategory(String category) {
-        return null;
-    }*/
 }
