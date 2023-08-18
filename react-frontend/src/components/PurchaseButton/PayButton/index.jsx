@@ -81,6 +81,9 @@ export default function PayButton() {
           totalPrice: currentTotalPrice,
           shippingMethod: shippingMethod,
           address: address,
+          orderStatus: "New",
+          paymentMethod: "COD",
+          date: new Date().toLocaleString()
         };
   
         const checkoutCartData = await updateOrCreateCart(checkoutPayload);
@@ -92,7 +95,7 @@ export default function PayButton() {
             productIds: [],
             isActive: true,
             isOrder: false,
-            totalPrice: 0.0,
+            totalPrice: 0,
           };
   
           const createNewCartResponse = await updateOrCreateCart(createNewCartPayload);

@@ -76,8 +76,8 @@ const Table = (props) => {
                   );
                 } else if (type === "orders") {
                   const {
-                    orderId,
-                    orderDate,
+                    cartId,
+                    date,
                     orderStatus,
                     paymentMethod,
                     totalPrice,
@@ -86,12 +86,12 @@ const Table = (props) => {
                   return (
                     <tr key={index}>
                       <td>
-                        <input type="checkbox" value={orderId} id={orderId} />
-                        <label htmlFor={orderId}></label>
+                        <input type="checkbox" value={cartId} id={cartId} />
+                        <label htmlFor={cartId}></label>
                       </td>
-                      <td>{orderId}</td>
+                      <td>{cartId}</td>
                       <td>{userId}</td>
-                      <td>{orderDate}</td>
+                      <td>{date}</td>
                       <td>{paymentMethod}</td>
                       <td>{totalPrice}</td>
                       <td>{orderStatus}</td>
