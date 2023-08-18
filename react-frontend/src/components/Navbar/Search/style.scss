@@ -74,16 +74,28 @@
     }
     .search-results {
       position: absolute;
+      z-index: 9999;
       width: 100%;
       background: rgb(244, 244, 244);
       margin-top: 8px;
       border: 1px solid #dcdce4;
       border-radius: 12px;
-      padding: 10px 16px;
+      padding: 16px;
       height: auto;
+      .num-results {
+        color: util.$FONT_COLOR;
+        font-size: 16px;
+        span {
+          color: util.$FONT_COLOR_BOLD;
+          font-family: util.$FONT_FAMILY_MA;
+          font-weight: 600;
+        }
+      }
       .list-results {
-        max-height: 400px;
+        margin-top: 16px;
+        max-height: 500px;
         overflow-y: auto;
+        overflow-x: hidden;
       }
     }
   }

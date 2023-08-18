@@ -12,7 +12,7 @@ import {
   selectCurrentUserId,
 } from "../../features/auth/authSlice";
 
-const Home = (props) => {
+const Home = () => {
   const user = useSelector(selectCurrentUser);
   const token = useSelector(selectCurrentToken);
   const id = useSelector(selectCurrentUserId);
@@ -21,11 +21,7 @@ const Home = (props) => {
     <>
       <div className="home-layout">
         <Header />
-        <ListProduct
-          title="Featured This Week"
-          productPerPage={8}
-          setData={props.setData}
-        />
+        <ListProduct title="Featured This Week" productPerPage={8} />
         <Advertisement />
         <Reason />
         <CustomerReview />

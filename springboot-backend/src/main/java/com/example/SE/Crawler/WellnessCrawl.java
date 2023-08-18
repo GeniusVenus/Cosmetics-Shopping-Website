@@ -17,9 +17,9 @@ public class WellnessCrawl implements BaseCrawler {
         int dem = 0;
         String baseUrl = "https://www.cultbeauty.co.uk/body-wellbeing/wellbeing.list?pageNumber=";
         String baseId = "Wellnes_";
-        try (Writer writer = new FileWriter("D:\\SE_Project\\SE\\springboot-backend\\src\\main\\java\\com\\example\\SE\\JsonFile\\Wellness.json")) {
+        try (Writer writer = new FileWriter("D:\\SE Project\\springboot-backend\\src\\main\\java\\com\\example\\SE\\JsonFile\\Wellness.json")) {
             writer.write('[');
-            for (int j = 1; j <= 5; ++j) {
+            for (int j = 1; j <= 4; ++j) {
                 try {
                     String url = "";
                     String num = Integer.toString(j);
@@ -36,7 +36,8 @@ public class WellnessCrawl implements BaseCrawler {
                         Document docs = Jsoup.connect(link).get();
                         String image = docs.select("#mainContent > div.athenaProductPage_topRow > div.athenaProductPage_firstColumn > div.athenaProductPage_imageContainer > div > div.athenaProductImageCarousel_imagesContainer > div > div:nth-child(1) > img").attr("src");
                         System.out.println("image: " + image);
-                        String name = docs.getElementsByClass("productName_title").text();
+                        if (docs.getElementsByClass("productName_title").first() == null) continue;
+                        String name = docs.getElementsByClass("productName_title").first().text();
                         String cost = docs.getElementsByClass("productPrice_price").text();
                         String description = "";
                         Elements desPTags = docs.select("#product-description-content-2 > div > div");
@@ -79,12 +80,16 @@ public class WellnessCrawl implements BaseCrawler {
                         System.out.println("brand: " + brand);
                         System.out.println("Volume: " + volume);
                         System.out.println("---------------------------------");*/
-                        Product product = new Product(productId, category, name, cost, description, how_to_use, ingredient, brand, volume, image);
-                        ObjectMapper mapper = new ObjectMapper();
-                        ///System.out.println(mapper.writeValueAsString(product));
-                        writer.write(mapper.writeValueAsString(product));
-                        writer.write(",");
-                        writer.write("\n");
+                        if (cost.length() > 7) continue;
+                        if (cost.equals("")) continue;
+                        if (!productId.isEmpty() && !category.isEmpty() && !name.isEmpty() && !description.isEmpty() && !how_to_use.isEmpty() &&  !ingredient.isEmpty() && !brand.isEmpty() && !volume.isEmpty() && !image.isEmpty()) {
+                            Product product = new Product(productId, category, name, cost, description, how_to_use, ingredient, brand, volume, image);
+                            ObjectMapper mapper = new ObjectMapper();
+                            ///System.out.println(mapper.writeValueAsString(product));
+                            writer.write(mapper.writeValueAsString(product));
+                            writer.write(",");
+                            writer.write("\n");
+                        }
                     }
                 } catch (IOException err) {
                     err.printStackTrace();
@@ -95,4 +100,4 @@ public class WellnessCrawl implements BaseCrawler {
             err.printStackTrace();
         }
     }
-}
+ }

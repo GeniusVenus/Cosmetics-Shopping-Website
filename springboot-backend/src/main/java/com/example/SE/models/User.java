@@ -28,6 +28,7 @@ public class User {
     private String username;
     private String email;
     private String password;
+    private Boolean isEnable = Boolean.TRUE;
 
     @DBRef
     private Set<Role> roles = new HashSet<>();
@@ -82,5 +83,13 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public Boolean getDisable() {
+        return isEnable;
+    }
+
+    public void setDisable(Boolean disable) {
+        isEnable = disable;
     }
 }
