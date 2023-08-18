@@ -20,7 +20,7 @@ public class CustomerInfo {
 
     private String firstname;
     private String lastname;
-    private List<String> address;
+    private List<Address> address;
     private String phoneNumber;
 
     private int defaultAddress;
@@ -59,11 +59,11 @@ public class CustomerInfo {
         this.lastname = lastname;
     }
 
-    public List<String> getAddress() {
+    public List<Address> getAddress() {
         return address;
     }
 
-    public void setAddress(List<String> address) {
+    public void setAddress(List<Address> address) {
         this.address = address;
     }
 
