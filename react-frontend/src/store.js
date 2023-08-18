@@ -3,7 +3,6 @@ import { apiSlice } from "./api/apiSlice";
 import authReducer from "./features/auth/authSlice";
 import cartReducer from "./features/cart/cartSlice";
 import purchaseReducer from "./features/purchase/purchaseSlice";
-import userReducer from "./features/user/userSlice";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
@@ -15,7 +14,6 @@ const store = configureStore({
   reducer: {
     [apiSlice.reducerPath]: apiSlice.reducer,
     auth: persistReducer(persistConfig, authReducer),
-    user: userReducer,
     cart: cartReducer,
     purchase: purchaseReducer
   },
