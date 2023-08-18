@@ -4,14 +4,13 @@ const Filter = (props) => {
   const filterList = [
     { title: "Gender", filterOption: ["Male", "Female"] },
     {
-      title: "Product Type",
+      title: "Category",
       filterOption: [
         "Skin care",
         "Grooming",
         "Perfume & Body Mist",
         "Hair care",
         "Body",
-        "Others",
       ],
     },
     { title: "Price", filterOption: [] },
@@ -19,7 +18,7 @@ const Filter = (props) => {
       title: "Brand",
       filterOption: [
         "The Ordinary",
-        "La Roche Posay",
+        "La Roche-Posay",
         "Laneige",
         "Curology",
         "Channel",
@@ -35,7 +34,7 @@ const Filter = (props) => {
   ];
   const [filter] = useState({
     gender: [],
-    "product type": [],
+    category: [],
     price: {
       min: 0,
       max: 999999999999999999,

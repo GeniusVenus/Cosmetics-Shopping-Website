@@ -3,6 +3,7 @@
 .user-page-layout {
   display: flex;
   .container {
+    overflow: auto;
     background: #f6f6f9;
     border-left: 2px solid #eaeaef;
     width: calc(100% - 246px);
@@ -20,8 +21,8 @@
 }
 
 .my-profile-page {
-  padding: 20px 32px 20px 32px;
+  padding: 4px 32px 20px 32px;
   display: flex;
   flex-direction: column;
-  gap: 34px;
+  gap: 20px;
 }

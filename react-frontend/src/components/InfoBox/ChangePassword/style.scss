@@ -1,0 +1,14 @@
+@use "../../../global" as util;
+@use "../style" as box;
+
+.change-password-card {
+  @include box.info_box();
+  padding: 24px 0px 24px 28px;
+  .title {
+    @include box.title_box();
+  }
+  .change-password-inputs {
+    margin-top: 12px;
+    display: flex;
+  }
+}

@@ -13,74 +13,78 @@
   }
 }
 .product-present {
-  border: 1px solid red;
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 20px;
   justify-content: center;
-  .image-list {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 30px;
-    img {
-      width: 130px;
-      height: 130px;
-      object-fit: cover;
-      border-radius: 10px;
-      cursor: pointer;
-    }
-    .image.active {
-      img {
-        border: 2px solid #5d8d00;
-      }
-    }
-  }
+  border-radius: 12px;
+  box-shadow: 0px 4px 28px -2px rgba(0, 0, 0, 0.08);
   .slide-show {
-    border: 1px solid black;
     width: 60%;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 60px;
+    margin-top: 40px;
     margin-bottom: 40px;
-    .prev-btn {
-      display: flex;
-      border: 1px solid red;
-      .container {
-        @extend .btn;
-      }
-    }
-    .next-btn {
-      .container {
-        @extend .btn;
-      }
-    }
     .slide-container {
-      border: 1px solid blue;
       width: 80%;
-      .slick-slide {
-        padding-right: 60px;
+      border-radius: 12px;
+      background: #fdfdfd;
+      box-shadow: 0px 4px 28px -2px rgba(0, 0, 0, 0.08);
+      .slide {
+        width: 100%;
+        @include util.center;
+        gap: 10%;
         img {
-          width: 550px;
-          height: 550px;
+          width: 450px;
+          height: 450px;
+          border-radius: 10px;
           object-fit: cover;
+          box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        }
+        .prev-btn {
+          justify-self: flex-start;
+          .container {
+            @extend .btn;
+          }
+        }
+        .next-btn {
+          justify-content: flex-end;
+          .container {
+            @extend .btn;
+          }
+        }
+      }
+      .image-list {
+        width: 100%;
+        margin-top: 40px;
+        display: grid;
+        justify-content: center;
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        gap: 30px;
+        img {
+          width: 130px;
+          height: 130px;
+          object-fit: cover;
+          border-radius: 10px;
+          cursor: pointer;
+          box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        }
+        .image.active {
+          img {
+            border: 2px solid #5d8d00;
+          }
         }
       }
     }
   }
   .product-image {
     width: 100%;
-    border: 1px solid black;
     .product-image-layout {
-      border: 1px solid blue;
       display: flex;
       justify-content: center;
       align-items: center;
-
-      image {
-        border: 1px solid brown;
-      }
     }
   }
 }

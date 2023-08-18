@@ -11,6 +11,8 @@ public class ModifyCustomerInfoRequest {
     private List<String> address;
     private String phoneNumber;
 
+    private int defaultAddress;
+
 
     public String getPhoneNumber() {
         return phoneNumber;
@@ -66,5 +68,13 @@ public class ModifyCustomerInfoRequest {
 
     public void setInfo_id(String info_id) {
         this.info_id = info_id;
+    }
+
+    public int getDefaultAddress() {
+        return defaultAddress;
+    }
+
+    public void setDefaultAddress(int defaultAddress) {
+        this.defaultAddress = defaultAddress;
     }
 }

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./style.scss";
 import Filter from "./Filter";
 import Dropdown from "./Dropdown";
@@ -13,10 +13,12 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Loading from "../Loading";
 import { useGetProductsQuery } from "../../features/product/productApiSlice";
-
 const ListProduct = (props) => {
   const listRef = useRef(null);
-  const { data, error, isLoading } = useGetProductsQuery();
+  const { data, error, isLoading, isError } = useGetProductsQuery();
+  const [tempList, setTempList] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [prevProducts, setPrevProducts] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
   const productPerPage = props.productPerPage;
   const pageVisited = pageNumber * productPerPage;
@@ -24,14 +26,55 @@ const ListProduct = (props) => {
     setPageNumber(selected);
     listRef.current.scrollIntoView();
   };
-  console.log(data);
+  const getMoney = (money) => {
+    return parseFloat(money.substring(1));
+  };
+  useEffect(() => {
+    if (!isLoading && !isError) {
+      setTempList(data);
+      setProducts(data);
+    }
+  }, [isLoading, isError, data]);
   const handleFilter = (value) => {
-    console.log(value);
+    const { brand, price, category } = value;
+    const { min, max } = price;
+    const isValid = (product) => {
+      // if(!gender.includes(product.gender) && gender.length !== 0) return false;
+      if (brand.length !== 0 && !brand.includes(product.brand)) return false;
+      if (category.length !== 0 && !category.includes(product.category))
+        return false;
+      const minCost = min === "" ? 0 : parseFloat(min);
+      const maxCost = max === "" ? 999999999 : parseFloat(max);
+      if (getMoney(product.cost) < minCost || getMoney(product.cost) > maxCost)
+        return false;
+      return true;
+    };
+    const newFilterArray = tempList.filter(isValid);
+    setPrevProducts(newFilterArray);
+    setProducts(newFilterArray);
   };
   const handleSort = (value) => {
-    console.log(value);
+    if (!value) {
+      setTempList(data);
+      if (prevProducts.length !== 0) setProducts(prevProducts);
+    }
+    if (value === "price") {
+      const ascendingSort = (p1, p2) => {
+        return getMoney(p1.cost) > getMoney(p2.cost)
+          ? 1
+          : getMoney(p1.cost) < getMoney(p2.cost)
+          ? -1
+          : 0;
+      };
+      const newSortArray = [...products];
+      newSortArray.sort(ascendingSort);
+      setPrevProducts(products);
+      setProducts(newSortArray);
+      const newDataArray = [...data];
+      newDataArray.sort(ascendingSort);
+      setTempList(newDataArray);
+    }
   };
-
   return (
     <>
       <div className="list-product">
@@ -51,14 +94,8 @@ const ListProduct = (props) => {
                     <Dropdown handleSort={handleSort} />
                   </div>
                 </div>
-                <div
-                  className="list-product-content"
-                  initial={{ opacity: 0, x: 40 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 1, delay: 1, ease: "easeInOut" }}
-                  viewport={{ once: true }}
-                >
-                  {data
+                <div className="list-product-content">
+                  {products
                     .slice(pageVisited, pageVisited + productPerPage)
                     .map((product, index) => {
                       return <Product key={index} product={product} />;
@@ -69,7 +106,7 @@ const ListProduct = (props) => {
                   <ReactPaginate
                     previousLabel={<FontAwesomeIcon icon={faArrowLeft} />}
                     nextLabel={<FontAwesomeIcon icon={faArrowRight} />}
-                    pageCount={Math.ceil(data.length / productPerPage)}
+                    pageCount={Math.ceil(products.length / productPerPage)}
                     onPageChange={changePage}
                     containerClassName="pagination-section"
                     previousLinkClassName="previous-btn"
@@ -78,7 +115,7 @@ const ListProduct = (props) => {
                   />
                   {props.title !== "All Products" && (
                     <div className="view-all-btn">
-                      <Link className="view-all" to="/data">
+                      <Link className="view-all" to="/products">
                         {" "}
                         View all <FontAwesomeIcon icon={faChevronRight} />
                       </Link>

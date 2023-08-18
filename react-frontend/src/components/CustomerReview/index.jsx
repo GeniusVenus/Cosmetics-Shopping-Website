@@ -128,8 +128,8 @@ const CustomerReview = () => {
                 <div className="review-layout">
                   <div className="content">{user.review}</div>
                   <div className="zip-line"></div>
-                  <div className="user">
-                    <div className="avatar">
+                  <div className="user-card">
+                    <div className="avatar-user">
                       <img
                         src="https://thuthuatnhanh.com/wp-content/uploads/2022/06/Hinh-anh-meme-cheems-ngau.jpg"
                         alt="wow"

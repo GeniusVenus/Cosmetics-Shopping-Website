@@ -15,7 +15,7 @@ public class SkinCrawl implements BaseCrawler {
         int dem = 0;
         String baseUrl = "https://www.cultbeauty.co.uk/skin-care.list?pageNumber=";
         String baseId = "Skin_";
-        try (Writer writer = new FileWriter("D:\\SE_Project\\SE\\springboot-backend\\src\\main\\java\\com\\example\\SE\\JsonFile\\Skin.json")) {
+        try (Writer writer = new FileWriter("D:\\SE Project\\springboot-backend\\src\\main\\java\\com\\example\\SE\\JsonFile\\Skin.json")) {
             writer.write('[');
             for (int j = 1; j <= 9; ++j) {
                 try {
@@ -33,7 +33,7 @@ public class SkinCrawl implements BaseCrawler {
                         System.out.println(productId);
                         Document docs = Jsoup.connect(link).get();
                         String image = docs.select("#mainContent > div.athenaProductPage_topRow > div.athenaProductPage_firstColumn > div.athenaProductPage_imageContainer > div > div.athenaProductImageCarousel_imagesContainer > div > div:nth-child(1) > img").attr("src");
-                        String name = docs.getElementsByClass("productName_title").text();
+                        String name = docs.getElementsByClass("productName_title").first().text();
                         String cost = docs.getElementsByClass("productPrice_price").text();
                         String description = "";
                         Elements desPTags = docs.select("#product-description-content-2 > div > div");
@@ -76,6 +76,8 @@ public class SkinCrawl implements BaseCrawler {
                         System.out.println("brand: " + brand);
                         System.out.println("Volume: " + volume);
                         System.out.println("---------------------------------");*/
+                        if (cost.length() > 7) continue;
+                        if (cost.equals("")) continue;
                         Product product = new Product(productId, category, name, cost, description, how_to_use, ingredient, brand, volume, image);
                         ObjectMapper mapper = new ObjectMapper();
                         ///System.out.println(mapper.writeValueAsString(product));

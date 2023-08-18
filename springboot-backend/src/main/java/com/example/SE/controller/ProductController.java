@@ -38,17 +38,10 @@ public class ProductController {
     public ResponseEntity<List<Product>> getCategoryProduct(@PathVariable("category") String category){
         return new ResponseEntity<List<Product>>(productService.categoryProduct(category), HttpStatus.OK);
     }
-    ///@PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/addProduct")
-    public Product saveProduct(@RequestBody Product product) {
-        String ids = product.getProductId();
-        Optional<Product> products = productService.IdProduct(ids);
-        if (products.isPresent()) {
-            Product prd = products.get();
-            prd.setNum(product.getNum() + 1);
-            return productService.saveProduct(prd);
-        }
-        else return productService.saveProduct(product);
+    public Product createProduct(@RequestBody Product product) {
+        return productService.saveProduct(product);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -75,6 +68,38 @@ public class ProductController {
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PutMapping("updateProduct/sell/{id}")
+    public ResponseEntity<Product> updateSellProduct(@PathVariable("id") String id, int sellQuantity) {
+        Optional<Product> products = productService.IdProduct(id);
+
+        if (products.isPresent()) {
+            Product product = products.get();
+            product.setNum(product.getNum() - sellQuantity);
+            product.setNum_sell(product.getNum_sell() + sellQuantity);
+            return new ResponseEntity<>(productService.saveProduct(product), HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PutMapping("/updateProduct/quantity")
+    public ResponseEntity<Product> updateSellProduct(@RequestBody Product prd) {
+        String id = prd.getProductId();
+        Optional<Product> products = productService.IdProduct(id);
+
+        if (products.isPresent()) {
+            Product product = products.get();
+            product.setNum(product.getNum() + prd.getNum());
+            return new ResponseEntity<>(productService.saveProduct(product), HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/updateProduct/{id}")
     public ResponseEntity<Product> updateProduct(@PathVariable("id") String id, @RequestBody Product prdct) {
         Optional<Product> products = productService.IdProduct(id);
@@ -90,17 +115,13 @@ public class ProductController {
             product.setIngredient(prdct.getIngredient());
             product.setName(prdct.getName());
             product.setVolume(prdct.getVolume());
-            product.setMark(prdct.getMark());
             product.setNum(prdct.getNum());
+            product.setProfit(prdct.getProfit());
+            product.setNum_sell(prdct.getNum_sell());
            return new ResponseEntity<>(productService.saveProduct(product), HttpStatus.OK);
         }
         else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-    }
-    @GetMapping("/hello")
-    public ResponseEntity<String> getCategoryProduct() {
-        String message = "Hello, world!";
-        return new ResponseEntity<>(message, HttpStatus.OK);
     }
 }

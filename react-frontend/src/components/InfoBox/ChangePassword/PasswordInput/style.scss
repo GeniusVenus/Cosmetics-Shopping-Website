@@ -1,0 +1,31 @@
+@use "../../../../global" as util;
+@use "../../style" as box;
+
+.password-input {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+  label {
+    @include box.input_label;
+  }
+  .input-container {
+    display: flex;
+    @include box.input_view;
+    padding-right: 6px;
+    align-items: center;
+    width: calc(100% - 28px);
+    input {
+      @include box.input_font;
+      width: 100%;
+      outline: none;
+      border: none;
+    }
+    .toggle {
+      cursor: pointer;
+    }
+    &:focus-within {
+      border: 1px solid #5d8d00;
+    }
+  }
+}

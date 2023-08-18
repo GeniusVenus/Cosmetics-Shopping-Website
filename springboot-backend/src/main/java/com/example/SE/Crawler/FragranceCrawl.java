@@ -17,7 +17,7 @@ public class FragranceCrawl implements BaseCrawler{
         int dem = 0;
         String baseUrl = "https://www.cultbeauty.co.uk/hair-care.list?pageNumber=";
         String baseId = "Fragrance_";
-        try (Writer writer = new FileWriter("D:\\SE_Project\\SE\\springboot-backend\\src\\main\\java\\com\\example\\SE\\JsonFile\\Fragrance.json")) {
+        try (Writer writer = new FileWriter("D:\\SE Project\\springboot-backend\\src\\main\\java\\com\\example\\SE\\JsonFile\\Fragrance.json")) {
             writer.write('[');
             for (int j = 1; j <= 6; ++j) {
                 try {
@@ -35,7 +35,7 @@ public class FragranceCrawl implements BaseCrawler{
                         System.out.println(productId);
                         Document docs = Jsoup.connect(link).get();
                         String image = docs.select("#mainContent > div.athenaProductPage_topRow > div.athenaProductPage_firstColumn > div.athenaProductPage_imageContainer > div > div.athenaProductImageCarousel_imagesContainer > div > div:nth-child(1) > img").attr("src");
-                        String name = docs.getElementsByClass("productName_title").text();
+                        String name = docs.getElementsByClass("productName_title").first().text();
                         String cost = docs.getElementsByClass("productPrice_price").text();
                         String description = "";
                         Elements desPTags = docs.select("#product-description-content-2 > div > div");
@@ -78,12 +78,16 @@ public class FragranceCrawl implements BaseCrawler{
                         System.out.println("brand: " + brand);
                         System.out.println("Volume: " + volume);
                         System.out.println("---------------------------------");*/
-                        Product product = new Product(productId, category, name, cost, description, how_to_use, ingredient, brand, volume, image);
-                        ObjectMapper mapper = new ObjectMapper();
-                        ///System.out.println(mapper.writeValueAsString(product));
-                        writer.write(mapper.writeValueAsString(product));
-                        writer.write(",");
-                        writer.write("\n");
+                        if (cost.length() > 7) continue;
+                        if (cost.equals("")) continue;
+                        if (!productId.isEmpty() && !category.isEmpty() && !name.isEmpty() && !description.isEmpty() && !how_to_use.isEmpty() &&  !ingredient.isEmpty() && !brand.isEmpty() && !volume.isEmpty() && !image.isEmpty()) {
+                            Product product = new Product(productId, category, name, cost, description, how_to_use, ingredient, brand, volume, image);
+                            ObjectMapper mapper = new ObjectMapper();
+                            ///System.out.println(mapper.writeValueAsString(product));
+                            writer.write(mapper.writeValueAsString(product));
+                            writer.write(",");
+                            writer.write("\n");
+                        }
                     }
                 } catch (IOException err) {
                     err.printStackTrace();
