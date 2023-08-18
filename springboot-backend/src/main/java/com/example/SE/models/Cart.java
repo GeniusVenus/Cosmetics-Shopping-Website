@@ -30,7 +30,9 @@ public class Cart {
     private boolean isActive;
     private boolean isOrder;
     private double totalPrice;
+    private String orderStatus;
     private String address;
+    private String date;
     private int shippingMethod;
 
     public Cart(
@@ -40,7 +42,9 @@ public class Cart {
             boolean isActive,
             boolean isOrder,
             double totalPrice,
+            String orderStatus,
             String address,
+            String date,
             int shippingMethod
         ) {
         this.cartId = cartId;
@@ -49,7 +53,9 @@ public class Cart {
         this.isActive = isActive;
         this.isOrder = isOrder;
         this.totalPrice = totalPrice;
+        this.orderStatus = orderStatus;
         this.address = address;
+        this.date = date;
         this.shippingMethod = shippingMethod;
     }
 
@@ -116,5 +122,21 @@ public class Cart {
 
     public void setShippingMethod(int shippingMethod) {
         this.shippingMethod = shippingMethod;
+    }
+
+    public String getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }
