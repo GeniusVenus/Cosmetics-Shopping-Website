@@ -1,5 +1,6 @@
 package com.example.SE.controller;
 
+import com.example.SE.models.Address;
 import com.example.SE.models.CustomerInfo;
 import com.example.SE.models.User;
 import com.example.SE.payload.request.ModifyCustomerInfoRequest;
@@ -7,6 +8,7 @@ import com.example.SE.payload.response.CustomerInfoResponse;
 import com.example.SE.repository.CustomerInfoRepository;
 import com.example.SE.repository.UserRepository;
 import com.example.SE.service.CustomerInfoService;
+import com.thoughtworks.qdox.model.expression.Add;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.beans.Encoder;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @CrossOrigin(value = "*", maxAge = 3600)
@@ -50,7 +54,16 @@ public class CustomerInfoController {
         customerInfo.setFirstname(modifyCustomerInfoRequest.getFirstname());
         customerInfo.setLastname(modifyCustomerInfoRequest.getLastname());
         customerInfo.setPhoneNumber(modifyCustomerInfoRequest.getPhoneNumber());
-        customerInfo.setAddress(modifyCustomerInfoRequest.getAddress());
+        System.out.println(!modifyCustomerInfoRequest.getNewpassword().isEmpty());
+        List<Address> listCurAddress = new ArrayList<>();
+        for(int i = 0; i < modifyCustomerInfoRequest.getAddress().size(); ++i)
+        {
+            System.out.println(modifyCustomerInfoRequest.getAddress().get(i).getProvince() + " " + modifyCustomerInfoRequest.getAddress().get(i).getDistrict() + " " + modifyCustomerInfoRequest.getAddress().get(i).getTown() + " " + modifyCustomerInfoRequest.getAddress().get(i).getDetails());
+            Address tempAdd = new Address(modifyCustomerInfoRequest.getAddress().get(i).getProvince(), modifyCustomerInfoRequest.getAddress().get(i).getDistrict(), modifyCustomerInfoRequest.getAddress().get(i).getTown(), modifyCustomerInfoRequest.getAddress().get(i).getDetails());
+            System.out.println(tempAdd);
+            listCurAddress.add(tempAdd);
+        }
+        customerInfo.setAddress(listCurAddress);
         if(modifyCustomerInfoRequest.getAddress().isEmpty())
             customerInfo.setDefaultAddress(-1);
         else{
@@ -60,7 +73,7 @@ public class CustomerInfoController {
                 customerInfo.setDefaultAddress(modifyCustomerInfoRequest.getDefaultAddress());
             }
         }
-        if(!modifyCustomerInfoRequest.getNewpassword().isEmpty());
+        if(!modifyCustomerInfoRequest.getNewpassword().isEmpty())
         {
             User user = userRepository.findById(modifyCustomerInfoRequest.getUser_id()).get();
             user.setPassword(encoder.encode(modifyCustomerInfoRequest.getNewpassword()));

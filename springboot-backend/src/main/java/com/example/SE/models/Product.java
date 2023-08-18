@@ -150,11 +150,15 @@ public class Product {
     }
 
     public void setProfit(double profit){
-
         this.profit = profit;
     }
 
     public double getProfit() {
-        return this.profit;
+        String money = this.cost.substring(1, this.cost.length() - 2);
+        double revenue = Double.parseDouble(money);
+        Random generator = new Random();
+        double num = generator.nextDouble() * (0.5 - 0);
+        revenue -= revenue * num;
+        return revenue;
     }
 }

@@ -147,7 +147,7 @@ public class AuthController {
         user.setDisable(Boolean.TRUE);
         userRepository.save(user);
         CustomerInfo info = new CustomerInfo();
-        List<String> address = new ArrayList<>();
+        List<Address> address = new ArrayList<>();
         info.setAddress(address);
         info.setDefaultAddress(-1);
         info.setUser(userRepository.findByUsername(user.getUsername()).get());
