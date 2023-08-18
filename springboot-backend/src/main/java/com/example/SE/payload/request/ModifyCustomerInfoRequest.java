@@ -1,5 +1,7 @@
 package com.example.SE.payload.request;
 
+import com.example.SE.models.Address;
+
 import java.util.List;
 
 public class ModifyCustomerInfoRequest {
@@ -8,7 +10,7 @@ public class ModifyCustomerInfoRequest {
     private String firstname;
     private String lastname;
     private String newpassword;
-    private List<String> address;
+    private List<Address> address;
     private String phoneNumber;
 
     private int defaultAddress;
@@ -46,11 +48,11 @@ public class ModifyCustomerInfoRequest {
         this.newpassword = newpassword;
     }
 
-    public List<String> getAddress() {
+    public List<Address> getAddress() {
         return address;
     }
 
-    public void setAddress(List<String> address) {
+    public void setAddress(List<Address> address) {
         this.address = address;
     }
 
