@@ -42,7 +42,6 @@ public class ReviewController {
         String userId = review.getUserId();
         System.out.println("userID: " + userId);
         Optional<Review> review1 = reviewService.ProductId_UserId_Review(productId, userId);
-        System.out.println(review1);
         if (review1.isPresent()) {
             Review review2 = review1.get();
             review2.setPoint(review.getPoint());

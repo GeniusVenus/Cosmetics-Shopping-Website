@@ -30,6 +30,7 @@ public class Product {
     private String image;
     private int num;
     private double profit;
+    private int num_sell;
 
     public Product(String productId, String category, String name, String cost, String description, String how_to_use, String ingredient, String brand, String volume, String image) {
         this.productId = productId;
@@ -49,6 +50,15 @@ public class Product {
         double num = generator.nextDouble() * (0.5 - 0);
         revenue -= revenue * num;
         this.profit = revenue;
+        this.num_sell = 0;
+    }
+
+    public int getNum_sell() {
+        return num_sell;
+    }
+
+    public void setNum_sell(int num_sell) {
+        this.num_sell = num_sell;
     }
 
     public String getProductId() {

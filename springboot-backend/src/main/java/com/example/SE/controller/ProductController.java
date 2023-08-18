@@ -40,15 +40,8 @@ public class ProductController {
     }
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/addProduct")
-    public Product saveProduct(@RequestBody Product product) {
-        String ids = product.getProductId();
-        Optional<Product> products = productService.IdProduct(ids);
-        if (products.isPresent()) {
-            Product prd = products.get();
-            prd.setNum(prd.getNum() + product.getNum());
-            return productService.saveProduct(prd);
-        }
-        else return productService.saveProduct(product);
+    public Product createProduct(@RequestBody Product product) {
+        return productService.saveProduct(product);
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -75,6 +68,38 @@ public class ProductController {
     }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PutMapping("updateProduct/sell/{id}")
+    public ResponseEntity<Product> updateSellProduct(@PathVariable("id") String id, int sellQuantity) {
+        Optional<Product> products = productService.IdProduct(id);
+
+        if (products.isPresent()) {
+            Product product = products.get();
+            product.setNum(product.getNum() - sellQuantity);
+            product.setNum_sell(product.getNum_sell() + sellQuantity);
+            return new ResponseEntity<>(productService.saveProduct(product), HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PutMapping("/updateProduct/quantity")
+    public ResponseEntity<Product> updateSellProduct(@RequestBody Product prd) {
+        String id = prd.getProductId();
+        Optional<Product> products = productService.IdProduct(id);
+
+        if (products.isPresent()) {
+            Product product = products.get();
+            product.setNum(product.getNum() + prd.getNum());
+            return new ResponseEntity<>(productService.saveProduct(product), HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/updateProduct/{id}")
     public ResponseEntity<Product> updateProduct(@PathVariable("id") String id, @RequestBody Product prdct) {
         Optional<Product> products = productService.IdProduct(id);
@@ -92,11 +117,11 @@ public class ProductController {
             product.setVolume(prdct.getVolume());
             product.setNum(prdct.getNum());
             product.setProfit(prdct.getProfit());
+            product.setNum_sell(prdct.getNum_sell());
            return new ResponseEntity<>(productService.saveProduct(product), HttpStatus.OK);
         }
         else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
-
 }
