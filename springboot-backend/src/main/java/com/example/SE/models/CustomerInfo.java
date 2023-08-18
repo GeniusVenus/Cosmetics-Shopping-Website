@@ -23,6 +23,8 @@ public class CustomerInfo {
     private List<String> address;
     private String phoneNumber;
 
+    private int defaultAddress;
+
     //getters and setters
 
     public String getId() {
@@ -79,5 +81,13 @@ public class CustomerInfo {
 
     public void setUser_id(String user_id) {
         this.user_id = user_id;
+    }
+
+    public int getDefaultAddress() {
+        return defaultAddress;
+    }
+
+    public void setDefaultAddress(int defaultAddress) {
+        this.defaultAddress = defaultAddress;
     }
 }

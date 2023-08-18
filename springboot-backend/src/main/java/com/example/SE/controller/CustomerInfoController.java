@@ -51,6 +51,15 @@ public class CustomerInfoController {
         customerInfo.setLastname(modifyCustomerInfoRequest.getLastname());
         customerInfo.setPhoneNumber(modifyCustomerInfoRequest.getPhoneNumber());
         customerInfo.setAddress(modifyCustomerInfoRequest.getAddress());
+        if(modifyCustomerInfoRequest.getAddress().isEmpty())
+            customerInfo.setDefaultAddress(-1);
+        else{
+            if(modifyCustomerInfoRequest.getAddress().size() == 1)
+                customerInfo.setDefaultAddress(0);
+            else{
+                customerInfo.setDefaultAddress(modifyCustomerInfoRequest.getDefaultAddress());
+            }
+        }
         if(!modifyCustomerInfoRequest.getNewpassword().isEmpty());
         {
             User user = userRepository.findById(modifyCustomerInfoRequest.getUser_id()).get();
