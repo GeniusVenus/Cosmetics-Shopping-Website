@@ -1,0 +1,44 @@
+@use "../../../../global" as util;
+
+.search-result {
+  cursor: pointer;
+  align-items: center;
+  display: flex;
+  padding: 10px;
+  .result-image {
+    height: 100px;
+    width: 100px;
+    img {
+      height: 100px;
+      width: 100px;
+      object-fit: cover;
+    }
+  }
+  .result-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 6px 10px 10px 10px;
+    .result-name {
+      color: #00171f;
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 18px;
+      @include util.overflow_ver(2);
+    }
+    .result-brand {
+      color: #667479;
+      font-size: 13px;
+      font-family: util.$FONT_FAMILY_M;
+      font-weight: 400;
+      line-height: 18px;
+      margin-right: 4px;
+    }
+    .result-cost {
+      @extend .result-brand;
+    }
+  }
+  &:hover {
+    background: rgb(227, 226, 226);
+  }
+}

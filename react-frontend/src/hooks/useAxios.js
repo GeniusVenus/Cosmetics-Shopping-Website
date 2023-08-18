@@ -1,34 +1,42 @@
 import { useState, useEffect } from "react";
 
-const useAxios = () => {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-  const [controller, setController] = useState();
-  const axiosFetch = async (configObj) => {
-    const { axiosInstance, method, url, requestConfig = {} } = configObj;
-    try {
-      setLoading(true);
-      const control = new AbortController();
-      setController(control);
-      const response = await axiosInstance[method.toLowerCase()](url, {
-        ...requestConfig,
-        signal: control.signal,
-      });
-      console.log(response);
-      setData(response.data);
-    } catch (error) {
-      console.log(error);
-      setError(error.message);
-    } finally {
-      setTimeout(() => setLoading(false), 1500);
-    }
-  };
-  useEffect(() => {
-    console.log(controller);
-    return () => controller && controller.abort();
-  }, [controller]);
+const useAxios = (configObj) => {
+  const { axiosInstance, method, url, requestConfig = {} } = configObj;
 
-  return [data, error, loading, axiosFetch];
+  const [response, setResponse] = useState([]);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [reload, setReload] = useState(0);
+
+  const refetch = () => setReload((prev) => prev + 1);
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    const fetchData = async () => {
+      try {
+        const res = await axiosInstance[method.toLowerCase()](url, {
+          ...requestConfig,
+          signal: controller.signal,
+        });
+        console.log(res);
+        setResponse(res.data);
+      } catch (err) {
+        console.log(err.message);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+
+    return () => controller.abort();
+
+    // eslint-disable-next-line
+  }, [reload]);
+
+  return [response, error, loading, refetch];
 };
+
 export default useAxios;

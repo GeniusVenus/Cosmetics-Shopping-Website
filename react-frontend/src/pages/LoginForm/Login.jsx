@@ -6,7 +6,6 @@ import { setCredentials } from "../../features/auth/authSlice";
 import { useSigninMutation } from "../../features/auth/authApiSlice";
 import LoginGreeting from "../../components/LoginGreeting";
 import FormCard from "../../components/FormCard";
-import { setInfo } from "../../features/user/userSlice";
 
 const Login = () => {
   const [values, setValues] = useState({
@@ -41,7 +40,6 @@ const Login = () => {
     try {
       const userData = await login(values).unwrap();
       dispatch(setCredentials({ ...userData, user }));
-      dispatch(setInfo(userData));
       setValues({
         username: "",
         password: "",
