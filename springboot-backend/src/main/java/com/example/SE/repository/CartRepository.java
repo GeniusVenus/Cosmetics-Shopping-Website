@@ -14,4 +14,9 @@ public interface CartRepository extends MongoRepository<Cart, String> {
     List<Cart> findByCartId(String cartId);
     @Query("{'userId': ?0, 'isActive': ?1}")
     List<Cart> findActiveCartByUserId(String userId, boolean isActive);
+    @Query("{'isActive': ?0}")
+    List<Cart> getAllOrders(boolean isActive);
+
+    @Query("{'userId': ?0, 'isActive': ?1}")
+    List<Cart> getOrdersByUserId(String userId, boolean isActive);
 }

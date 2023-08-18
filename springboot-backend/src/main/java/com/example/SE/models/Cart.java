@@ -34,6 +34,7 @@ public class Cart {
     private String address;
     private String date;
     private int shippingMethod;
+    private String paymentMethod;
 
     public Cart(
             String cartId,
@@ -45,7 +46,8 @@ public class Cart {
             String orderStatus,
             String address,
             String date,
-            int shippingMethod
+            int shippingMethod,
+            String paymentMethod
         ) {
         this.cartId = cartId;
         this.userId = userId;
@@ -57,6 +59,7 @@ public class Cart {
         this.address = address;
         this.date = date;
         this.shippingMethod = shippingMethod;
+        this.paymentMethod = paymentMethod;
     }
 
     public String getCartId() {
@@ -138,5 +141,13 @@ public class Cart {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
 }

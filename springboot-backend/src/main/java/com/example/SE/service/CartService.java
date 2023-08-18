@@ -12,4 +12,6 @@ public interface CartService {
     Cart saveCart (Cart cart);
     List<Cart> findByCartId(String cartId);
     List<Cart> findActiveCartByUserId(String userId, boolean isActive);
+    List<Cart> getAllOrders(boolean isActive);
+    List<Cart> getOrdersByUserId(String userId, boolean isActive);
 }

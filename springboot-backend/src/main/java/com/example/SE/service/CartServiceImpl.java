@@ -34,4 +34,14 @@ public class CartServiceImpl implements CartService {
     public List<Cart> findActiveCartByUserId(String userId, boolean isActive) {
         return cartRepository.findActiveCartByUserId(userId, isActive);
     }
+
+    @Override
+    public List<Cart> getAllOrders(boolean isActive) {
+        return cartRepository.getAllOrders(isActive);
+    }
+
+    @Override
+    public List<Cart> getOrdersByUserId(String userId, boolean isActive) {
+        return cartRepository.getOrdersByUserId(userId, isActive);
+    }
 }
