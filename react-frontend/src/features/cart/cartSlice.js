@@ -6,7 +6,7 @@ const initialState = {
     cartId: null,
     productIds : [],
     totalPrice: null,
-    shippingMethod: null,
+    shippingMethod: 0,
     orderStatus: null
 }
 
@@ -61,6 +61,9 @@ const cartSlice = createSlice({
         setCurrentTotalPrice: (state, action) => {
             state.totalPrice = action.payload;
         },
+        setCurrentShippingMethod: (state,action) => {
+            state.shippingMethod = action.payload;
+        },
         setCurrentOrderStatus: (state, action) => {
             state.orderStatus = action.payload;
         },
@@ -101,7 +104,13 @@ const cartSlice = createSlice({
 })
 
 //Todo : check other thing
-export const {setCurrentProductIds, setCurrentCartId, setCurrentCartEntity, setCurrentTotalPrice, setCurrentOrderStatus} = cartSlice.actions;
+export const {setCurrentProductIds, 
+    setCurrentCartId, 
+    setCurrentCartEntity, 
+    setCurrentTotalPrice, 
+    setCurrentShippingMethod,
+    setCurrentOrderStatus} = cartSlice.actions;
+
 export const getCurrentProductIds = (state) => state.cart.productIds;
 export const getCurrentCartId = (state) => state.cart.cartId;
 export const getCurrentTotalPrice = (state) => state.cart.totalPrice;

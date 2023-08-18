@@ -11,16 +11,24 @@ import { setCurrentProductIds,
     fetchProductIds, 
     fetchCart, 
     getCurrentTotalPrice, 
-    setCurrentTotalPrice } from '../../features/cart/cartSlice';
+    setCurrentTotalPrice, 
+    getCurrentShippingMethod} from '../../features/cart/cartSlice';
 import './style.scss'
+
 export default function OrderReview(props) {
     const dispatch = useDispatch();
     const userId = useSelector(selectCurrentUserId);
     const currentTotalPrice = useSelector(getCurrentTotalPrice);
+    const currentShippingMethod = useSelector(getCurrentShippingMethod);
+    const shippingValue = (
+        currentShippingMethod === 1 ? 10:
+        currentShippingMethod === 2 ? 50 : 0);
+    
+
     useEffect(() => {
-        // dispatch(fetchProductIds);
-        dispatch(fetchCart);
+        dispatch(fetchCart(userId));
       }, [dispatch]);
+
     return (
         <>
             <p className='heading'>Order Review</p>
@@ -31,24 +39,38 @@ export default function OrderReview(props) {
                     <span className="purchase-suggest-link">
                         <Link to="/cart">Edit My Order</Link>
                     </span>
-
                 </div>) :null
             }
             <div className='price'>
                 <div className='price-label'>Subtotal</div>
-                <div className='price-value'>totalprice</div>
+                <div className='price-value'>{currentTotalPrice+"$"}</div>
             </div>
-            <div className='price price-bottom'>
-                <div className='price-label'>Shipping</div>
-                <div className='price-value'>10</div>
-            </div>
-            <div className='totalprice'>
-                <div >
-                    <div className='totalprice-label'>Total</div>
-                    <span className='totalprice-info'>Including 8% VAT</span>
-                </div>
-                <div className='totalprice-value'>{currentTotalPrice}</div>
-            </div>
+            {
+                props.inPage == "checkout" ?
+                <>
+                    <div className='price price-bottom'>
+                        <div className='price-label'>
+                        {
+                            "Shipping " +
+                            (currentShippingMethod == 1 ? "(Standard)" :
+                            currentShippingMethod == 2 ? "(Express)" : "")
+                        }
+                        </div>
+                        <div className='price-value'>
+                            {shippingValue+"$"}
+                        </div>
+                    </div>
+                    <div className='totalprice'>
+                        <div >
+                            <div className='totalprice-label'>Total</div>
+                        </div>
+                        <div className='totalprice-value'>{(currentTotalPrice + shippingValue) +"$"}</div>
+                    </div>
+                </>
+                : null
+            }
+
+            
             {props.inPage == "cart" ? <CheckoutButton/> : <PayButton/>}
         </>
     );
