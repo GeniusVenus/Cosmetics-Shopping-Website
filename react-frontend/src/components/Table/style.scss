@@ -1,0 +1,193 @@
+@use "../../global" as util;
+.basic-btn-setting {
+  @include util.center();
+  padding: 11px 12px;
+  border-radius: 4px;
+  border: 1px solid #dcdce4;
+  background: #fff;
+  cursor: pointer;
+}
+.table-section {
+  font-family: util.$FONT_FAMILY_M;
+  .table-number-data {
+    color: #666687;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    margin-bottom: 10px;
+    margin-left: 4px;
+  }
+  svg {
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+  }
+  .table-header {
+    display: flex;
+    .first-section {
+      display: flex;
+      gap: 12px;
+      flex: 1;
+      .search-btn {
+        @extend .basic-btn-setting;
+      }
+      .filter-btn {
+        @extend .basic-btn-setting;
+        gap: 8px;
+        font-weight: 600;
+      }
+    }
+    .second-section {
+      display: flex;
+      gap: 12px;
+      .num-selected-card {
+        @extend .basic-btn-setting;
+      }
+      .setting-btn {
+        @extend .basic-btn-setting;
+      }
+    }
+  }
+  .content-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 24px 0;
+    font-size: 0.9em;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    thead {
+      tr {
+        text-align: left;
+        font-weight: bold;
+        border-bottom: 1px solid #c8c5c5;
+      }
+    }
+    th,
+    td {
+      padding: 12px 15px;
+      input {
+        padding: 0;
+        height: initial;
+        width: initial;
+        margin-bottom: 0;
+        display: none;
+        cursor: pointer;
+      }
+      label {
+        position: relative;
+        font-size: 14px;
+        font-family: util.$FONT_FAMILY_M;
+        font-weight: 400;
+        line-height: 20px;
+        cursor: pointer;
+      }
+      label:before {
+        content: "";
+        appearance: none;
+        background-color: transparent;
+        border: 2px solid #ccd1d2;
+        border-radius: 4px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05),
+          inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+        padding: 8px;
+        display: inline-block;
+        position: relative;
+        vertical-align: middle;
+        margin-bottom: 2px;
+        margin-right: 4px;
+        cursor: pointer;
+      }
+      input:checked + label:after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 3px;
+        left: 7px;
+        width: 4px;
+        height: 8px;
+        border: solid #002a48;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+      }
+    }
+    .item-management {
+      display: flex;
+      @include util.center();
+      gap: 12px;
+      .ban-btn,
+      .delete-btn {
+        svg {
+          path {
+            fill: red;
+          }
+        }
+      }
+    }
+    tbody {
+      tr {
+        border-bottom: 1px solid #dddddd;
+      }
+      tr:nth-of-type(even) {
+        background-color: #f3f3f3;
+      }
+      tr.active-row {
+        font-weight: bold;
+        color: #5d8d00;
+      }
+    }
+  }
+  .table-footer {
+    display: flex;
+    .table-num-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      .description {
+        color: #8e8ea9;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 16px;
+      }
+    }
+    .pagination-section {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex: 1;
+      gap: 6px;
+      a {
+        list-style-type: none;
+        width: 34px;
+        height: 34px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: black;
+        font-size: 14px;
+        font-family: util.$FONT_FAMILY_M;
+        font-weight: 700;
+        line-height: 24px;
+        border-radius: 8px;
+        cursor: pointer;
+        &:hover {
+          border-radius: 4px;
+          background: #fff;
+          box-shadow: 0px 1px 4px 0px rgba(26, 26, 67, 0.1);
+          color: #5d8d00;
+          svg {
+            color: #5d8d00;
+          }
+        }
+      }
+      .pagination-active a {
+        border-radius: 4px;
+        background: #fff;
+        box-shadow: 0px 1px 4px 0px rgba(26, 26, 67, 0.1);
+        border-radius: 8px;
+        background: white;
+        color: #5d8d00;
+      }
+    }
+  }
+}

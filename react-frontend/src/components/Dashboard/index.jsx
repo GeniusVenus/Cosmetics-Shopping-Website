@@ -3,12 +3,8 @@ import "./style.scss";
 import DashboardImage from "../../assets/image/DashboardImage";
 import { useSignoutMutation } from "../../features/auth/authApiSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { logOut } from "../../features/auth/authSlice";
+import { logOut, selectCurrentUserId } from "../../features/auth/authSlice";
 import { useLocation, useNavigate } from "react-router-dom";
-import {
-  refreshInfo,
-  selectCurrentUsername,
-} from "../../features/user/userSlice";
 import { selectCurrentRoles } from "../../features/auth/authSlice";
 const Dashboard = (props) => {
   const {
@@ -21,8 +17,9 @@ const Dashboard = (props) => {
     logOutIcon,
     manageIcon,
   } = DashboardImage;
-  const username = useSelector(selectCurrentUsername);
+  const username = "";
   const roles = useSelector(selectCurrentRoles);
+  const id = useSelector(selectCurrentUserId);
   const { active, setPage } = props;
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -90,9 +87,8 @@ const Dashboard = (props) => {
   const advanced = ["My Profile"];
   const handleLogOut = async () => {
     try {
-      await logout;
+      await logout(id);
       dispatch(logOut());
-      dispatch(refreshInfo());
       navigate("/");
     } catch (err) {
       console.log(err);
@@ -121,13 +117,13 @@ const Dashboard = (props) => {
                     return (
                       <>
                         <li
+                          key={index}
                           className={
                             item.title !== "Log Out" &&
                             location.pathname === item.link
                               ? "option active"
                               : "option"
                           }
-                          key={index}
                           onClick={() => {
                             if (item.title === "Log Out") handleLogOut();
                             else {

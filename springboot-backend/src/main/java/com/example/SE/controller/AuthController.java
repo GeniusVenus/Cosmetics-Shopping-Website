@@ -1,5 +1,6 @@
 package com.example.SE.controller;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -146,6 +147,9 @@ public class AuthController {
         user.setDisable(Boolean.TRUE);
         userRepository.save(user);
         CustomerInfo info = new CustomerInfo();
+        List<String> address = new ArrayList<>();
+        info.setAddress(address);
+        info.setDefaultAddress(-1);
         info.setUser(userRepository.findByUsername(user.getUsername()).get());
         customerInfoRepository.save(info);
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));

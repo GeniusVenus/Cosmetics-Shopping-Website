@@ -64,6 +64,9 @@
         &:hover {
           background: util.$FONT_COLOR;
           color: white;
+          svg {
+            color: white;
+          }
         }
       }
       .pagination-active a {
