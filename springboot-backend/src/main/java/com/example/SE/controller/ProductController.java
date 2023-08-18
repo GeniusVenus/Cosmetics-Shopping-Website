@@ -99,7 +99,7 @@ public class ProductController {
         }
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("/updateProduct/{id}")
     public ResponseEntity<Product> updateProduct(@PathVariable("id") String id, @RequestBody Product prdct) {
         Optional<Product> products = productService.IdProduct(id);

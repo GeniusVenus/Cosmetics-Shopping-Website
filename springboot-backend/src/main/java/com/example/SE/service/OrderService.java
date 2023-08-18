@@ -7,7 +7,7 @@ import java.util.List;
 @Service
 public interface OrderService {
 
-    Order saveOrder (Order order);
+    Order aveOrder (Order order);
 
     List<Order> findAll(String userId);
 
