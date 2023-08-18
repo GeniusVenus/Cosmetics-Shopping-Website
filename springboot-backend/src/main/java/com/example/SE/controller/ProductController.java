@@ -1,6 +1,7 @@
 package com.example.SE.controller;
 
 import com.example.SE.models.Product;
+import com.example.SE.payload.request.SellQuantity;
 import com.example.SE.service.ProductServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -69,13 +70,12 @@ public class ProductController {
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("updateProduct/sell/{id}")
-    public ResponseEntity<Product> updateSellProduct(@PathVariable("id") String id, int sellQuantity) {
+    public ResponseEntity<Product> updateSellProduct(@PathVariable("id") String id,@RequestBody SellQuantity sellQuantity) {
         Optional<Product> products = productService.IdProduct(id);
-
         if (products.isPresent()) {
             Product product = products.get();
-            product.setNum(product.getNum() - sellQuantity);
-            product.setNum_sell(product.getNum_sell() + sellQuantity);
+            product.setNum(product.getNum() - sellQuantity.getSellQuantity());
+            product.setNum_sell(product.getNum_sell() + sellQuantity.getSellQuantity());
             return new ResponseEntity<>(productService.saveProduct(product), HttpStatus.OK);
         }
         else {
@@ -106,18 +106,18 @@ public class ProductController {
 
         if (products.isPresent()) {
             Product product = products.get();
-            product.setProductId(prdct.getProductId());
-            product.setBrand(prdct.getBrand());
-            product.setCategory(prdct.getCategory());
-            product.setCost(prdct.getCost());
-            product.setDescription(prdct.getDescription());
-            product.setHow_to_use(prdct.getHow_to_use());
-            product.setIngredient(prdct.getIngredient());
-            product.setName(prdct.getName());
-            product.setVolume(prdct.getVolume());
-            product.setNum(prdct.getNum());
-            product.setProfit(prdct.getProfit());
-            product.setNum_sell(prdct.getNum_sell());
+            if (prdct.getProductId() != null) product.setProductId(prdct.getProductId());
+            if (prdct.getBrand() != null) product.setBrand(prdct.getBrand());
+            if (prdct.getCategory() != null) product.setCategory(prdct.getCategory());
+            if (prdct.getCost() != null) product.setCost(prdct.getCost());
+            if (prdct.getDescription() != null) product.setDescription(prdct.getDescription());
+            if (prdct.getHow_to_use() != null) product.setHow_to_use(prdct.getHow_to_use());
+            if (prdct.getIngredient() != null) product.setIngredient(prdct.getIngredient());
+            if (prdct.getName() != null) product.setName(prdct.getName());
+            if (prdct.getVolume() != null) product.setVolume(prdct.getVolume());
+            if (prdct.getNum() != 0) product.setNum(prdct.getNum());
+            if (prdct.getCost() != null) product.setProfit(product.getProfit());
+            if (prdct.getNum_sell() != 0) product.setNum_sell(prdct.getNum_sell());
            return new ResponseEntity<>(productService.saveProduct(product), HttpStatus.OK);
         }
         else {
