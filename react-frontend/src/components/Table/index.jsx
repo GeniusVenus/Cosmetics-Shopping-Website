@@ -8,6 +8,7 @@ import {
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 import Dropdown from "./Dropdown";
+import { useNavigate } from "react-router-dom";
 const Table = (props) => {
   const { searchIcon, filterIcon, settingIcon, editIcon, banIcon, deleteIcon } =
     TableImage;
@@ -19,8 +20,16 @@ const Table = (props) => {
     tableRef.current.scrollIntoView();
   };
   const tableRef = useRef();
+  const navigate = useNavigate();
   const { type, head, infos } = props;
   const [data, setData] = useState(infos);
+  const handleView = (id) => {
+    if (type === "users") {
+      navigate(`/users/${id}`);
+    } else if (type === "orders") {
+      navigate(`/orders/${id}`);
+    }
+  };
   return (
     <>
       <div className="table-section" ref={tableRef}>
@@ -33,18 +42,12 @@ const Table = (props) => {
             </div>
           </div>
           <div className="second-section">
-            <div className="num-selected-card">Currently selected : 0</div>
             <div className="setting-btn"> {settingIcon}</div>
           </div>
         </div>
         <table className="content-table">
           <thead>
             <tr>
-              <th>
-                {" "}
-                <input type="checkbox" id="all" />
-                <label htmlFor="all"></label>
-              </th>
               {head.map((title, index) => (
                 <th key={index}> {title}</th>
               ))}
@@ -58,17 +61,18 @@ const Table = (props) => {
                   const { id, username, email } = info;
                   return (
                     <tr key={index}>
-                      <td>
-                        <input type="checkbox" value={id} id={id} />
-                        <label htmlFor={id}></label>
-                      </td>
                       <td>{id}</td>
                       <td>{username}</td>
                       <td>{email}</td>
                       <td>
                         {" "}
                         <div className="item-management">
-                          <div className="edit-btn">{editIcon}</div>
+                          <div
+                            className="edit-btn"
+                            onClick={() => handleView(id)}
+                          >
+                            {editIcon}
+                          </div>
                           <div className="ban-btn">{banIcon}</div>
                         </div>
                       </td>
@@ -85,10 +89,6 @@ const Table = (props) => {
                   } = info;
                   return (
                     <tr key={index}>
-                      <td>
-                        <input type="checkbox" value={cartId} id={cartId} />
-                        <label htmlFor={cartId}></label>
-                      </td>
                       <td>{cartId}</td>
                       <td>{userId}</td>
                       <td>{date}</td>
@@ -98,7 +98,12 @@ const Table = (props) => {
                       <td>
                         {" "}
                         <div className="item-management">
-                          <div className="edit-btn">{editIcon}</div>
+                          <div
+                            className="edit-btn"
+                            onClick={() => handleView(cartId)}
+                          >
+                            {editIcon}
+                          </div>
                           <div className="delete-btn">{deleteIcon}</div>
                         </div>
                       </td>

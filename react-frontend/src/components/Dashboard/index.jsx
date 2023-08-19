@@ -3,7 +3,11 @@ import "./style.scss";
 import DashboardImage from "../../assets/image/DashboardImage";
 import { useSignoutMutation } from "../../features/auth/authApiSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { logOut, selectCurrentUserId } from "../../features/auth/authSlice";
+import {
+  logOut,
+  selectCurrentUser,
+  selectCurrentUserId,
+} from "../../features/auth/authSlice";
 import { useLocation, useNavigate } from "react-router-dom";
 import { selectCurrentRoles } from "../../features/auth/authSlice";
 const Dashboard = (props) => {
@@ -17,7 +21,7 @@ const Dashboard = (props) => {
     logOutIcon,
     manageIcon,
   } = DashboardImage;
-  const username = "";
+  const username = useSelector(selectCurrentUser);
   const roles = useSelector(selectCurrentRoles);
   const id = useSelector(selectCurrentUserId);
   const { active, setPage } = props;

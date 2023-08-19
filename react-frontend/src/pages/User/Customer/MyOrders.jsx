@@ -1,6 +1,6 @@
 import React from "react";
 import Table from "../../../components/Table";
-import './style.scss';
+import "./style.scss";
 import Loading from "../../../components/Loading";
 import { useSelector } from "react-redux";
 import { useGetOrderByUserIdQuery } from "../../../features/order/orderApiSlice";

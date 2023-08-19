@@ -6,8 +6,15 @@ import DropdownWithSearch from "../../../DropdownWithSearch";
 import { toast } from "react-toastify";
 import Address from "./Address";
 const AddressModal = (props) => {
-  const { addresses, active, setActive } = props;
-  const [listAddress, setListAddress] = useState([]);
+  const {
+    addresses,
+    active,
+    setActive,
+    listAddresses,
+    changeAddress,
+    changeDefaultAddress,
+  } = props;
+  const [listAddress, setListAddress] = useState(listAddresses);
   const [change, setChange] = useState(0);
   const [values, setValues] = useState({
     id: "",
@@ -60,6 +67,21 @@ const AddressModal = (props) => {
     const newArray = listAddress.filter((p) => p.id !== addressId);
     setListAddress(newArray);
   };
+  const handleSaveAddress = () => {
+    // let addressList = [];
+    // for (var i in listAddress) {
+    //   var address =
+    //     listAddress[i].province +
+    //     " , " +
+    //     listAddress[i].district +
+    //     " , " +
+    //     listAddress[i].town +
+    //     " , " +
+    //     listAddress[i].detail;
+    //   addressList.push(address);
+    // }
+    changeAddress(listAddress);
+  };
   return (
     <>
       <div className={active ? "address-modal opened" : "address-modal"}>
@@ -79,6 +101,7 @@ const AddressModal = (props) => {
                   setChange={setChange}
                   setValues={setValues}
                   handleDeleteAddress={handleDeleteAddress}
+                  changeDefaultAddress={changeDefaultAddress}
                   key={index}
                 />
               ))}
@@ -88,7 +111,16 @@ const AddressModal = (props) => {
                 {" "}
                 Back{" "}
               </button>
-              <button className="save-btn"> Save </button>
+              <button
+                className="save-btn"
+                onClick={() => {
+                  handleSaveAddress();
+                  setActive(!active);
+                }}
+              >
+                {" "}
+                Save{" "}
+              </button>
             </div>
           </div>
         ) : (

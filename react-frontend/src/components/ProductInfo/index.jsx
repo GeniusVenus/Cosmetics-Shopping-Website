@@ -8,23 +8,22 @@ import Info from "./Info";
 import { getActiveCartByUserId } from "../../api/apiFunctions";
 import { updateOrCreateCart } from "../../api/apiFunctions";
 import { toast } from "react-toastify";
-import { setCurrentProductIds, 
-  getCurrentProductIds, 
-  setCurrentCartId, 
-  getCurrentCartId, 
-  fetchProductIds, 
-  getCurrentTotalPrice, 
-  fetchTotalPrice, 
-  setCurrentCartEntity} from '../../features/cart/cartSlice';
+import {
+  fetchProductIds,
+  getCurrentTotalPrice,
+  fetchTotalPrice,
+  setCurrentCartEntity,
+} from "../../features/cart/cartSlice";
 import { useEffect, useState } from "react";
-import { formToJSON } from "axios";
+
+import { selectCurrentRoles } from "../../features/auth/authSlice";
+
 const ProductInfo = (props) => {
   const dispatch = useDispatch();
   const { messageIcon } = ProductDetailImage;
   const { productId, image, name, cost, category, ...others } = props.product;
-  const [cartId, setCartId] = useState(null); 
+  const [cartId, setCartId] = useState(null);
   const userId = useSelector(selectCurrentUserId);
-  const productIdsInCart = useSelector(getCurrentProductIds);
   const currentTotalPrice = useSelector(getCurrentTotalPrice);
 
   useEffect(() => {
@@ -35,7 +34,7 @@ const ProductInfo = (props) => {
   useEffect(() => {
     const fetchCartId = async () => {
       const cart = await getActiveCartByUserId(userId);
-        setCartId(cart.cartId);
+      setCartId(cart.cartId);
     };
 
     fetchCartId();
@@ -43,7 +42,7 @@ const ProductInfo = (props) => {
 
   const handleAddToCart = async (id, cost) => {
     const numericCost = parseFloat(cost.replace(/[^0-9.-]+/g, ""));
-  
+
     try {
       if (cartId !== null) {
         const cartData = await getActiveCartByUserId(userId);
@@ -58,13 +57,15 @@ const ProductInfo = (props) => {
           totalPrice: currentTotalPrice + numericCost,
         };
 
-        const updatedCartData = await updateOrCreateCart(createOrUpdateCartPayload);
+        const updatedCartData = await updateOrCreateCart(
+          createOrUpdateCartPayload
+        );
 
         if (updatedCartData) {
           dispatch(setCurrentCartEntity(updatedCartData));
           toast.success("You have added product to cart");
         } else {
-          toast.error("Error when add product to cart")
+          toast.error("Error when add product to cart");
         }
       } else {
         toast.error("Error when add product to cart");
@@ -73,6 +74,7 @@ const ProductInfo = (props) => {
       toast.error("Error when add product to cart");
     }
   };
+  const roles = useSelector(selectCurrentRoles);
   return (
     <>
       <div className="product-info">
@@ -90,12 +92,15 @@ const ProductInfo = (props) => {
               </div>
             </div>
             <div className="other-info">
-              {Object.entries(others).map(([title, value]) => (
-                <Info
-                  title={title.slice(0, 1).toUpperCase() + title.slice(1)}
-                  value={value}
-                />
-              ))}
+              {Object.entries(others).map(([title, value]) => {
+                if (title === "profit" && !roles.includes("ROLE_ADMIN")) return;
+                return (
+                  <Info
+                    title={title.slice(0, 1).toUpperCase() + title.slice(1)}
+                    value={value}
+                  />
+                );
+              })}
             </div>
             <div className="other-interact-btn">
               <div

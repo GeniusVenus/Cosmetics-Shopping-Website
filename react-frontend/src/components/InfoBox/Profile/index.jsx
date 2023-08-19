@@ -1,25 +1,36 @@
 import React from "react";
 import "./style.scss";
-const Profile = () => {
+
+const Profile = (props) => {
+  const { values, onChange } = props;
   const inputs = [
     {
-      name: "first_name",
+      name: "firstname",
       type: "text",
       placeholder: "",
       label: "First Name",
+      value: values.firstname,
     },
     {
-      name: "last_name",
+      name: "lastname",
       type: "text",
       placeholder: "",
       label: "Last Name",
+      value: values.lastname,
     },
-    { name: "email", type: "email", placeholder: "", label: "Email" },
+    {
+      name: "email",
+      type: "email",
+      placeholder: "",
+      label: "Email",
+      value: values.email,
+    },
     {
       name: "username",
       type: "text",
       placeholder: "",
       label: "Username",
+      value: values.username,
     },
   ];
   return (
@@ -28,12 +39,18 @@ const Profile = () => {
         <div className="title"> Profile </div>
         <div className="profile-inputs">
           {inputs.map((input, index) => {
-            const { name, type, placeholder, label } = input;
+            const { name, type, placeholder, label, value } = input;
             return (
               <div className="info-input-container" key={index}>
                 {" "}
                 <label> {label} </label>
-                <input type={type} placeholder={placeholder} name={name} />
+                <input
+                  type={type}
+                  placeholder={placeholder}
+                  name={name}
+                  value={value}
+                  onChange={onChange}
+                />
               </div>
             );
           })}

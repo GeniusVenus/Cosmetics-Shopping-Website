@@ -19,7 +19,7 @@ const Dropdown = (props) => {
     { value: 20, label: "20" },
   ];
   return (
-    <div className="dropdown" ref={menuRef}>
+    <div className="dropdown-with-style" ref={menuRef}>
       <div className="dropdown-btn" onClick={(e) => setActive(!active)}>
         <div className="option">
           {" "}
