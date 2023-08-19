@@ -14,7 +14,7 @@ import ResetPassword from "./pages/LoginForm/ResetPassword";
 import CheckoutLayout from "./pages/Checkout/Layout";
 import Checkout from "./pages/Checkout/Checkout";
 import CheckoutSuccess from "./pages/Checkout/CheckoutSuccess";
-import CartLayout from "./pages/Cart/Layout"
+import CartLayout from "./pages/Cart/Layout";
 import Cart from "./pages/Cart/Cart";
 
 // User pages
@@ -34,6 +34,8 @@ import NotFoundPage from "./pages/NotFoundPage";
 // Utils
 import Wrapper from "./utils/Wrapper";
 import ProtectedRoute from "./utils/ProtectedRoute";
+import UserDetail from "./pages/User/Admin/UserDetail";
+import OrderDetail from "./pages/User/Admin/OrderDetail";
 const App = () => {
   const USER = "ROLE_USER";
   const ADMIN = "ROLE_ADMIN";
@@ -69,13 +71,15 @@ const App = () => {
               <Route path="manage" element={<Manage />} />
               <Route path="orders" element={<Orders />} />
               <Route path="users" element={<Users />} />
+              <Route path="users/:id" element={<UserDetail />} />
+              <Route path="orders/:id" element={<OrderDetail />} />
             </Route>
             <Route path="settings" element={<Settings />} />
           </Route>
         </Route>
         <Route path="/checkout" element={<CheckoutLayout />}>
           <Route index element={<Checkout />} />
-          <Route path="/checkout/success" element={<CheckoutSuccess/>} />
+          <Route path="/checkout/success" element={<CheckoutSuccess />} />
         </Route>
         <Route path="/cart" element={<CartLayout />}>
           <Route index element={<Cart />} />

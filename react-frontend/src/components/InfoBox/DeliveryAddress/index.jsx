@@ -6,15 +6,20 @@ import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import useAxios from "../../../hooks/useAxios";
 import axios from "axios";
 import AddressModal from "./AddressModal";
-const DeliveryAddress = () => {
+const DeliveryAddress = (props) => {
   const [addresses, loading, error] = useAxios({
     axiosInstance: axios,
     url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
     method: "GET",
     responseType: "application/json",
   });
-  const [defaultAddress, setDefaultAddress] = useState("");
+  const { values, changeAddress, changeDefaultAddress } = props;
   const [active, setActive] = useState(false);
+  console.log("Delivery");
+  console.log(values);
+  const { province, district, town, details } =
+    values.customerInfo.address[values.customerInfo.defaultAddress];
+  console.log(province + "-" + district + "-" + town + "-" + details);
   return (
     <>
       <div className="delivery-address-card">
@@ -31,7 +36,9 @@ const DeliveryAddress = () => {
           >
             {" "}
             <p>
-              {defaultAddress ? defaultAddress : "Select your address here"}{" "}
+              {values.defaultAddress !== -1
+                ? province + " , " + district + " , " + town + " , " + details
+                : "Select your address here"}{" "}
             </p>
             <FontAwesomeIcon icon={faChevronDown} />
           </div>
@@ -44,7 +51,9 @@ const DeliveryAddress = () => {
             addresses={addresses}
             active={active}
             setActive={setActive}
-            setDefaultAddress={setDefaultAddress}
+            listAddresses={values.address}
+            changeAddress={changeAddress}
+            changeDefaultAddress={changeDefaultAddress}
           />
         )}
       </div>

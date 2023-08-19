@@ -7,3 +7,20 @@
 .orders-page {
   padding: 20px 32px 40px 32px;
 }
+.user-detail-page {
+  padding: 20px 32px 40px 32px;
+  .user-detail-info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    .info-orders {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+  }
+}
+
+.order-detail-page {
+  padding: 20px 32px 40px 32px;
+}

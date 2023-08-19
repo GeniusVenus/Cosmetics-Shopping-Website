@@ -6,6 +6,9 @@
   align-items: center;
   gap: 12px;
   background: #fff;
+  .rating-point {
+    font-size: 24px;
+  }
   span {
     color: #000;
     font-size: 22px;
@@ -61,4 +64,44 @@
       }
     }
   }
+}
+
+.rate {
+  height: 46px;
+}
+
+.rate:not(:checked) > input[type="radio"] {
+  position: absolute;
+  left: -9999px;
+}
+
+.rate:not(:checked) > label {
+  float: right;
+  width: 1em;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+  font-size: 30px;
+  color: gray;
+}
+
+.rate:not(:checked) > label:before {
+  content: "★ ";
+}
+
+.rate > input[type="radio"]:checked ~ label {
+  color: orange;
+}
+
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+  color: orange;
+}
+
+.rate > input[type="radio"]:checked + label:hover,
+.rate > input[type="radio"]:checked + label:hover ~ label,
+.rate > input[type="radio"]:checked ~ label:hover,
+.rate > input[type="radio"]:checked ~ label:hover ~ label,
+.rate > input[type="radio"]:hover ~ input[type="radio"]:checked ~ label {
+  color: orange;
 }
