@@ -1,25 +1,33 @@
 package com.example.SE.payload.response;
 
+import com.example.SE.models.Role;
+
 import java.util.List;
+import java.util.Set;
 
 public class UserInfoResponse {
-    private Long id;
+    private String id;
     private String username;
+    private String firstname;
+    private String lastname;
     private String email;
-    private List<String> roles;
+    private Set<Role> roles;
+    private Boolean isEnable;
 
-    public UserInfoResponse(Long id, String username, String email, List<String> roles) {
+    public UserInfoResponse(String id, String username, String firstname, String lastname, String email, Set<Role> roles, Boolean isEnable) {
         this.id = id;
         this.username = username;
+        this.firstname = firstname;
         this.email = email;
         this.roles = roles;
+        this.isEnable = isEnable;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -39,7 +47,35 @@ public class UserInfoResponse {
         this.username = username;
     }
 
-    public List<String> getRoles() {
+    public Set<Role> getRoles() {
         return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
+    public Boolean getEnable() {
+        return isEnable;
+    }
+
+    public void setEnable(Boolean enable) {
+        isEnable = enable;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getLastname() {
+        return lastname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 }

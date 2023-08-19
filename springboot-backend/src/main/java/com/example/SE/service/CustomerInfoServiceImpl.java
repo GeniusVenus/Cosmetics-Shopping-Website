@@ -22,12 +22,11 @@ public class CustomerInfoServiceImpl implements CustomerInfoService {
                 .orElseThrow(() -> new RuntimeException("Error: customer not found"));
         return customer;
     }
-    public CustomerInfo createCustomerInfo(String user_id, String firstname, String lastname, List<Address> address, String phoneNumber){
+    public CustomerInfo createCustomerInfo(String user_id, String firstname, String lastname, String phoneNumber){
         CustomerInfo customerInfo = new CustomerInfo();
         customerInfo.setUser(userRepository.findById(user_id).get());
         customerInfo.setFirstname(firstname);
         customerInfo.setLastname(lastname);
-        customerInfo.setAddress(address);
         customerInfo.setPhoneNumber(phoneNumber);
 
         customerInfoRepository.save(customerInfo);

@@ -20,10 +20,8 @@ public class CustomerInfo {
 
     private String firstname;
     private String lastname;
-    private List<Address> address;
     private String phoneNumber;
 
-    private int defaultAddress;
 
     //getters and setters
 
@@ -59,14 +57,6 @@ public class CustomerInfo {
         this.lastname = lastname;
     }
 
-    public List<Address> getAddress() {
-        return address;
-    }
-
-    public void setAddress(List<Address> address) {
-        this.address = address;
-    }
-
     public String getPhoneNumber() {
         return phoneNumber;
     }
@@ -83,11 +73,4 @@ public class CustomerInfo {
         this.user_id = user_id;
     }
 
-    public int getDefaultAddress() {
-        return defaultAddress;
-    }
-
-    public void setDefaultAddress(int defaultAddress) {
-        this.defaultAddress = defaultAddress;
-    }
 }

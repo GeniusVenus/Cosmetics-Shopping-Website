@@ -55,7 +55,7 @@ public class CustomerInfoController {
         customerInfo.setLastname(modifyCustomerInfoRequest.getLastname());
         customerInfo.setPhoneNumber(modifyCustomerInfoRequest.getPhoneNumber());
         System.out.println(!modifyCustomerInfoRequest.getNewpassword().isEmpty());
-        List<Address> listCurAddress = new ArrayList<>();
+        /*List<Address> listCurAddress = new ArrayList<>();
         for(int i = 0; i < modifyCustomerInfoRequest.getAddress().size(); ++i)
         {
             System.out.println(modifyCustomerInfoRequest.getAddress().get(i).getProvince() + " " + modifyCustomerInfoRequest.getAddress().get(i).getDistrict() + " " + modifyCustomerInfoRequest.getAddress().get(i).getTown() + " " + modifyCustomerInfoRequest.getAddress().get(i).getDetails());
@@ -72,7 +72,7 @@ public class CustomerInfoController {
             else{
                 customerInfo.setDefaultAddress(modifyCustomerInfoRequest.getDefaultAddress());
             }
-        }
+        }*/
         if(!modifyCustomerInfoRequest.getNewpassword().isEmpty())
         {
             User user = userRepository.findById(modifyCustomerInfoRequest.getUser_id()).get();

@@ -9,7 +9,7 @@ import java.util.List;
 @Service
 public interface CustomerInfoService {
     public CustomerInfo findByUser(String user_id);
-    public CustomerInfo createCustomerInfo(String user_id, String firstname, String lastname, List<Address> address, String phoneNumber);
+    public CustomerInfo createCustomerInfo(String user_id, String firstname, String lastname, String phoneNumber);
 
     public void deleteById(String id);;
 }

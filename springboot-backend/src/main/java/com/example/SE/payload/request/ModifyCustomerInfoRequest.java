@@ -10,10 +10,7 @@ public class ModifyCustomerInfoRequest {
     private String firstname;
     private String lastname;
     private String newpassword;
-    private List<Address> address;
     private String phoneNumber;
-
-    private int defaultAddress;
 
 
     public String getPhoneNumber() {
@@ -48,13 +45,6 @@ public class ModifyCustomerInfoRequest {
         this.newpassword = newpassword;
     }
 
-    public List<Address> getAddress() {
-        return address;
-    }
-
-    public void setAddress(List<Address> address) {
-        this.address = address;
-    }
 
     public String getUser_id() {
         return user_id;
@@ -72,11 +62,4 @@ public class ModifyCustomerInfoRequest {
         this.info_id = info_id;
     }
 
-    public int getDefaultAddress() {
-        return defaultAddress;
-    }
-
-    public void setDefaultAddress(int defaultAddress) {
-        this.defaultAddress = defaultAddress;
-    }
 }

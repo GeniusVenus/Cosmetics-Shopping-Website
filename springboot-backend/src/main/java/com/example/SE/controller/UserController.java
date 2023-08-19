@@ -48,6 +48,7 @@ public class UserController {
     UserService userService;
     @Autowired
     AuthController authController;
+    @PostAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping()
     public ResponseEntity<?> getAllUsers(){
         return ResponseEntity.ok(userService.findAllUser());
@@ -55,20 +56,20 @@ public class UserController {
 
     @GetMapping("/{user_id}")
     public ResponseEntity<?> getUserById(@PathVariable("user_id") String user_id){
-        return ResponseEntity.ok(userRepository.findById(user_id).get());
+        return ResponseEntity.ok(userService.findUserById(user_id));
     }
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @PostMapping("/editRoles/{id}")
-    public ResponseEntity<?> editRoles(@PathVariable("id") String user_id, @RequestBody RoleEditRequest roleEditRequest){
-        User curUser = userRepository.findById(user_id).get();
+    @PostMapping("/editRoles")
+    public ResponseEntity<?> editRoles(@RequestBody RoleEditRequest roleEditRequest){
+        User curUser = userRepository.findById(roleEditRequest.getId()).get();
         userService.updateRole(curUser, roleEditRequest.getRoles());
-        return ResponseEntity.ok("User " + user_id + " roles updated");
+        return ResponseEntity.ok("User " + roleEditRequest.getId() + " roles updated");
     }
     @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @PostMapping("/banUser/{id}")
-    public ResponseEntity<?> banUser(@PathVariable("id") String user_id){
-        userService.banUser(user_id);
-        User curUser = userRepository.findById(user_id).get();
+    @PostMapping("/banUser")
+    public ResponseEntity<?> banUser(@RequestBody BanRequest banRequest){
+        userService.banUser(banRequest.getId());
+        User curUser = userRepository.findById(banRequest.getId()).get();
         return ResponseEntity.ok("User " + (curUser.getDisable() ? " is unbanned" : " is banned"));
     }
 }
