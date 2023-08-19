@@ -38,6 +38,7 @@ public class UserService {
     public UserInfoResponse findUserById(String user_id){
         User tempUser = userRepository.findById(user_id).get();
         CustomerInfo tempInfo = customerInfoService.findByUser(user_id);
+        System.out.println(tempInfo.getLastname());
         UserInfoResponse tempResponse = new UserInfoResponse(tempUser.getId(), tempUser.getUsername(), tempInfo.getFirstname(), tempInfo.getLastname(), tempUser.getEmail(), tempUser.getRoles(), tempUser.getIsEnable());
         return tempResponse;
     }
