@@ -48,6 +48,8 @@ public class UserController {
     UserService userService;
     @Autowired
     AuthController authController;
+    @Autowired
+    RoleRepository roleRepository;
     @PostAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping()
     public ResponseEntity<?> getAllUsers(){
@@ -64,6 +66,26 @@ public class UserController {
         User curUser = userRepository.findById(roleEditRequest.getId()).get();
         userService.updateRole(curUser, roleEditRequest.getRoles());
         return ResponseEntity.ok("User " + roleEditRequest.getId() + " roles updated");
+    }
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PostMapping("/setAdmin")
+    public ResponseEntity<?> setAdmin(@RequestBody BanRequest banRequest){
+        User curUser = userRepository.findById(banRequest.getId()).get();
+        Set<Role> roles = curUser.getRoles();
+        Set<Role> actualRole = new HashSet<>();
+        Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
+                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+        Role userRole = roleRepository.findByName(ERole.ROLE_USER)
+                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+        Boolean check = Boolean.TRUE;
+        if(roles.contains(adminRole)){
+            actualRole.add(userRole);
+            check = Boolean.FALSE;
+        }
+        else actualRole.add(adminRole);
+        curUser.setRoles(actualRole);
+        userRepository.save(curUser);
+        return ResponseEntity.ok("User " + banRequest.getId() + " is " + (check ? "now an admin" : "no longer an admin"));
     }
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/banUser")
