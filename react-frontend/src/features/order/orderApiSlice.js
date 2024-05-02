@@ -9,9 +9,13 @@ export const orderApiSlice = apiSlice.injectEndpoints({
       query: (orderId) => `cart/orders/${orderId}`,
     }),
     getOrderByUserId: builder.query({
-      query: (userId) => `cart/orders/userId/${userId}`
-    })
+      query: (userId) => `cart/orders/userId/${userId}`,
+    }),
   }),
 });
 
-export const { useGetOrderDetailQuery, useGetOrdersQuery, useGetOrderByUserIdQuery } = orderApiSlice;
+export const {
+  useGetOrderDetailQuery,
+  useGetOrdersQuery,
+  useGetOrderByUserIdQuery,
+} = orderApiSlice;

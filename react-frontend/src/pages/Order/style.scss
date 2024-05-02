@@ -1,0 +1,116 @@
+@use "../../global" as util;
+
+.order-page-layout {
+  padding-top: 80px;
+}
+
+.cart-page {
+  padding-top: 30px;
+  border: 1px solid red;
+  .empty-cart-container {
+    @include util.center();
+    flex-direction: column;
+    font-family: util.$FONT_FAMILY_M;
+    span {
+      color: util.$FONT_COLOR;
+      font-family: util.$FONT_FAMILY_MA;
+      font-size: 28px;
+      font-weight: 700;
+    }
+    p {
+      margin-top: 16px;
+      font-size: 16px;
+      margin-bottom: 24px;
+    }
+    button {
+      padding: 16px 30px;
+      font-family: util.$FONT_FAMILY_M;
+      border-radius: 10px;
+      font-size: 14px;
+      color: white;
+      background-color: util.$FONT_COLOR;
+    }
+  }
+  .cart-page-header {
+    color: util.$FONT_COLOR;
+    font-family: util.$FONT_FAMILY_M;
+    font-size: 32px;
+    font-weight: 700;
+    text-align: center;
+  }
+  .cart-page-body {
+    min-height: 90vh;
+    .list-items-cart {
+      padding: 20px 40px;
+      display: flex;
+      flex-direction: column;
+      li {
+        border-top: 1px solid util.$FONT_COLOR;
+      }
+      .item-in-cart {
+        display: flex;
+        padding: 20px 0;
+        gap: 5%;
+        font-family: util.$FONT_FAMILY_M;
+        .item-image {
+          border-radius: 8px;
+          border: 1px solid #b2bcca;
+          img {
+            border-radius: 8px;
+            height: 140px;
+            width: 140px;
+          }
+        }
+        .item-info {
+          padding-top: 10px;
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+          flex: 1;
+          color: #000;
+          font-size: 18px;
+          font-weight: 500;
+          line-height: 20px;
+          .item-brand,
+          .item-volume {
+            color: #828282;
+            font-size: 16px;
+            font-weight: 400;
+            line-height: 20px;
+          }
+        }
+        .item-total-cost {
+          padding-top: 10px;
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+          align-items: flex-end;
+        }
+      }
+    }
+  }
+  .cart-page-footer {
+  }
+}
+
+.check-out-page {
+  padding-top: 30px;
+  font-family: util.$FONT_FAMILY_M;
+  header {
+    display: flex;
+    border: 1px solid red;
+    border-radius: 0;
+    align-items: center;
+    .back-btn {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    h1 {
+      justify-self: center;
+    }
+  }
+  body {
+    border: 1px solid blue;
+  }
+}

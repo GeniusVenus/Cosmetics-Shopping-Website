@@ -1,0 +1,63 @@
+@use "../../../global" as util;
+.basic-btn-setting {
+  @include util.center();
+  padding: 11px 12px;
+  border-radius: 4px;
+  border: 1px solid #dcdce4;
+  background: #fff;
+  cursor: pointer;
+}
+.table-header {
+  display: flex;
+  .first-section {
+    display: flex;
+    gap: 12px;
+    flex: 1;
+    position: relative;
+    .search-btn {
+      @extend .basic-btn-setting;
+    }
+    .filter-btn {
+      @extend .basic-btn-setting;
+      gap: 8px;
+      font-weight: 600;
+      position: relative;
+      .filter-list {
+        @extend .basic-btn-setting;
+        flex-direction: column;
+        position: absolute;
+        top: 40px;
+        gap: 4px;
+        left: 0px;
+        width: 200%;
+        font-weight: 400;
+        transform: scaleY(0);
+        transform-origin: top;
+        transition: ease-in-out;
+        transition-duration: 0.2s;
+        &.active {
+          transform: scaleY(1);
+        }
+        .filter-option {
+          background: #f6f6f9;
+          padding: 10px;
+          width: 100%;
+          font-size: 12px;
+          &.selected {
+            border: 1px solid util.$FONT_COLOR;
+          }
+        }
+      }
+    }
+  }
+  .second-section {
+    display: flex;
+    gap: 12px;
+    .num-selected-card {
+      @extend .basic-btn-setting;
+    }
+    .setting-btn {
+      @extend .basic-btn-setting;
+    }
+  }
+}

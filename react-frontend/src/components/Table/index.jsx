@@ -1,134 +1,94 @@
-import React, { useState, useRef } from "react";
-import "./style.scss";
-import TableImage from "../../assets/image/TableImage";
-import ReactPaginate from "react-paginate";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faChevronLeft,
-  faChevronRight,
-} from "@fortawesome/free-solid-svg-icons";
-import Dropdown from "./Dropdown";
+import React, { useState, useRef, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
+import {
+  useBanUserMutation,
+  useSetAdminMutation,
+} from "../../features/user/userApiSlice";
+import TableHeader from "./TableHeader";
+import TableFooter from "./TableFooter";
+import TableBody from "./TableBody";
+import "./style.scss";
 const Table = (props) => {
-  const { searchIcon, filterIcon, settingIcon, editIcon, banIcon, deleteIcon } =
-    TableImage;
+  const { type, head, infos, listFilter } = props;
   const [pageNumber, setPageNumber] = useState(0);
   const [infoPerPage, setInfoPerPage] = useState(10);
-  const pageVisited = pageNumber * infoPerPage;
+  const [filterOption, setFilterOption] = useState(listFilter[0]);
+  const [searchValue, setSearchValue] = useState("");
+  const pageVisited = useMemo(
+    () => pageNumber * infoPerPage,
+    [pageNumber, infoPerPage]
+  );
+  const tableRef = useRef();
+  const navigate = useNavigate();
+  const [ban] = useBanUserMutation();
+  const [setAdmin] = useSetAdminMutation();
   const changePage = ({ selected }) => {
     setPageNumber(selected);
     tableRef.current.scrollIntoView();
   };
-  const tableRef = useRef();
-  const navigate = useNavigate();
-  const { type, head, infos } = props;
-  const [data, setData] = useState(infos);
   const handleView = (id) => {
-    if (type === "users") {
-      navigate(`/users/${id}`);
-    } else if (type === "orders") {
-      navigate(`/orders/${id}`);
+    navigate(`/${type}/${id}`);
+  };
+  const handleFilter = (p) => {
+    if (filterOption === "ID") return p.id.includes(searchValue);
+    else if (filterOption === "Name") return p.username.includes(searchValue);
+    else if (filterOption === "Email") return p.email.includes(searchValue);
+    else if (filterOption === "OrderID") return p.cartId.includes(searchValue);
+    else if (filterOption === "UserID") return p.userId.includes(searchValue);
+    else if (filterOption === "Order date") return p.date.includes(searchValue);
+    else if (filterOption === "Payment method")
+      return p.paymentMethod.includes(searchValue);
+    else if (filterOption === "Status")
+      return p.orderStatus.includes(searchValue);
+    return false;
+  };
+  const handleBan = async (id) => {
+    try {
+      await ban({ id });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const handleEditRole = async (id) => {
+    try {
+      await setAdmin({ id });
+    } catch (err) {
+      console.log(err);
     }
   };
   return (
     <>
       <div className="table-section" ref={tableRef}>
-        <div className="table-number-data">{data.length} entries found</div>
-        <div className="table-header">
-          <div className="first-section">
-            <div className="search-btn">{searchIcon}</div>
-            <div className="filter-btn">
-              {filterIcon} <p> Filter</p>
-            </div>
-          </div>
-          <div className="second-section">
-            <div className="setting-btn"> {settingIcon}</div>
-          </div>
-        </div>
-        <table className="content-table">
-          <thead>
-            <tr>
-              {head.map((title, index) => (
-                <th key={index}> {title}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {data
-              .slice(pageVisited, pageVisited + infoPerPage)
-              .map((info, index) => {
-                if (type === "users") {
-                  const { id, username, email } = info;
-                  return (
-                    <tr key={index}>
-                      <td>{id}</td>
-                      <td>{username}</td>
-                      <td>{email}</td>
-                      <td>
-                        {" "}
-                        <div className="item-management">
-                          <div
-                            className="edit-btn"
-                            onClick={() => handleView(id)}
-                          >
-                            {editIcon}
-                          </div>
-                          <div className="ban-btn">{banIcon}</div>
-                        </div>
-                      </td>
-                    </tr>
-                  );
-                } else if (type === "orders") {
-                  const {
-                    cartId,
-                    date,
-                    orderStatus,
-                    paymentMethod,
-                    totalPrice,
-                    userId,
-                  } = info;
-                  return (
-                    <tr key={index}>
-                      <td>{cartId}</td>
-                      <td>{userId}</td>
-                      <td>{date}</td>
-                      <td>{paymentMethod}</td>
-                      <td>{totalPrice}</td>
-                      <td>{orderStatus}</td>
-                      <td>
-                        {" "}
-                        <div className="item-management">
-                          <div
-                            className="edit-btn"
-                            onClick={() => handleView(cartId)}
-                          >
-                            {editIcon}
-                          </div>
-                          <div className="delete-btn">{deleteIcon}</div>
-                        </div>
-                      </td>
-                    </tr>
-                  );
-                }
-              })}
-          </tbody>
-        </table>
-        <div className="table-footer">
-          <div className="table-num-row">
-            <Dropdown setInfoPerPage={setInfoPerPage} />
-            <div className="description">Entries per page</div>
-          </div>
-          <ReactPaginate
-            previousLabel={<FontAwesomeIcon icon={faChevronLeft} />}
-            nextLabel={<FontAwesomeIcon icon={faChevronRight} />}
-            pageCount={Math.ceil(data.length / infoPerPage)}
-            onPageChange={changePage}
-            containerClassName="pagination-section"
-            previousLinkClassName="previous-btn"
-            nextLinkClassName="next-btn"
-            activeClassName="pagination-active"
-          />
-        </div>
+        <div className="table-number-data">{infos.length} entries found</div>
+        {/* Table Header */}
+        <TableHeader
+          listFilter={listFilter}
+          type={type}
+          filterOption={filterOption}
+          setFilterOption={setFilterOption}
+          setSearchValue={setSearchValue}
+        />
+        {/* Table Body */}
+        <TableBody
+          head={head}
+          infos={infos}
+          type={type}
+          pageVisited={pageVisited}
+          infoPerPage={infoPerPage}
+          handleEditRole={handleEditRole}
+          handleFilter={handleFilter}
+          handleBan={handleBan}
+          handleView={handleView}
+        />
+        {/* Table Footer */}
+        <TableFooter
+          setInfoPerPage={setInfoPerPage}
+          infos={infos}
+          searchValue={searchValue}
+          infoPerPage={infoPerPage}
+          handleFilter={handleFilter}
+          changePage={changePage}
+        />
       </div>
     </>
   );

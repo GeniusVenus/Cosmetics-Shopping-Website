@@ -2,6 +2,11 @@ import React, { useEffect, useRef, useState } from "react";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./style.scss";
+const options = [
+  { value: "popular", label: "Sort by : Popular" },
+  { value: "price", label: "Sort by : Price" },
+  { value: null, label: "None" },
+];
 const Dropdown = (props) => {
   const [active, setActive] = useState(false);
   const [selected, setSelected] = useState(null);
@@ -13,11 +18,6 @@ const Dropdown = (props) => {
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
   }, []);
-  const options = [
-    { value: "popular", label: "Sort by : Popular" },
-    { value: "price", label: "Sort by : Price" },
-    { value: null, label: "None" },
-  ];
   return (
     <div className="dropdown" ref={menuRef}>
       <div className="dropdown-btn" onClick={(e) => setActive(!active)}>

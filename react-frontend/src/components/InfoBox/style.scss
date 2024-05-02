@@ -1,4 +1,12 @@
 @use "../../global" as util;
+
+@mixin basic-modal-container {
+  height: 80%;
+  background: white;
+  width: 70%;
+  border-radius: 8px;
+}
+
 @mixin info_box {
   border-radius: 8px;
   border: 1px solid #eaeaef;

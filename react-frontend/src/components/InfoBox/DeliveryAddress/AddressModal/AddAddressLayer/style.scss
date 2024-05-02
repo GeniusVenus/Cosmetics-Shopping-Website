@@ -1,0 +1,66 @@
+@use "../../../../../global" as util;
+@use "../../../style" as box;
+
+@mixin title {
+  font-size: 18px;
+  font-family: util.$FONT_FAMILY_M;
+  font-weight: 500;
+}
+.dark-btn {
+  background: util.$FONT_COLOR;
+  font-family: util.$FONT_FAMILY_M;
+  color: white;
+  padding: 10px 20px 10px 20px;
+  border-radius: 4px;
+}
+.light-btn {
+  background: white;
+  font-family: util.$FONT_FAMILY_M;
+  padding: 10px 20px 10px 20px;
+  color: util.$FONT_COLOR;
+  border-radius: 4px;
+}
+
+.address-container {
+  @include box.basic-modal-container();
+  .address-header {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px 10px 20px;
+    border-bottom: 1px solid #e3e3e3;
+    p {
+      flex: 1;
+      @include title;
+    }
+    .add-address-btn {
+      background: util.$FONT_COLOR;
+      font-family: util.$FONT_FAMILY_M;
+      color: white;
+      padding: 10px 20px 10px 20px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-family: util.$FONT_FAMILY_M;
+      transition: all 0.25s ease-in-out;
+      &:hover {
+        background: #fff;
+        color: util.$FONT_COLOR;
+      }
+    }
+  }
+  .list-addresses {
+    height: 480px;
+  }
+  .address-footer {
+    border-top: 1px solid #e3e3e3;
+    padding: 10px 20px 10px 20px;
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    .back-btn {
+      @extend .light-btn;
+    }
+    .save-btn {
+      @extend .dark-btn;
+    }
+  }
+}

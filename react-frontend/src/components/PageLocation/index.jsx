@@ -4,7 +4,7 @@ import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import "./style.scss";
 const PageLocation = (props) => {
-  const page = props.page;
+  const { page } = props;
   return (
     <div className="page-location">
       {page.map((value, index) => {

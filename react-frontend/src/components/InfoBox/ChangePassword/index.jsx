@@ -1,19 +1,22 @@
 import React from "react";
 import "./style.scss";
 import PasswordInput from "./PasswordInput";
-const ChangePassword = () => {
+const ChangePassword = (props) => {
+  const { values, onChange } = props;
   const inputs = [
     {
-      name: "password",
+      name: "newpassword",
       type: "password",
       placeholder: "",
       label: "Re-type Your Password",
+      pattern: "",
     },
     {
       name: "confirmPassword",
       type: "password",
       placeholder: "",
       label: "Password Confirmation",
+      pattern: values.newpassword,
     },
   ];
   return (
@@ -22,7 +25,7 @@ const ChangePassword = () => {
         <div className="title"> Change password</div>
         <div className="change-password-inputs">
           {inputs.map((input, index) => {
-            return <PasswordInput {...input} key={index} />;
+            return <PasswordInput {...input} key={index} onChange={onChange} />;
           })}
         </div>
       </div>

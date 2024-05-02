@@ -2,21 +2,21 @@ import React from "react";
 import "./style.scss";
 import NavBarImage from "../../assets/image/NavBarImage";
 import FooterImage from "../../assets/image/FooterImage";
+const { logo } = NavBarImage;
+const { instagramIcon, facebookIcon, youtubeIcon } = FooterImage;
+const links = [
+  "Explore",
+  "Privacy Policy",
+  "Product",
+  "Legal",
+  "Sell your Product",
+  "Terms of Service",
+  "Pricing",
+  "Help Center",
+  "Reviews",
+  "Social Media",
+];
 const Footer = () => {
-  const { logo } = NavBarImage;
-  const { instagramIcon, facebookIcon, youtubeIcon } = FooterImage;
-  const links = [
-    "Explore",
-    "Privacy Policy",
-    "Product",
-    "Legal",
-    "Sell your Product",
-    "Terms of Service",
-    "Pricing",
-    "Help Center",
-    "Reviews",
-    "Social Media",
-  ];
   return (
     <div className="footer">
       <div className="footer-layout">

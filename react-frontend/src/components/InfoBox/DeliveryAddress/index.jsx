@@ -1,25 +1,19 @@
 import React, { useState } from "react";
 import "./style.scss";
-// import DropdownWithSearch from "../../DropdownWithSearch";
+import axios from "axios";
+import useAxios from "../../../hooks/useAxios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
-import useAxios from "../../../hooks/useAxios";
-import axios from "axios";
 import AddressModal from "./AddressModal";
 const DeliveryAddress = (props) => {
-  const [addresses, loading, error] = useAxios({
+  const { defaultAddress, addresses, changeAddressInfo } = props;
+  const [activeModal, setActiveModal] = useState(false);
+  const [VNaddresses, loading, error] = useAxios({
     axiosInstance: axios,
     url: "https://raw.githubusercontent.com/kenzouno1/DiaGioiHanhChinhVN/master/data.json",
     method: "GET",
     responseType: "application/json",
   });
-  const { values, changeAddress, changeDefaultAddress } = props;
-  const [active, setActive] = useState(false);
-  console.log("Delivery");
-  console.log(values);
-  const { province, district, town, details } =
-    values.customerInfo.address[values.customerInfo.defaultAddress];
-  console.log(province + "-" + district + "-" + town + "-" + details);
   return (
     <>
       <div className="delivery-address-card">
@@ -32,13 +26,14 @@ const DeliveryAddress = (props) => {
           <label>Default Address</label>
           <div
             className="default-address-btn"
-            onClick={() => setActive(!active)}
+            onClick={() => setActiveModal(!activeModal)}
           >
             {" "}
             <p>
-              {values.defaultAddress !== -1
+              {/* {defaultAddress !== -1
                 ? province + " , " + district + " , " + town + " , " + details
-                : "Select your address here"}{" "}
+                : "Select your address here"}{" "} */}
+              Select your address here
             </p>
             <FontAwesomeIcon icon={faChevronDown} />
           </div>
@@ -46,14 +41,14 @@ const DeliveryAddress = (props) => {
             Click the dropdown to choose from the list of your saved addresses.
           </span>
         </div>
-        {!loading && !error && (
+        {activeModal && (
           <AddressModal
+            VNaddresses={loading || error ? [] : VNaddresses}
+            activeModal={activeModal}
+            setActiveModal={setActiveModal}
             addresses={addresses}
-            active={active}
-            setActive={setActive}
-            listAddresses={values.address}
-            changeAddress={changeAddress}
-            changeDefaultAddress={changeDefaultAddress}
+            defaultAddress={defaultAddress}
+            changeAddressInfo={changeAddressInfo}
           />
         )}
       </div>

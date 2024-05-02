@@ -1,25 +1,6 @@
 @use "../../../../global" as util;
 @use "../../style" as box;
 
-.dark-btn {
-  background: util.$FONT_COLOR;
-  font-family: util.$FONT_FAMILY_M;
-  color: white;
-  padding: 10px 20px 10px 20px;
-  border-radius: 4px;
-}
-.light-btn {
-  background: white;
-  font-family: util.$FONT_FAMILY_M;
-  padding: 10px 20px 10px 20px;
-  color: util.$FONT_COLOR;
-  border-radius: 4px;
-}
-@mixin title {
-  font-size: 18px;
-  font-family: util.$FONT_FAMILY_M;
-  font-weight: 500;
-}
 .basic-modal-container {
   height: 600px;
   background: white;
@@ -39,98 +20,5 @@
     left: 0;
     align-items: center;
     justify-content: center;
-    .address-container {
-      @extend .basic-modal-container;
-      .address-header {
-        display: flex;
-        align-items: center;
-        padding: 10px 20px 10px 20px;
-        border-bottom: 1px solid #e3e3e3;
-        p {
-          flex: 1;
-          @include title;
-        }
-        .add-address-btn {
-          background: util.$FONT_COLOR;
-          font-family: util.$FONT_FAMILY_M;
-          color: white;
-          padding: 10px 20px 10px 20px;
-          border-radius: 4px;
-        }
-      }
-      .list-addresses {
-        height: 480px;
-      }
-      .address-footer {
-        border-top: 1px solid #e3e3e3;
-        padding: 10px 20px 10px 20px;
-        display: flex;
-        gap: 12px;
-        justify-content: flex-end;
-        .back-btn {
-          @extend .light-btn;
-        }
-        .save-btn {
-          @extend .dark-btn;
-        }
-      }
-    }
-    .add-address-container {
-      @extend .basic-modal-container;
-      .add-address-header {
-        display: flex;
-        align-items: center;
-        padding: 18.5px 20px 18.5px 20px;
-        border-bottom: 1px solid #e3e3e3;
-        p {
-          flex: 1;
-          @include title;
-          text-align: center;
-        }
-        svg {
-          cursor: pointer;
-          width: 16px;
-          height: 16px;
-        }
-      }
-      .add-address-content {
-        height: 480px;
-        overflow: auto;
-        overflow-x: hidden;
-        .generated-address {
-          padding: 20px 20px 10px 24px;
-          font-size: 14px;
-          font-family: util.$FONT_FAMILY_M;
-          font-weight: 500;
-          height: auto;
-        }
-        .select-section {
-          display: flex;
-          padding: 14px 20px 14px 20px;
-          justify-content: space-between;
-        }
-        .detail-address {
-          padding: 14px 20px 14px 20px;
-          input {
-            width: 100%;
-            @include box.input_view();
-            @include box.input_font();
-            outline: none;
-            &:focus {
-              border: 1px solid #5d8d00;
-            }
-          }
-        }
-      }
-      .add-address-footer {
-        display: flex;
-        justify-content: flex-end;
-        border-top: 1px solid #e3e3e3;
-        padding: 10px 20px 10px 20px;
-        .finish-btn {
-          @extend .dark-btn;
-        }
-      }
-    }
   }
 }

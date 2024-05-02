@@ -10,17 +10,77 @@ import {
 } from "../../features/auth/authSlice";
 import { useLocation, useNavigate } from "react-router-dom";
 import { selectCurrentRoles } from "../../features/auth/authSlice";
+const {
+  logo,
+  userIcon,
+  favoriteIcon,
+  couponIcon,
+  orderIcon,
+  settingIcon,
+  logOutIcon,
+  manageIcon,
+} = DashboardImage;
+const items = [
+  [
+    {
+      title: "My Profile",
+      icon: userIcon,
+      link: "/my-profile",
+      page: "Profile",
+    },
+  ],
+  [
+    {
+      title: "My Favorites",
+      icon: favoriteIcon,
+      link: "/my-favorites",
+      page: "Favorites",
+    },
+    {
+      title: "Saved Coupons",
+      icon: couponIcon,
+      link: "/my-coupons",
+      page: "Coupons",
+    },
+    {
+      title: "My Orders",
+      icon: orderIcon,
+      link: "/my-orders",
+      page: "Orders",
+    },
+  ],
+  [
+    {
+      title: "Create & Manage",
+      icon: manageIcon,
+      link: "/manage",
+      page: "Manage",
+    },
+    {
+      title: "Orders",
+      icon: orderIcon,
+      link: "/orders",
+      page: "Orders",
+    },
+    {
+      title: "Users",
+      icon: userIcon,
+      link: "/users",
+      page: "Users",
+    },
+  ],
+  [
+    {
+      title: "Advanced Settings",
+      icon: settingIcon,
+      link: "/settings",
+      page: "Settings",
+    },
+    { title: "Log Out", icon: logOutIcon },
+  ],
+];
+const advanced = ["My Profile"];
 const Dashboard = (props) => {
-  const {
-    logo,
-    userIcon,
-    favoriteIcon,
-    couponIcon,
-    orderIcon,
-    settingIcon,
-    logOutIcon,
-    manageIcon,
-  } = DashboardImage;
   const username = useSelector(selectCurrentUser);
   const roles = useSelector(selectCurrentRoles);
   const id = useSelector(selectCurrentUserId);
@@ -29,66 +89,6 @@ const Dashboard = (props) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [logout] = useSignoutMutation();
-  const items = [
-    [
-      {
-        title: "My Profile",
-        icon: userIcon,
-        link: "/my-profile",
-        page: "Profile",
-      },
-    ],
-    [
-      {
-        title: "My Favorites",
-        icon: favoriteIcon,
-        link: "/my-favorites",
-        page: "Favorites",
-      },
-      {
-        title: "Saved Coupons",
-        icon: couponIcon,
-        link: "/my-coupons",
-        page: "Coupons",
-      },
-      {
-        title: "My Orders",
-        icon: orderIcon,
-        link: "/my-orders",
-        page: "Orders",
-      },
-    ],
-    [
-      {
-        title: "Create & Manage",
-        icon: manageIcon,
-        link: "/manage",
-        page: "Manage",
-      },
-      {
-        title: "Orders",
-        icon: orderIcon,
-        link: "/orders",
-        page: "Orders",
-      },
-      {
-        title: "Users",
-        icon: userIcon,
-        link: "/users",
-        page: "Users",
-      },
-    ],
-    [
-      {
-        title: "Advanced Settings",
-        icon: settingIcon,
-        link: "/settings",
-        page: "Settings",
-      },
-      { title: "Log Out", icon: logOutIcon },
-    ],
-  ];
-  const advanced = ["My Profile"];
   const handleLogOut = async () => {
     try {
       await logout(id);
@@ -116,12 +116,16 @@ const Dashboard = (props) => {
             }
             return (
               <>
-                <ul id="section" className={"section_" + index} key={index}>
+                <ul
+                  id="section"
+                  className={"section_" + index}
+                  key={`dashboard_${index}`}
+                >
                   {section.map((item, index) => {
                     return (
                       <>
                         <li
-                          key={index}
+                          key={`selection_${index}`}
                           className={
                             item.title !== "Log Out" &&
                             location.pathname === item.link

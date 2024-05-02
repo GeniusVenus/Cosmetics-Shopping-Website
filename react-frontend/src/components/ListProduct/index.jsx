@@ -13,28 +13,24 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import Loading from "../Loading";
 import { useGetProductsQuery } from "../../features/product/productApiSlice";
+import ErrorDisplay from "../ErrorDisplay";
+
+const getMoney = (money) => {
+  return parseFloat(money.substring(1));
+};
 const ListProduct = (props) => {
   const listRef = useRef(null);
-  const { data, error, isLoading, isError } = useGetProductsQuery();
+  const { productPerPage, title } = props;
+  const { data, error, isLoading, isError, refetch } = useGetProductsQuery();
   const [tempList, setTempList] = useState([]);
   const [products, setProducts] = useState([]);
   const [prevProducts, setPrevProducts] = useState([]);
   const [pageNumber, setPageNumber] = useState(0);
-  const productPerPage = props.productPerPage;
   const pageVisited = pageNumber * productPerPage;
   const changePage = ({ selected }) => {
     setPageNumber(selected);
     listRef.current.scrollIntoView();
   };
-  const getMoney = (money) => {
-    return parseFloat(money.substring(1));
-  };
-  useEffect(() => {
-    if (!isLoading && !isError) {
-      setTempList(data);
-      setProducts(data);
-    }
-  }, [isLoading, isError, data]);
   const handleFilter = (value) => {
     const { brand, price, category } = value;
     const { min, max } = price;
@@ -75,17 +71,25 @@ const ListProduct = (props) => {
       setTempList(newDataArray);
     }
   };
+  useEffect(() => {
+    if (!isLoading && !isError) {
+      setTempList(data);
+      setProducts(data);
+    }
+  }, [isLoading, isError, data]);
   return (
     <>
       <div className="list-product">
         <div className="list-product" ref={listRef}>
-          <div className="list-title"> {props.title}</div>
+          <div className="list-title"> {title}</div>
           <div className="list-content">
             <Filter handleFilter={handleFilter} />
-            {error || isLoading ? (
+            {isLoading ? (
               <div className="loading-section">
                 <Loading />
               </div>
+            ) : error ? (
+              <ErrorDisplay refetch={refetch} />
             ) : (
               <div className="list-product-info">
                 <div className="list-product-header">

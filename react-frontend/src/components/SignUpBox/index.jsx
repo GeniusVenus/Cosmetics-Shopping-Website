@@ -1,8 +1,8 @@
 import React from "react";
 import AdvertisementImage from "../../assets/image/AdvertisementImage";
 import "./style.scss";
+const { arrow } = AdvertisementImage;
 const SignUpBox = () => {
-  const { arrow } = AdvertisementImage;
   return (
     <div className="sign-up-box">
       <div className="sign-up-layout">

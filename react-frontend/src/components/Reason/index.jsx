@@ -1,35 +1,36 @@
 import React from "react";
 import "./style.scss";
 import AdvertisementImage from "../../assets/image/AdvertisementImage";
+
+const { shoppingCart, tapeMeasure, shopDesign, deliveryCar } =
+  AdvertisementImage;
+const contents = [
+  {
+    icon: shoppingCart,
+    label: "Shop for latest products",
+    value:
+      "Lorem ipsum dolor sit amet consectetur. Quam libero viverra faucibus condimentum.",
+  },
+  {
+    icon: tapeMeasure,
+    label: "Chat with customer support",
+    value:
+      "Lorem ipsum dolor sit amet consectetur. Quam libero viverra faucibus condimentum.",
+  },
+  {
+    icon: shopDesign,
+    label: "Request for new featured brand",
+    value:
+      "Lorem ipsum dolor sit amet consectetur. Quam libero viverra faucibus condimentum.",
+  },
+  {
+    icon: deliveryCar,
+    label: "Get your orders delivered to you",
+    value:
+      "Lorem ipsum dolor sit amet consectetur. Quam libero viverra faucibus condimentum.",
+  },
+];
 const Reason = () => {
-  const { shoppingCart, tapeMeasure, shopDesign, deliveryCar } =
-    AdvertisementImage;
-  const contents = [
-    {
-      icon: shoppingCart,
-      label: "Shop for latest products",
-      value:
-        "Lorem ipsum dolor sit amet consectetur. Quam libero viverra faucibus condimentum.",
-    },
-    {
-      icon: tapeMeasure,
-      label: "Chat with customer support",
-      value:
-        "Lorem ipsum dolor sit amet consectetur. Quam libero viverra faucibus condimentum.",
-    },
-    {
-      icon: shopDesign,
-      label: "Request for new featured brand",
-      value:
-        "Lorem ipsum dolor sit amet consectetur. Quam libero viverra faucibus condimentum.",
-    },
-    {
-      icon: deliveryCar,
-      label: "Get your orders delivered to you",
-      value:
-        "Lorem ipsum dolor sit amet consectetur. Quam libero viverra faucibus condimentum.",
-    },
-  ];
   return (
     <>
       <div className="reason">

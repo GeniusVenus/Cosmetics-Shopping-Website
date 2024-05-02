@@ -3,22 +3,23 @@ import "./style.scss";
 import HeaderImage from "../../assets/image/HeaderImage";
 import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+const {
+  firstPicture,
+  secondPicture,
+  thirdPicture,
+  fourthPicture,
+  fifthPicture,
+  vectorOne,
+  vectorTwo,
+  fillOne,
+} = HeaderImage;
+const commits = [
+  "Easy payment",
+  "24/7 Customer Support",
+  "Return & Refund Policy",
+];
+
 const Header = () => {
-  const {
-    firstPicture,
-    secondPicture,
-    thirdPicture,
-    fourthPicture,
-    fifthPicture,
-    vectorOne,
-    vectorTwo,
-    fillOne,
-  } = HeaderImage;
-  const commits = [
-    "Easy payment",
-    "24/7 Customer Support",
-    "Return & Refund Policy",
-  ];
   return (
     <>
       <div className="header">

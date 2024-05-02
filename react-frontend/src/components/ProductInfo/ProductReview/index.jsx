@@ -9,10 +9,12 @@ import {
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectCurrentUserId } from "../../../features/auth/authSlice";
+
+const { sendIcon } = ProductDetailImage;
+
 const ProductReview = () => {
-  const { sendIcon } = ProductDetailImage;
   const [point, setPoint] = useState(0);
-  console.log(point);
+  // console.log(point);
   const productId = useParams().id;
   const userId = useSelector(selectCurrentUserId);
   const [editReview] = useEditReviewMutation();

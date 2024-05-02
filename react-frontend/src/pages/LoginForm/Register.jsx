@@ -5,7 +5,6 @@ import FormCard from "../../components/FormCard";
 import { useSignupMutation } from "../../features/auth/authApiSlice";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 const Register = () => {
   const [values, setValues] = useState({
     username: "",
@@ -15,7 +14,6 @@ const Register = () => {
   });
   const [signup] = useSignupMutation();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const inputs = [
     {
       id: 1,
@@ -25,7 +23,7 @@ const Register = () => {
       errorMessage:
         "Username should be 3-16 characters and shouldn't include any special character!",
       label: "Enter your username",
-      pattern: "^[A-Za-z0-9]{3,16}$",
+      pattern: `^[A-Za-z0-9]{3,16}$`,
       required: true,
     },
     {
@@ -35,6 +33,8 @@ const Register = () => {
       placeholder: "Enter email",
       errorMessage: "Invalid email",
       label: "Enter your email address",
+      pattern:
+        "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:.[a-zA-Z0-9-]+)*$",
       required: true,
     },
     {
@@ -59,11 +59,23 @@ const Register = () => {
       required: true,
     },
   ];
-
+  const validation = (input) => {
+    if (input.required && values[input.name] === "") return false;
+    if (input.pattern) {
+      const pattern = new RegExp(input.pattern);
+      if (!pattern.test(values[input.name])) return false;
+    }
+    return true;
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    for (var i in inputs)
+      if (!validation(inputs[i])) {
+        toast.error("Fill in the form correctly");
+        return;
+      }
     try {
-      const userData = await signup({
+      await signup({
         username: values.username,
         email: values.email,
         password: values.password,
@@ -77,7 +89,8 @@ const Register = () => {
       toast.success("Sign up successfully");
       setTimeout(() => navigate("/login"), 2000);
     } catch (err) {
-      toast.error(err.data.message);
+      if (!err?.data?.status) toast.error("No Server Response");
+      else toast.error(err?.data?.message);
     }
   };
 

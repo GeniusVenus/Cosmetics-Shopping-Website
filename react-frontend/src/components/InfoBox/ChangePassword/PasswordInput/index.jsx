@@ -17,6 +17,8 @@ const PasswordInput = (props) => {
             type={values.type}
             name={values.name}
             placeholder={values.placeholder}
+            pattern={values.pattern}
+            onChange={props.onChange}
           />
           <div className="toggle" onClick={togglePassword}>
             {values.type === "text" ? (

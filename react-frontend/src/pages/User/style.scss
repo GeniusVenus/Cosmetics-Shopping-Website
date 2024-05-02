@@ -43,6 +43,9 @@
       svg {
         color: white;
       }
+      &:disabled {
+        background: gray;
+      }
     }
   }
 }

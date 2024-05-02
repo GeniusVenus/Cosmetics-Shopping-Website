@@ -1,13 +1,27 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, useMemo } from "react";
 import NavBarImage from "../../../assets/image/NavBarImage";
 import { useGetProductsQuery } from "../../../features/product/productApiSlice";
 import "./style.scss";
 import Result from "./Result";
+const Normalization = (value) => {
+  return value.toLowerCase().trim();
+};
+const { searchIcon } = NavBarImage;
 const Search = (props) => {
-  let { searchIcon } = NavBarImage;
   const { active, setActive } = props;
   const { data, isLoading, isError } = useGetProductsQuery();
-  const [searchList, setSearchList] = useState([]);
+  const [query, setQuery] = useState("");
+  const searchList = useMemo(() => {
+    if (!isLoading) {
+      if (data)
+        return data.filter((item) =>
+          Normalization(item.name).includes(Normalization(query))
+        );
+      return [];
+    }
+    return [];
+  }, [data, query, isLoading]);
+
   const searchRef = useRef();
   useEffect(() => {
     let handler = (e) => {
@@ -17,23 +31,6 @@ const Search = (props) => {
     document.addEventListener("mousedown", handler);
     return () => document.removeEventListener("mousedown", handler);
   }, [setActive]);
-  const Normalization = (value) => {
-    return value.toLowerCase().trim();
-  };
-  const handleSearch = (e) => {
-    const value = e.target.value;
-    if (!isLoading && !isError) {
-      setSearchList(
-        data.filter((p) => {
-          return (
-            value &&
-            p.name &&
-            Normalization(p.name).includes(Normalization(value))
-          );
-        })
-      );
-    }
-  };
   return (
     <>
       <div
@@ -48,7 +45,7 @@ const Search = (props) => {
           <input
             type="search"
             placeholder="Search here"
-            onChange={handleSearch}
+            onChange={(e) => setQuery(e.target.value)}
           />
           <div className="search-results">
             <div className="num-results">

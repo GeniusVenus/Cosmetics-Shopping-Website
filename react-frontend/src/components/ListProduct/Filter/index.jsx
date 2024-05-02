@@ -1,37 +1,40 @@
 import React, { useState } from "react";
 import "./style.scss";
+
+const filterList = [
+  { title: "Gender", filterOption: ["Male", "Female"] },
+  {
+    title: "Category",
+    filterOption: [
+      "Skin care",
+      "Grooming",
+      "Perfume & Body Mist",
+      "Hair care",
+      "Body",
+    ],
+  },
+  { title: "Price", filterOption: [] },
+  {
+    title: "Brand",
+    filterOption: [
+      "The Ordinary",
+      "La Roche-Posay",
+      "Laneige",
+      "Curology",
+      "Channel",
+      "Innisfree",
+      "Yves Saint Laurent",
+      "Lancôme",
+      "L’ Oréal",
+      "Some By Mi",
+      "Bioderma",
+      "Vichy",
+    ],
+  },
+];
+
 const Filter = (props) => {
-  const filterList = [
-    { title: "Gender", filterOption: ["Male", "Female"] },
-    {
-      title: "Category",
-      filterOption: [
-        "Skin care",
-        "Grooming",
-        "Perfume & Body Mist",
-        "Hair care",
-        "Body",
-      ],
-    },
-    { title: "Price", filterOption: [] },
-    {
-      title: "Brand",
-      filterOption: [
-        "The Ordinary",
-        "La Roche-Posay",
-        "Laneige",
-        "Curology",
-        "Channel",
-        "Innisfree",
-        "Yves Saint Laurent",
-        "Lancôme",
-        "L’ Oréal",
-        "Some By Mi",
-        "Bioderma",
-        "Vichy",
-      ],
-    },
-  ];
+  const { handleFilter } = props;
   const [filter] = useState({
     gender: [],
     category: [],
@@ -43,12 +46,12 @@ const Filter = (props) => {
   });
   const handleMinValueChange = (e) => {
     filter.price[e.target.name] = e.target.value !== null ? e.target.value : 0;
-    props.handleFilter(filter);
+    handleFilter(filter);
   };
   const handleMaxValueChange = (e) => {
     filter.price[e.target.name] =
       e.target.value !== null ? e.target.value : 999999999999999999;
-    props.handleFilter(filter);
+    handleFilter(filter);
   };
   const handleFilterChange = (e) => {
     const checked = e.target.checked;
@@ -59,7 +62,7 @@ const Filter = (props) => {
       filter[checkedName] = filter[checkedName].filter(
         (item) => item !== checkedValue
       );
-    props.handleFilter(filter);
+    handleFilter(filter);
   };
   return (
     <>

@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { toast } from "react-toastify";
-import { useDispatch, useSelector } from "react-redux";
-import { setCredentials, selectCurrentUserId } from "../../features/auth/authSlice";
+import { useDispatch } from "react-redux";
+import { setCredentials } from "../../features/auth/authSlice";
 import { useSigninMutation } from "../../features/auth/authApiSlice";
-import { getActiveCartByUserId, updateOrCreateCart } from "../../api/apiFunctions";
 import LoginGreeting from "../../components/LoginGreeting";
 import FormCard from "../../components/FormCard";
 
@@ -16,8 +15,7 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [login] = useSigninMutation();
-  const userId = useSelector(selectCurrentUserId);
-  let inputs = [
+  const inputs = [
     {
       id: 1,
       name: "username",
@@ -25,6 +23,7 @@ const Login = () => {
       placeholder: "Username or email address",
       errorMessage: "",
       label: "Enter your username or email address",
+      required: true,
     },
 
     {
@@ -34,10 +33,24 @@ const Login = () => {
       placeholder: "Password",
       errorMessage: "",
       label: "Enter your Password",
+      required: true,
     },
   ];
+  const validation = (input) => {
+    if (input.required && values[input.name] === "") return false;
+    if (input.pattern) {
+      const pattern = new RegExp(input.pattern);
+      if (!pattern.test(values[input.name])) return false;
+    }
+    return true;
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
+    for (var i in inputs)
+      if (!validation(inputs[i])) {
+        toast.error("Fill in the form correctly");
+        return;
+      }
     const user = values.username;
     try {
       const userData = await login(values).unwrap();
@@ -47,23 +60,6 @@ const Login = () => {
         password: "",
       });
       toast.success("Sign in successfully");
-      const cart = await getActiveCartByUserId(userData.id);
-      console.log('Current cart Id:', )
-      if (!cart) {
-        const payload = {
-          userId: userData.id,
-          productIds: [],
-          isActive: true,
-        };
-
-        updateOrCreateCart(payload)
-          .then((data) => {
-            console.log('create New cart successfully login', userData.id);
-          })
-          .catch((error) => {
-            console.error('Error:', error);
-          });
-      }
       setTimeout(() => navigate("/"), 2000);
     } catch (err) {
       if (!err?.data?.status) toast.error("No Server Response");

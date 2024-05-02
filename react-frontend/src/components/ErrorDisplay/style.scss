@@ -1,0 +1,57 @@
+@use "../../global" as util;
+
+@mixin scaleTransistion($val) {
+  -ms-transform: scale($val);
+  -moz-transform: scale($val);
+  -webkit-transform: scale($val);
+  transform: scale($val);
+}
+.errorModule {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .errorMsg {
+    font-size: 18px;
+    color: util.$FONT_COLOR;
+    font-family: util.$FONT_FAMILY_M;
+  }
+  .errorIcon {
+    text-align: center;
+    font-size: 60px;
+    margin: 1rem;
+    width: 50%;
+    animation: animateIcon 3s infinite;
+    svg {
+      color: util.$FONT_COLOR;
+      width: 50px;
+    }
+  }
+  .try-again-btn {
+    margin-top: 1.5rem;
+    width: 10rem;
+    height: 3.2rem;
+    border-radius: 14px;
+    font-weight: 600;
+    background: util.$FONT_COLOR;
+    color: #fff;
+    font-size: 16px;
+    font-family: util.$FONT_FAMILY_M;
+    transition: all 0.25s ease-in-out;
+    &:hover {
+      background: #fff;
+      color: util.$FONT_COLOR;
+    }
+  }
+  @keyframes animateIcon {
+    0% {
+      @include scaleTransistion(1);
+    }
+    50% {
+      @include scaleTransistion(1.5);
+    }
+    100% {
+      @include scaleTransistion(1);
+    }
+  }
+}

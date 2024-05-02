@@ -5,20 +5,25 @@ import Loading from "../../../components/Loading";
 import { useSelector } from "react-redux";
 import { useGetOrderByUserIdQuery } from "../../../features/order/orderApiSlice";
 import { selectCurrentUserId } from "../../../features/auth/authSlice";
-
+const head = [
+  "OrderID",
+  "UserID",
+  "Order date",
+  "Payment method",
+  "Total price",
+  "Status",
+  "",
+];
+const listFilter = [
+  "OrderID",
+  "UserID",
+  "Order date",
+  "Payment method",
+  "Status",
+];
 const MyOrders = () => {
   const userId = useSelector(selectCurrentUserId);
-  const head = [
-    "OrderID",
-    "UserID",
-    "Order date",
-    "Payment method",
-    "Total price",
-    "Status",
-    "",
-  ];
   const { data, isLoading, isError } = useGetOrderByUserIdQuery(userId);
-  console.log(data);
   return (
     <>
       {" "}
@@ -29,7 +34,12 @@ const MyOrders = () => {
             <Loading />
           </div>
         ) : (
-          <Table type="orders" head={head} infos={data} />
+          <Table
+            listFilter={listFilter}
+            type="orders"
+            head={head}
+            infos={data}
+          />
         )}
       </div>{" "}
     </>

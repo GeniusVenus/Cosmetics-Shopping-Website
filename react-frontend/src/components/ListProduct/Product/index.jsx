@@ -3,10 +3,9 @@ import "./style.scss";
 import NavBarImage from "../../../assets/image/NavBarImage";
 
 import { Link } from "react-router-dom";
-
+const { cartIcon2 } = NavBarImage;
 const Product = (props) => {
   const { productId, image, name, brand, cost } = props.product;
-  const { cartIcon2 } = NavBarImage;
   return (
     <>
       <Link className="product-container" to={"/products/" + productId}>

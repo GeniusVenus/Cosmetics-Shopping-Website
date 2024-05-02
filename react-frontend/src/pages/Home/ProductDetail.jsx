@@ -5,7 +5,7 @@ import ProductPresent from "../../components/ProductPresent";
 import { useParams } from "react-router-dom";
 import Loading from "../../components/Loading";
 import { useGetProductDetailQuery } from "../../features/product/productApiSlice";
-const ProductDetail = (props) => {
+const ProductDetail = () => {
   const { id } = useParams();
   const page = [
     { title: "Home", url: "/" },

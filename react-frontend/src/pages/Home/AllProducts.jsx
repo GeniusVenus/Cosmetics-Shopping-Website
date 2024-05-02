@@ -3,11 +3,11 @@ import Advertisement from "../../components/Advertisement";
 import ListProduct from "../../components/ListProduct";
 import "./style.scss";
 import PageLocation from "../../components/PageLocation";
+const page = [
+  { title: "Home", url: "/" },
+  { title: "Products (All)", url: "/products" },
+];
 const AllProducts = (props) => {
-  const page = [
-    { title: "Home", url: "/" },
-    { title: "Products (All)", url: "/products" },
-  ];
   return (
     <>
       {" "}

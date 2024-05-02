@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import NavBar from "../../components/Navbar";
 import Footer from "../../components/Footer";
 const LoginLayout = () => {
+  
   return (
     <>
       <ToastContainer />

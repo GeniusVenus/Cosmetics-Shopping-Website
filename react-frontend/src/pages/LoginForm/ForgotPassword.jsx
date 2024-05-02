@@ -3,22 +3,24 @@ import { useNavigate } from "react-router-dom";
 import FormCard from "../../components/FormCard";
 import LoginGreeting from "../../components/LoginGreeting";
 import "./style.scss";
+
+const inputs = [
+  {
+    id: 1,
+    name: "username",
+    type: "text",
+    placeholder: "Username or email address",
+    errorMessage: "",
+    label: "Enter your username or email address",
+  },
+];
+
 const Login = () => {
   const [values, setValues] = useState({
     username: "",
     password: "",
   });
   const navigate = useNavigate();
-  const inputs = [
-    {
-      id: 1,
-      name: "username",
-      type: "text",
-      placeholder: "Username or email address",
-      errorMessage: "",
-      label: "Enter your username or email address",
-    },
-  ];
 
   const handleSubmit = (e) => {
     e.preventDefault();

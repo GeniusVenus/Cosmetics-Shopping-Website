@@ -5,8 +5,8 @@ import NavBarImage from "../../assets/image/NavBarImage";
 import Search from "./Search";
 import Cart from "./Cart";
 import Avatar from "./Avatar";
+const { logo } = NavBarImage;
 const Navbar = () => {
-  let { logo } = NavBarImage;
   const navigate = useNavigate();
   const [active, setActive] = useState(false);
   // const [fixed] = useState(false);
